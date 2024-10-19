@@ -1,4 +1,4 @@
-# Mistery-Mice
+# Mystery-Mice
 Descripción temática del juego:
   Mistery Mice es un juego de investigación que se centra en la cooperación entre dos jugadores, cada uno con un ratón detective, en el que deberán resolver el misterio paranormal que se cierne sobre el pueblo de VillaCheddar. Para ello, tendrán que compenetrarse y utilizar la habilidad única y especial de su ratón correctamente. Utilizando a ambos de la manera apropiada, desenmascararán la verdad oculta que hay tras tales misteriosas entidades.
 
