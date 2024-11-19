@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'mousy';
+    src: url('assets/mousy.ttf') format('truetype');
+}
+
+body{
+    font-family: 'mousy', sans-serif;
+    font-size: 40px;
+    color: black;
+}
