@@ -18,7 +18,11 @@ class DialogueScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
+<<<<<<< Updated upstream
         let 
+=======
+        let see = true; // true -> derecha, false -> izquierda
+>>>>>>> Stashed changes
 
         const rectDialogue = this.add.image(centerX,1.2*centerY, "dial_dhc");
         rectDialogue.setScale(0.8);
@@ -26,6 +30,10 @@ class DialogueScene extends Phaser.Scene {
         scentpaw.setScale(0.8);
         const sighttail = this.add.image(0.5*centerX, 1.2*centerY, "sighttail");
         sighttail.setScale(0.8);
+<<<<<<< Updated upstream
+=======
+        const rectNameIz = this.add.image(centerX, 1.1*centerY, "name");
+>>>>>>> Stashed changes
         
     }
 }

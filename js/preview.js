@@ -14,6 +14,7 @@ class PreviewScene extends Phaser.Scene{
         //variable del fondo del periodico
 
         //meter texto -> background chulo
+        this.scene.launch("DialogueScene");
 
         var cont = 0;
         const resetTime = 500;
