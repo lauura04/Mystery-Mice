@@ -18,7 +18,7 @@ class IntroScene extends Phaser.Scene{
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width/2;
         const centerY = this.scale.height/2;
-
+        
         // activacion de sonidos
 
         const background_menu = this.add.image(centerX,centerY, "background");
@@ -39,13 +39,25 @@ class IntroScene extends Phaser.Scene{
         });
         startbutton.setScale(0.5);
 
-        const texto1 = this.add.text(1.55*centerX, 0.5*centerY, 'Empezar',{
+        const startText = this.add.text(1.55*centerX, 0.5*centerY, 'Empezar',{
             font: '40px mousy',
             color: '#FFFFFF',
             align: 'center'
-        }
+        });
 
-        );
+        startText.on('pointerover', () => {
+            graphics.clear();
+            graphics.lineStyle(4, 0x000000); // Color y grosor de la línea
+            graphics.beginPath();
+            graphics.moveTo(textBounds.x, textBounds.centerY);
+            graphics.lineTo(textBounds.x + textBounds.width, textBounds.centerY);
+            graphics.strokePath();
+        });
+        
+        startText.on('pointerout', () => {
+            graphics.clear(); // Borrar la línea al salir del texto
+        });
+
 
         //boton controles 
         const controlbutton = this.add.image(1.6*centerX, 1.2*centerY, "control")
@@ -61,6 +73,7 @@ class IntroScene extends Phaser.Scene{
             color: '#FFFFFF',
             align: 'center'
         });
+       
 
         //boton exit -> determinar si volver al inicio o eliminar todo
         const exitbutton = this.add.image(1.6*centerX, 1.9*centerY, "exit")
@@ -70,7 +83,7 @@ class IntroScene extends Phaser.Scene{
         });
         exitbutton.setScale(0.5);
 
-        const texto3 = this.add.text(1.58*centerX, 1.65*centerY, 'Salir', {
+        const exitText = this.add.text(1.58*centerX, 1.65*centerY, 'Salir', {
             font: '40px mousy',
             color: '#FFFFFF',
             align: 'center'

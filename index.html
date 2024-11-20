@@ -10,6 +10,7 @@
     <script src='js\end.js'></script>
     <script src='js\controls.js'></script>
     <script src='js\preview.js'></script>
+    <script src='js\dialogo.js'></script>
     
 
     <meta charset="utf-8" />
@@ -39,7 +40,7 @@
                 }
             },
             // aqui vendria lo de las escenas -> intro, juego y fin (posibilidad de añadir otras)
-            scene: [IntroScene,GameScene, EndScene, ControlScene, PreviewScene] //meter el resto de escenas segun vaya haciendo
+            scene: [IntroScene,GameScene, EndScene, ControlScene, PreviewScene, DialogueScene] //meter el resto de escenas segun vaya haciendo
         };
         const game = new Phaser.Game(config);
         game.scene.start('IntroScene');
