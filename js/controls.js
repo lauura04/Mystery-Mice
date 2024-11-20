@@ -12,6 +12,8 @@ class ControlScene extends Phaser.Scene{
         this.load.image("backControlButton", 'assets/backbutton.png');
         this.load.image("staticSighttail", 'assets/SightailDialogue.png');
         this.load.image("staticScentpaw", 'assets/ScentpawDialogue.png');
+        this.load.image("control1", 'assets/Controles_awse.png');
+        this.load.image("control2", 'assets/Controles_flechas.png');
     }
 
     create(){
@@ -35,37 +37,15 @@ class ControlScene extends Phaser.Scene{
         const sighttailAsset = this.add.image(0.5*centerX,0.6*centerY, "staticSighttail");
         sighttailAsset.setScale(0.4);
 
-        const controlASighttail = this.add.text(0.55*centerX, 0.65*centerY, " A ", {
-            font: '70px mousy',
-            color: '#FFFFFF',
-            backgroundColor: '#000',
-            align: 'center'
-        });
-
-        const controlWSighttail = this.add.text(0.65*centerX, 0.5*centerY, "W", {
-            font: '70px mousy',
-            color: '#FFFFFF',
-            backgroundColor: '#000',
-            align: 'center'
-        });
-
-        const controlDSighttail = this.add.text(0.72*centerX, 0.65*centerY, " D ", {
-            font: '70px mousy',
-            color: '#FFFFFF',
-            backgroundColor: '#000',
-            align: 'center'
-        });
-
-        const controlSSighttail = this.add.text(0.65*centerX, 0.8*centerY, " S ", {
-            font: '70px mousy',
-            color: '#FFFFFF',
-            backgroundColor: '#000',
-            align: 'center'
-        });
+        const control1 = this.add.image(0.7*centerX, 0.8*centerY, "control1");
+        control1.setScale(1.2);
 
         // hacer lo mismo que con sighttail para scentpaw pero con los assets de las flechas
         const scentpawAsset = this.add.image(1.4*centerX, 0.6*centerY,"staticScentpaw" );
         scentpawAsset.setScale(-0.45, 0.45);
+
+        const control2 = this.add.image(1.5*centerX, 0.9*centerY, "control2");
+        control2.setScale(1.2);
        
         // meter lo de los poderes -> teclas por poder
 
