@@ -4,6 +4,10 @@ class ControlScene extends Phaser.Scene{
     }
 
     preload() {
+        //carga de audios
+        this.load.audio("button", 'assets/Clickar_Boton.wav')
+
+        // carga de imagenes
         this.load.image("backgroundcontrol", 'assets/backgroundcontrol.png');
         this.load.image("backControlButton", 'assets/backbutton.png');
         this.load.image("staticSighttail", 'assets/SightailDialogue.png');
@@ -22,6 +26,7 @@ class ControlScene extends Phaser.Scene{
         .on('pointerdown', ()=>{
             this.scene.stop("ControlScene");
             this.scene.start("IntroScene");
+            this.sound.play("button");
         } );
         
         backcontrolButton.setScale(0.5);

@@ -5,6 +5,7 @@ class IntroScene extends Phaser.Scene{
 
     preload(){
         // carga de audios
+        this.load.audio("button", 'assets/Clickar_Boton.wav')
 
         //carga de imágenes
         this.load.image("background", 'assets/menu.png');
@@ -36,6 +37,7 @@ class IntroScene extends Phaser.Scene{
         .on('pointerdown', ()=>{
             this.scene.stop("IntroScene");
             this.scene.start("PreviewScene");
+            this.sound.play("button");
         });
         startbutton.setScale(0.5);
 
@@ -45,19 +47,6 @@ class IntroScene extends Phaser.Scene{
             align: 'center'
         });
 
-        startText.on('pointerover', () => {
-            graphics.clear();
-            graphics.lineStyle(4, 0x000000); // Color y grosor de la línea
-            graphics.beginPath();
-            graphics.moveTo(textBounds.x, textBounds.centerY);
-            graphics.lineTo(textBounds.x + textBounds.width, textBounds.centerY);
-            graphics.strokePath();
-        });
-        
-        startText.on('pointerout', () => {
-            graphics.clear(); // Borrar la línea al salir del texto
-        });
-
 
         //boton controles 
         const controlbutton = this.add.image(1.6*centerX, 1.2*centerY, "control")
@@ -65,6 +54,7 @@ class IntroScene extends Phaser.Scene{
         .on('pointerdown', () =>{
             this.scene.stop("IntroScene");
             this.scene.start("ControlScene");
+            this.sound.play("button");
         })
         controlbutton.setScale(0.4);
 
@@ -79,6 +69,7 @@ class IntroScene extends Phaser.Scene{
         const exitbutton = this.add.image(1.6*centerX, 1.9*centerY, "exit")
         .setInteractive()
         .on('pointerdown', ()=>{
+            this.sound.play("button");
             this.game.destroy(true);
         });
         exitbutton.setScale(0.5);

@@ -42,6 +42,7 @@ class GameScene extends Phaser.Scene{
             down: 'S',
             left: 'A',
             right: 'D',
+            
         });
 
         this.controls2 = this.input.keyboard.createCursorKeys();
