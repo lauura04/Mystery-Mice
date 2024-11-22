@@ -11,10 +11,8 @@ class IntroScene extends Phaser.Scene{
 
         //carga de imágenes
         this.load.image("background", 'assets/menu.png');
-        this.load.image("start", 'assets/startbutton.png');
-        this.load.image("config", 'assets/configbutton.png');
-        this.load.image("control", 'assets/controlbutton.png');
-        this.load.image("exit", 'assets/exitbutton.png');
+        this.load.image("book", 'assets/Libro.png');
+        this.load.image("shadowBook", 'assets/SombraLibro.png');
     }
 
     create(){
@@ -30,64 +28,64 @@ class IntroScene extends Phaser.Scene{
             this.music = this.sound.get('backgroundsound');
         }
 
-
+        
         const background_menu = this.add.image(centerX,centerY, "background");
 
-        const title = this.add.text(0.4*centerX, 0.15*centerY, 'Mystery Mice', {
+        const title = this.add.text(0.1*centerX, 0.05*centerY, 'Mystery Mice', {
             font: '200px mousy',
-            color: '#FFFFFF',
-            backgroundColor: '#000',
+            color: '#CDC1BF',
+            backgroundColor: '#42240e80',
             align: 'center'
         });
+
+        // interfaz del libro
+        const shadowBook = this.add.image(0.618*centerX, 1.2*centerY, "shadowBook");
+        const book = this.add.image(0.65*centerX, 1.2*centerY, "book");
         
-        //boton start -> funcionamiento y reajuste de tamaño
-        const startbutton = this.add.image(1.6*centerX,0.5*centerY,"start")
-        .setInteractive()
+        
+        const startText = this.add.text(0.72*centerX, 0.65*centerY, 'Empezar',{
+            font: '70px mousy',
+            color: '#42240e',
+            align: 'center'
+        }).setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("IntroScene");
             this.scene.start("PreviewScene"); 
             this.music.stop();           
             this.sound.play("button");
         });
-        startbutton.setScale(0.5);
 
-        const startText = this.add.text(1.55*centerX, 0.5*centerY, 'Empezar',{
-            font: '40px mousy',
-            color: '#FFFFFF',
+
+        const textControl = this.add.text(0.72*centerX, 0.9*centerY, 'Controles', {
+            font: '70px mousy',
+            color: '#42240e',
             align: 'center'
-        });
-
-
-        //boton controles 
-        const controlbutton = this.add.image(1.6*centerX, 1.2*centerY, "control")
-        .setInteractive()
+        }).setInteractive()
         .on('pointerdown', () =>{
             this.scene.stop("IntroScene");
             this.scene.start("ControlScene");
             this.sound.play("button");
-        })
-        controlbutton.setScale(0.4);
-
-        const textControl = this.add.text(1.55*centerX, 1.15*centerY, 'Controles', {
-            font: '40px mousy',
-            color: '#FFFFFF',
-            align: 'center'
         });
-       
 
-        //boton exit -> determinar si volver al inicio o eliminar todo
-        const exitbutton = this.add.image(1.6*centerX, 1.9*centerY, "exit")
-        .setInteractive()
+        const textCredit = this.add.text(0.72*centerX, 1.15*centerY, 'Créditos', {
+            font: '70px mousy',
+            color: '#42240e',
+            align: 'center'
+        }).setInteractive()
+        .on('pointerdown', () =>{
+            this.scene.stop("IntroScene");
+            this.scene.start("CreditScene");
+            this.sound.play("button");
+        });
+
+        const exitText = this.add.text(0.78*centerX, 1.4*centerY, 'Salir', {
+            font: '70px mousy',
+            color: '#42240e',
+            align: 'center'
+        }).setInteractive()
         .on('pointerdown', ()=>{
             this.sound.play("button");
             this.game.destroy(true);
-        });
-        exitbutton.setScale(0.5);
-
-        const exitText = this.add.text(1.58*centerX, 1.65*centerY, 'Salir', {
-            font: '40px mousy',
-            color: '#FFFFFF',
-            align: 'center'
         });
     }
 
