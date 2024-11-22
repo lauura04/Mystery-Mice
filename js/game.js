@@ -28,7 +28,7 @@ class GameScene extends Phaser.Scene {
         const tileSize = 64;
 
         const mapData = [
-            // Aquí va tu matriz mapData
+            // Aquí va  matriz mapData
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7],
@@ -153,10 +153,6 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.sighttail, this.cazador);
         this.physics.add.collider(this.scentpaw, this.cazador);
 
-        //colisiones entre jugadores
-        this.physics.add.collider(this.sighttail, this.scentpaw);
- 
-
         // Definir controles para ambos jugadores
         this.controls1 = this.input.keyboard.addKeys({
             up: 'W',
@@ -174,28 +170,28 @@ class GameScene extends Phaser.Scene {
     createAnimations(playerkey) {
         this.anims.create({
             key: `${playerkey}-idleUp`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 0, end: 4 }),
+            frames: this.anims.generateFrameNumbers(playerkey, { start: 286, end: 287 }),
             frameRate: 8,
             repeat: -1,
         });
 
         this.anims.create({
             key: `${playerkey}-idleLeft`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 13, end: 17 }),
+            frames: this.anims.generateFrameNumbers(playerkey, { start: 299, end: 300 }),
             frameRate: 8,
             repeat: -1,
         });
 
         this.anims.create({
             key: `${playerkey}-idleDown`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 26, end: 30 }),
+            frames: this.anims.generateFrameNumbers(playerkey, { start: 312, end: 313 }),
             frameRate: 8,
             repeat: -1,
         });
 
         this.anims.create({
             key: `${playerkey}-idleRight`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 39, end: 43 }),
+            frames: this.anims.generateFrameNumbers(playerkey, { start: 325, end: 326 }),
             frameRate: 8,
             repeat: -1,
         });

@@ -49,11 +49,6 @@ class ControlScene extends Phaser.Scene{
        
         // meter lo de los poderes -> teclas por poder
 
-        const textBack = this.add.text(0.2*centerX, 1.45*centerY, 'Volver', {
-            font: '40px mousy',
-            color: '#FFFFFF',
-            align: 'center'
-        });
 
     }
     
