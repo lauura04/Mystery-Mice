@@ -116,7 +116,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Bien visto. Aunque… esto me huele aún peor de lo que esperaba. Prepárate, seguro que no será camino de rosas.",
+                                text: "Bien visto. Aunque… esto me huele aún peor de lo que esperaba. Prepárate, seguro que no será un camino de rosas.",
                                 side: "rigth",
                         },
                         {
@@ -215,7 +215,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Porque fui traicionado. Mi muerte no fue un simple accidente, sino un acto deliberado de un cobarde que me temía. ",
+                                text: "Porque fui traicionado. Mi muerte no fue un simple accidente, sino un acto deliberado de un cobarde que me temía.",
                                 side: "right",
                         },
                         {
