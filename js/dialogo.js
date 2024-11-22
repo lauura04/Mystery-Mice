@@ -65,7 +65,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Tiene lógica, pero... hay algo que me da mala espina. Jamás he oido a nadie en VillaCheddar hablar de ella.",
+                                text: "Tiene lógica, pero... hay algo que me da mala espina. Jamás he oído a nadie en VillaCheddar hablar de ella.",
                                 side: "left",
                         },
 
@@ -137,7 +137,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: " Lo sé. No me gusta esto. Noto algo en el aire… y las paredes… parece que nos están observando. Mantente alerta.",
+                                text: "Lo sé. No me gusta esto. Noto algo en el aire… y las paredes… parece que nos están observando. Mantente alerta.",
                                 side: "left",
                         },
 
@@ -179,7 +179,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Perfecto, justo lo que nos faltaba. Tranquilo, si seguimos tu rastro llegaremos al centro.",
+                                text: "Perfecto, justo lo que nos faltaba. Tranquilo, si seguimos tu rastro saldremos de aquí.",
                                 side: "left",
                         },
 
@@ -221,7 +221,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Yo protegía este pueblo, pero mi lealtad fue pagada con una daga en la espalda.",
+                                text: "Yo protegía este pueblo de fantasmas bajo las ordenes de nuestra alcaldesa, pero mi lealtad fue pagada con una daga en la espalda.",
                                 side: "right",
                         },
 
@@ -235,7 +235,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Alguien con influencia suficiente para manipular todo a su favor... Recuerdo vagamente una figura... ",
+                                text: "Alguien con un ansia de poder inimaginable... Recuerdo vagamente una figura... ",
                                 side: "right",
                         },
 
@@ -249,7 +249,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Entonces, si esto fue una conspiración, tal vez tenga que ver con los fantasmas que están retenidos en el pueblo.",
+                                text: "Entonces, si fue una conspiración, tal vez tenga que ver con los fantasmas que están causando el caos en el pueblo.",
                                 side: "rigth",
                         },
 
@@ -332,91 +332,91 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: " Son víctimas de un oscuro ciclo que alguien está perpetuando. Una figura en las sombras controla a estos seres,",
+                                text: " Son víctimas de un antiguo ritual. Una figura en las sombras controla a estos seres cuando llega la medianoche hasta que sale el sol,",
                                 side: "rigth",
                         },
 
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: " usando el miedo y el dolor para sus propios fines.",
-                                side: "rigth",
-                        },
-
-                        {
-                                character: "sighttail",
-                                name: "Sighttail",
-                                text: "¿Una figura en las sombras? ¿Se refiere a la misma persona que el cazador mencionó? Todo empieza a encajar.",
-                                side: "left",
-                        },
-
-                        {
-                                character: "scentpaw",
-                                name: "Scentpaw",
-                                text: "‘No podemos afirmar nada con certeza, pero todas nuestras sospechas apuntan… a la alcaldesa.’",
+                                text: " canalizando el dolor y la ira, y extrayendo su energía para alimentar su conexión con el plano espiritual.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"¿Qué? ¿La alcaldesa? ¡No puede ser! Siempre nos dijo que quería ayudar, que estaba preocupada por los fantasmas.",
-                                side: "left",
-                        },
-
-                        {
-                                character: "sighttail",
-                                name: "Sighttail",
-                                text:"Pero si ella está implicada... ¿por qué?",
+                                text: "¿Una figura en las sombras? ¿Se refiere a la misma persona que mencionó el cazador? Todo empieza a encajar.",
                                 side: "left",
                         },
 
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "‘Si llegáis a esta carta, significa que ya sabéis lo que está pasando. Debéis tener cuidado.",
-                                side: "rigth",
-                        },
-
-                        {
-                                character: "scentpaw",
-                                name: "Scentpaw",
-                                text: "La verdad puede ser más peligrosa de lo que imaginamos. Si no podemos detener lo que se avecina,",
-                                side: "rigth",
-                        },
-
-                        {
-                                character: "scentpaw",
-                                name: "Scentpaw",
-                                text: "al menos esperamos que vosotros podáis hacerlo.’",
+                                text: "‘Tras mucho tiempo de investigación, hemos descubierto que quién está detrás de todo esto es… la propia alcaldesa VillaCheddar.’",
                                 side: "rigth",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"No quiero creerlo, pero todo encaja. Alguien con influencia... Tenemos que llegar al fondo de esto.",
+                                text:"¿Qué? ¿La alcaldesa? ¡No puede ser! Dijo que necesitaba nuestra ayuda.",
                                 side: "left",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"Si papá y mamá tenían razón, la alcaldesa está jugando con algo mucho más grande de lo que imaginábamos.",
+                                text:"Pero... ¿por qué alguien atormentaría a su propio pueblo?",
                                 side: "left",
                         },
 
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "No nos detendremos hasta descubrir la verdad. Por mamá y papá. Y por VillaCheddar.",
+                                text: "‘Según hemos logrado descubrir, la alcadesa es descendiente de una familia de antiguos ocultistas.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "No dejaremos que se salgan con la suya.",
+                                text: "Es una persona corrompida por su ambición, y gracias al control de los fantasmas elimina a cualquiera que amenace su puesto de poder.",
+                                side: "rigth",
+                        },
+
+                        {
+                                character: "scentpaw",
+                                name: "Scentpaw",
+                                text: "Si no podemos detener lo que se avecina, al menos esperamos que vosotros podáis hacerlo. Os queremos...’",
+                                side: "rigth",
+                        },
+
+                        {
+                                character: "sighttail",
+                                name: "Sighttail",
+                                text:"No quiero creerlo, pero todo encaja. Nos mandó investigar para que no sopechasemos de ella, al igual que al cazador.",
+                                side: "left",
+                        },
+
+                        {
+                                character: "sighttail",
+                                name: "Sighttail",
+                                text:" Entonces papá y mamá descubrieron la verdad y... fueron asesinados por los fantasmas de la alcaldesa.",
+                                side: "left",
+                        },
+
+                        {
+                                character: "scentpaw",
+                                name: "Scentpaw",
+                                text: "Hay que detenerla antes que acabemos como ellos. Por mamá y papá. Y por VillaCheddar.",
+                                side: "rigth",
+                        },
+
+                        {
+                                character: "scentpaw",
+                                name: "Scentpaw",
+                                text: "Aún no es medianoche, vamos a por ella antes de que se entere de que la hemos decubierto. Papá, mamá, lo conseguimos...",
                                 side: "rigth",
                         },
 
