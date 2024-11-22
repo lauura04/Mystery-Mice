@@ -1,31 +1,35 @@
 class GameScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'GameScene' });
+        super({ key: 'GameScene', physics: { default: 'arcade' } });
     }
 
     preload() {
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
             frameWidth: 64,
-            frameHeight: 64
+            frameHeight: 64,
         });
         this.load.spritesheet('Scentpaw', 'assets/Scentpaw-spritesheet.png', {
             frameWidth: 64,
-            frameHeight: 64
+            frameHeight: 64,
         });
-
         this.load.image('tiles', 'assets/Tilemap.png');
+
+        this.load.spritesheet('Cazador', 'assets/cazador_spritesheet.png', {
+            frameWidth: 64,
+            frameHeight: 64,
+        });
     }
-    // tutorial mostrar movimiento, ver poderes -> entrar en la cripta 
-    // juego
 
     create() {
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
+        const tileSize = 64;
+
         const mapData = [
-
-
+            // Aquí va tu matriz mapData
+            [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7],
@@ -99,44 +103,66 @@ class GameScene extends Phaser.Scene {
 
         ];
 
-        const tileSize = 64;
         const map = this.make.tilemap({
             data: mapData,
             tileWidth: tileSize,
             tileHeight: tileSize,
         });
 
-
         const tileset = map.addTilesetImage('tiles');
-
         const layer = map.createLayer(0, tileset, 0, 0);
 
-        //configurar límites de la cámara al tamaño del mapa
+        // Configurar límites de la cámara al tamaño del mapa
         const worldWidth = map.widthInPixels;
         const worldHeight = map.heightInPixels;
         this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+        this.cameras.main.setZoom(2);
 
-        this.cameras.main.setZoom(0.5);
-        // variables referentes a sighttail y scentpaw
-        this.sighttail = this.add.sprite(3.5* centerX, 8 * centerY, 'Sighttail').setScale(2);
+        // Configurar colisiones en el mapa
+        layer.setCollision([7]);
 
-        this.scentpaw = this.add.sprite(3.5* centerX, 8* centerY, 'Scentpaw').setScale(2);
 
-        // crear las animaciones para los dos
+        // Crear los sprites de los jugadores con físicas
+        this.sighttail = this.physics.add.sprite(3.5 * centerX, 4.5 * centerY, 'Sighttail')
+            .setScale(2)
+            .setSize(tileSize, tileSize)
+            .setOffset(0, 0);
+
+        this.scentpaw = this.physics.add.sprite(3.3 * centerX, 4.5 * centerY, 'Scentpaw')
+            .setScale(2)
+            .setSize(tileSize, tileSize)
+            .setOffset(0, 0);
+
+        this.cazador = this.physics.add.sprite(3.2 * centerX, 4.5 * centerY, 'Cazador')
+            .setScale(2)
+            .setSize(tileSize, tileSize)
+            .setOffset(0, 0);
+
+        // Crear las animaciones para los jugadores
         this.createAnimations('Sighttail');
         this.createAnimations('Scentpaw');
+        this.createAnimations('Cazador');
 
+        
 
+        // Habilitar colisiones entre los jugadores y los tiles del mapa
+        this.physics.add.collider(this.sighttail, layer);
+        this.physics.add.collider(this.scentpaw, layer);
 
+        //colisiones entre jugadores y cazador
+        this.physics.add.collider(this.sighttail, this.cazador);
+        this.physics.add.collider(this.scentpaw, this.cazador);
 
+        //colisiones entre jugadores
+        this.physics.add.collider(this.sighttail, this.scentpaw);
+ 
 
-        // definir el control del movimiento para cada uno de los personajes
+        // Definir controles para ambos jugadores
         this.controls1 = this.input.keyboard.addKeys({
             up: 'W',
             down: 'S',
             left: 'A',
             right: 'D',
-
         });
 
         this.controls2 = this.input.keyboard.createCursorKeys();
@@ -145,7 +171,6 @@ class GameScene extends Phaser.Scene {
         this.lastDirection2 = 'down';
     }
 
-    // funcion para controlar el movimiento y no tener que poner codigo duplicado
     createAnimations(playerkey) {
         this.anims.create({
             key: `${playerkey}-idleUp`,
@@ -204,53 +229,55 @@ class GameScene extends Phaser.Scene {
         });
     }
 
-
-    //hacer diferenciación entre sighttail y scentpaw
     update() {
-        this.lastDirection1 = this.handlePlayerMovement(this.sighttail, this.controls1, 'Sighttail', this.lastDirection1);
-        this.lastDirection2 = this.handlePlayerMovement(this.scentpaw, this.controls2, 'Scentpaw', this.lastDirection2);
+        this.lastDirection1 = this.handlePlayerMovement(
+            this.sighttail,
+            this.controls1,
+            'Sighttail',
+            this.lastDirection1
+        );
 
-        // calcular el centro entre los dos jugadores
+        this.lastDirection2 = this.handlePlayerMovement(
+            this.scentpaw,
+            this.controls2,
+            'Scentpaw',
+            this.lastDirection2
+        );
+
+        // Centrar cámara entre los dos jugadores
         const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
         const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
-
         this.cameras.main.centerOn(centerjX, centerjY);
     }
 
     handlePlayerMovement(player, controls, playerkey, lastDirection) {
         let isMoving = false;
 
+        player.setVelocity(0); // Detener movimiento al principio del frame
+
         if (controls.down.isDown) {
-            player.y += 2;
+            player.setVelocityY(100);
             player.anims.play(`${playerkey}-walk-down`, true);
             lastDirection = 'down';
             isMoving = true;
-        }
-
-        else if (controls.up.isDown) {
-            player.y -= 2;
+        } else if (controls.up.isDown) {
+            player.setVelocityY(-100);
             player.anims.play(`${playerkey}-walk-up`, true);
             lastDirection = 'up';
             isMoving = true;
-        }
-
-        else if (controls.left.isDown) {
-            player.x -= 2;
+        } else if (controls.left.isDown) {
+            player.setVelocityX(-100);
             player.anims.play(`${playerkey}-walk-left`, true);
             lastDirection = 'left';
             isMoving = true;
-        }
-
-        else if (controls.right.isDown) {
-            player.x += 2;
+        } else if (controls.right.isDown) {
+            player.setVelocityX(100);
             player.anims.play(`${playerkey}-walk-right`, true);
             lastDirection = 'right';
             isMoving = true;
         }
 
-
         if (!isMoving) {
-
             switch (lastDirection) {
                 case 'down':
                     player.anims.play(`${playerkey}-idleDown`, true);
@@ -264,11 +291,8 @@ class GameScene extends Phaser.Scene {
                 case 'right':
                     player.anims.play(`${playerkey}-idleRight`, true);
                     break;
-
             }
         }
         return lastDirection;
     }
-
-
 }
