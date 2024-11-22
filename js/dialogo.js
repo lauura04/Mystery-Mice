@@ -24,6 +24,7 @@ class DialogueScene extends Phaser.Scene {
 
                 this.scentpaw = this.add.image(1.45 * this.centerX, 1.2 * this.centerY, "scentpaw").setScale(0.8);
                 this.sighttail = this.add.image(0.5 * this.centerX, 1.2 * this.centerY, "sighttail").setScale(0.8);
+                this.cazador = this.add.image(1.45 * this.centerX, 1.2*this.centerY, "cazador").setScale(0.8);
                 this.rectDialogue = this.add.image(this.centerX, 1.2 * this.centerY, "dialog").setScale(-0.8, 0.8);
                 this.rectName = this.add.image(this.centerX, 1.1 * this.centerY, "nameIm");
                 this.nameText = this.add.text(0.289 * this.centerX, 1.457 * this.centerY, "Sighttail", {

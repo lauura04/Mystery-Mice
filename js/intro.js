@@ -5,7 +5,9 @@ class IntroScene extends Phaser.Scene{
 
     preload(){
         // carga de audios
-        this.load.audio("button", 'assets/Clickar_Boton.wav')
+        this.load.audio("button", 'assets/Clickar_Boton.wav');
+        this.load.audio("backgroundsound", 'assets/musicMenu.mp3');
+
 
         //carga de imágenes
         this.load.image("background", 'assets/menu.png');
@@ -21,6 +23,13 @@ class IntroScene extends Phaser.Scene{
         const centerY = this.scale.height/2;
         
         // activacion de sonidos
+        if (!this.sound.get('backgroundsound')) {
+            this.music = this.sound.add("backgroundsound", { loop: true, volume: 0.5 });
+            this.music.play();
+        } else {
+            this.music = this.sound.get('backgroundsound');
+        }
+
 
         const background_menu = this.add.image(centerX,centerY, "background");
 
@@ -36,7 +45,8 @@ class IntroScene extends Phaser.Scene{
         .setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("IntroScene");
-            this.scene.start("PreviewScene");
+            this.scene.start("PreviewScene"); 
+            this.music.stop();           
             this.sound.play("button");
         });
         startbutton.setScale(0.5);
