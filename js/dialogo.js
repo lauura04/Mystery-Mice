@@ -44,28 +44,28 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "¿Sabes, Scentpaw? No puedo dejar de pensar por qué este lugar en particular es tan importante para nuestra investigación.",
+                                text: "¿Sabes, Scentpaw? No puedo dejar de pensar por qué este lugar en concreto es tan importante para nuestra investigación.",
                                 side: "left",
 
                         },
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "La cripta no solo es antigua, también está vinculada a los primeros asentamientos de VillaCheddar. Todo apunta a este lugar.",
+                                text: "A esta cripta se la relaciona con los primeros asentamientos de VillaCheddar.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Es el epicentro de las energías espectrales que he estado rastreando desde hace semanas.",
+                                text: "Es el epicentro de las energías que he estado rastreando desde hace semanas. Todas las señales apuntan a este lugar.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Eso tiene lógica, pero... algo me sigue incomodando. La cripta estaba casi olvidada por los habitantes. ",
+                                text: "Tiene lógica, pero... hay algo que me da mala espina. Jamás he oido a nadie en VillaCheddar hablar de ella.",
                                 side: "left",
                         },
 
@@ -79,14 +79,14 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Quizás porque aquí ocurrió algo que nadie quiere recordar.",
+                                text: "Quizá porque aquí ocurrió algo que nadie quiere recordar.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Entonces más vale que estemos preparados. Algo me dice que aquí hay algo más que simples piedras y huesos.",
+                                text: "Entonces más nos vale estar preparados. Algo me dice que aquí hay algo más que simples piedras y huesos.",
                                 side: "left",
                         },
 
@@ -116,13 +116,13 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Buen ojo. Aunque… esto huele aún peor de lo que esperaba. Prepárate, seguro que no será un paseo tranquilo.",
+                                text: "Bien visto. Aunque… esto me huele aún peor de lo que esperaba. Prepárate, seguro que no será camino de rosas.",
                                 side: "rigth",
                         },
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: " ¿Y cuándo lo es? Vamos.",
+                                text: " ¿Y cuándo lo es? Vamos, Scentpaw.",
                                 side: "left",
                         },
 
@@ -137,7 +137,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: " Lo sé. No me gusta esto. Algo en el aire… y las paredes… parece que nos están observando. Mantente alerta.",
+                                text: " Lo sé. No me gusta esto. Noto algo en el aire… y las paredes… parece que nos están observando. Mantente alerta.",
                                 side: "left",
                         },
 
@@ -165,7 +165,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Lo veo ahora. Vamos, buscaré un camino alternativo. No podemos quedarnos aquí mucho tiempo.",
+                                text: "Ya lo veo. Vamos, buscaré un camino alternativo. No podemos quedarnos aquí por mucho tiempo.",
                                 side: "left",
                         },
 
@@ -173,13 +173,13 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Algo se está moviendo… puedo oler la energía espectral. Las paredes están cambiando de lugar.",
+                                text: "Noto algo moverse… Son las paredes, están cambiando de lugar.",
                                 side: "rigth",
                         },
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Perfecto, justo lo que nos faltaba. No te preocupes, si seguimos tu rastro llegaremos al centro.",
+                                text: "Perfecto, justo lo que nos faltaba. Tranquilo, si seguimos tu rastro llegaremos al centro.",
                                 side: "left",
                         },
 
@@ -187,7 +187,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "¿Quién osa perturbar mi descanso? ¿Sois enviados de ese maldito traidor?",
+                                text: "¿Quién osa perturbar mi eterno descanso? ¿Sois enviados de ese maldito traidor?",
                                 side: "right",
                         },
 
@@ -201,7 +201,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Soy más que un simple espíritu, pequeño. Fui un cazador, uno de los mejores de VillaCheddar.",
+                                text: "Soy más que un simple espíritu, pequeñajo. Fui un cazador, y de los buenos, uno de los mejores de VillaCheddar.",
                                 side: "right",
                         },
 
@@ -215,7 +215,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Porque fui traicionado. Mi muerte no fue un accidente, sino un acto deliberado de alguien que temía lo que sabía. ",
+                                text: "Porque fui traicionado. Mi muerte no fue un simple accidente, sino un acto deliberado de un cobarde que me temía. ",
                                 side: "right",
                         },
                         {
@@ -235,7 +235,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Alguien con influencia suficiente para manipular todo a su favor...Recuerdo vagamente una figura... ",
+                                text: "Alguien con influencia suficiente para manipular todo a su favor... Recuerdo vagamente una figura... ",
                                 side: "right",
                         },
 
@@ -249,14 +249,14 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Entonces, si esto fue una conspiración, tal vez tenga que ver con los fantasmas que están retenidos en el pueblo. Todo parece conectado.",
+                                text: "Entonces, si esto fue una conspiración, tal vez tenga que ver con los fantasmas que están retenidos en el pueblo.",
                                 side: "rigth",
                         },
 
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Es posible. Algo oscuro ha caído sobre VillaCheddar. Las energías que percibo no son naturales...",
+                                text: "Es posible. Algo oscuro ha caído sobre VillaCheddar. Las energías que percibo no son normales...",
                                 side: "right",
                         },
 
@@ -277,14 +277,14 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "Los secretos que guarda esta cripta podrían aclarar muchas cosas. Quizás aquí encontréis las respuestas.",
+                                text: "Los secretos que guarda esta cripta podrían aclarar muchas cosas. Quizá aquí encontréis las respuestas.",
                                 side: "right",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "Gracias por tu ayuda. Prometemos buscar las respuestas y hacer justicia por lo que te hicieron.",
+                                text: "Gracias por tu ayuda. Prometemos averiguar que está pasando y hacer justicia por lo que te hicieron.",
                                 side: "left",
                         },
 
@@ -332,7 +332,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: " Son víctimas de un oscuro ciclo que alguien está perpetuando. Una figura en las sombras controla estas energías espectrales,",
+                                text: " Son víctimas de un oscuro ciclo que alguien está perpetuando. Una figura en las sombras controla a estos seres,",
                                 side: "rigth",
                         },
 
@@ -395,7 +395,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"No quiero creerlo, pero todo encaja. Tenemos que llegar al fondo de esto. No podemos quedarnos de brazos cruzados.",
+                                text:"No quiero creerlo, pero todo encaja. Alguien con influencia... Tenemos que llegar al fondo de esto.",
                                 side: "left",
                         },
 
@@ -416,7 +416,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: ". No dejaremos que se salgan con la suya.",
+                                text: "No dejaremos que se salgan con la suya.",
                                 side: "rigth",
                         },
 
