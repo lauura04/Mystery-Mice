@@ -18,6 +18,8 @@ class GameScene extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 64,
         });
+
+        this.load.image('pause', 'assets/Boton_Pausa.png');
     }
 
     create() {
@@ -125,25 +127,31 @@ class GameScene extends Phaser.Scene {
         // Crear los sprites de los jugadores con físicas
         this.sighttail = this.physics.add.sprite(3.5 * centerX, 4.5 * centerY, 'Sighttail')
             .setScale(2)
-            .setSize(tileSize, tileSize)
-            .setOffset(0, 0);
+            .setSize(40, 30)
+            .setOffset(12, 20);
 
         this.scentpaw = this.physics.add.sprite(3.3 * centerX, 4.5 * centerY, 'Scentpaw')
             .setScale(2)
-            .setSize(tileSize, tileSize)
-            .setOffset(0, 0);
+            .setSize(40,30)
+            .setOffset(12,20);
 
         this.cazador = this.physics.add.sprite(3.2 * centerX, 4.5 * centerY, 'Cazador')
             .setScale(2)
-            .setSize(tileSize, tileSize)
-            .setOffset(0, 0);
+            .setSize(40,40)
+            .setOffset(12, 20)
+            .setImmovable(true);
 
+        const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
+            .setInteractive()
+            .on('pointerdown', () => {
+                this.scene.launch("PauseScene");
+            });
         // Crear las animaciones para los jugadores
         this.createAnimations('Sighttail');
         this.createAnimations('Scentpaw');
         this.createAnimations('Cazador');
 
-        
+
 
         // Habilitar colisiones entre los jugadores y los tiles del mapa
         this.physics.add.collider(this.sighttail, layer);
@@ -165,6 +173,8 @@ class GameScene extends Phaser.Scene {
 
         this.lastDirection1 = 'down';
         this.lastDirection2 = 'down';
+
+
     }
 
     createAnimations(playerkey) {

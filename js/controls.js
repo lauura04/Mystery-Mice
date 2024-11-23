@@ -14,6 +14,8 @@ class ControlScene extends Phaser.Scene{
         this.load.image("staticScentpaw", 'assets/ScentpawDialogue.png');
         this.load.image("control1", 'assets/Controles_awse.png');
         this.load.image("control2", 'assets/Controles_flechas.png');
+        this.load.image("vision", 'assets/Supervision.png');
+        this.load.image("olfato", 'assets/Superolfato.png');
     }
 
     create(){
@@ -23,7 +25,7 @@ class ControlScene extends Phaser.Scene{
 
         const backgroundControl = this.add.image(centerX, centerY, "backgroundcontrol");
 
-        const backcontrolButton = this.add.image(0.3*centerX, 1.6*centerY, "backControlButton")
+        const backcontrolButton = this.add.image(0.2*centerX, 1.7*centerY, "backControlButton")
         .setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("ControlScene");
@@ -31,7 +33,7 @@ class ControlScene extends Phaser.Scene{
             this.sound.play("button");
         } );
         
-        backcontrolButton.setScale(0.5);
+        backcontrolButton.setScale(0.3);
 
         
         const sighttailAsset = this.add.image(0.5*centerX,0.6*centerY, "staticSighttail");
@@ -48,6 +50,8 @@ class ControlScene extends Phaser.Scene{
         control2.setScale(1.2);
        
         // meter lo de los poderes -> teclas por poder
+        const vision = this.add.image(0.7*centerX, 1.2*centerY, "vision").setScale(3);
+        const olfato = this.add.image(1.5*centerX, 1.2*centerY, "olfato").setScale(3);
 
 
     }

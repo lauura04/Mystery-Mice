@@ -26,7 +26,7 @@ class PreviewScene extends Phaser.Scene {
 
                 if (cont > 1) {
                     this.scene.stop("PreviewScene");
-                    this.scene.start("GameScene");
+                    this.scene.start("TutorialScene");
                 }
             });
 
@@ -54,6 +54,8 @@ class PreviewScene extends Phaser.Scene {
         var cont = 0;
         const resetTime = 500;
 
+        const readingTime = 25000;
+
         const message = this.add.text(1.3 * centerX, 1.8 * centerY, '', {
             font: '50px mousy',
             color: '#FFFFFF',
@@ -72,9 +74,14 @@ class PreviewScene extends Phaser.Scene {
 
             if (cont > 1) {
                 this.scene.stop("PreviewScene");
-                this.scene.start("GameScene");
+                this.scene.start("TutorialScene");
             }
         });
+
+        this.time.delayedCall(readingTime,()=>{
+            this.scene.stop("PreviewScene");
+            this.scene.start("TutorialScene");
+        })
 
 
     }
