@@ -81,7 +81,7 @@ class CreditScene extends Phaser.Scene{
 
         })
 
-        const son= this.add.text(0.75*centerX,0.95*centerY, 'Sfx y guión', {
+        const son= this.add.text(0.75*centerX,0.95*centerY, 'Sfx y guion', {
             font: '65px mousy',
             color: '#42240e',
             align: 'center'
