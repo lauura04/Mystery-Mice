@@ -428,6 +428,7 @@ class DialogueScene extends Phaser.Scene {
                 this.endIndex = endIndex;
                 this.callingScene = this.scene.settings.data?.callingScene || null;
                 this.updateDialogue();
+                this.primerDialCaz = true;
 
                 this.input.on('pointerdown', () => {
                         this.nextDialogue();
@@ -442,16 +443,47 @@ class DialogueScene extends Phaser.Scene {
 
         updateDialogue() {
                 const dialogue = this.dialogueData[this.currentDialogueIndex];
-
-                if (dialogue.side === 'left') {
-                        this.rectDialogue.setScale(-0.8, 0.8);
-                        this.rectName.setPosition(this.centerX, 1.1 * this.centerY, "nameIm");
-                        this.nameText.setPosition(0.289 * this.centerX, 1.457 * this.centerY).setText("Sighttail");
+                if (this.currentDialogueIndex < 20) {
+                        if (dialogue.side === 'left') {
+                                this.rectDialogue.setScale(-0.8, 0.8);
+                                this.rectName.setPosition(this.centerX, 1.1 * this.centerY, "nameIm");
+                                this.nameText.setPosition(0.289 * this.centerX, 1.457 * this.centerY).setText("Sighttail");
+                        }
+                        else {
+                                this.rectDialogue.setScale(0.8);
+                                this.rectName.setPosition(2.25 * this.centerX, 1.1 * this.centerY, "nameIm");
+                                this.nameText.setPosition(1.52 * this.centerX, 1.457 * this.centerY).setText("Scentpaw");
+                        }
                 }
-                else {
-                        this.rectDialogue.setScale(0.8);
-                        this.rectName.setPosition(2.25 * this.centerX, 1.1 * this.centerY, "nameIm");
-                        this.nameText.setPosition(1.52 * this.centerX, 1.457 * this.centerY).setText("Scentpaw");
+
+                else if(this.currentDialogueIndex<36){
+                        
+                        if (dialogue.character === 'sighttail') {
+                                this.scentpaw.setVisible(false);
+                                this.sighttail.setVisible(true);
+                                this.rectDialogue.setScale(-0.8, 0.8);
+                                this.rectName.setPosition(this.centerX, 1.1 * this.centerY, "nameIm");
+                                this.nameText.setPosition(0.289 * this.centerX, 1.457 * this.centerY).setText("Sighttail");
+                        }
+                        else if(dialogue.character === 'scentpaw') {
+                                this.sighttail.setVisible(false);
+                                this.scentpaw.setVisible(true).setScale(-1,1);
+                                this.scentpaw.setPosition(0.7* this.centerX, 1.2 * this.centerY);
+                                this.rectDialogue.setScale(-0.8, 0.8);
+                                this.rectName.setPosition(this.centerX, 1.1 * this.centerY, "nameIm");
+                                this.nameText.setPosition(0.289 * this.centerX, 1.457 * this.centerY).setText("Scentpaw");
+                        }
+
+                        else if(dialogue.character === 'cazador') {
+                                if(this.primerDialCaz){
+                                        this.scentpaw.setVisible(false);
+                                        this.primerDialCaz = false;
+                                }
+                                this.cazador.setVisible(true);
+                                this.rectDialogue.setScale(0.8);
+                                this.rectName.setPosition(2.25 * this.centerX, 1.1 * this.centerY, "nameIm");
+                                this.nameText.setPosition(1.52 * this.centerX, 1.457 * this.centerY).setText("Cazador");
+                        }
                 }
                 this.dialogueText.setText(dialogue.text);
                 console.log(this.currentDialogueIndex);
@@ -472,10 +504,10 @@ class DialogueScene extends Phaser.Scene {
         }
 
         endDialogue() {
-                if(this.callingScene){
+                if (this.callingScene) {
                         this.scene.stop();
                         this.scene.resume(this.callingScene);
-                } else{
+                } else {
                         console.error("No callingScene provided");
                 }
         }

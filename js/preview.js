@@ -74,7 +74,7 @@ class PreviewScene extends Phaser.Scene {
 
             if (cont > 1) {
                 this.scene.stop("PreviewScene");
-                this.scene.start("TutorialScene");
+                this.scene.start("GameScene");
             }
         });
 

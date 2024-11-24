@@ -28,6 +28,7 @@ class GameScene extends Phaser.Scene {
         this.load.image("frame3", 'assets/Flechas_F3.png');
         this.load.image("frame4", 'assets/Flechas_F4.png');
         this.load.image("frame5", 'assets/Flechas_F5.png');
+        this.load.image("carta", 'assets/carta.png');
 
         this.load.audio("laberinto", 'assets/MusicaLaberinto.mp3');
 
@@ -63,6 +64,11 @@ class GameScene extends Phaser.Scene {
         this.olfatoDisp = true;
 
         this.vidas = 3;
+
+        this.gasPriVez = true;
+        this.flechasPriVez = true;
+
+        this.hablarCazador = true;
 
         const tileSize = 64;
 
@@ -181,6 +187,8 @@ class GameScene extends Phaser.Scene {
             .setOffset(12, 20)
             .setImmovable(true);
 
+        this.carta = this.physics.add.image(3.5 * centerX, 4.6 * centerY, 'carta').setVisible(false).setImmovable(true);
+
         this.anims.create({
             key: 'flechas',
             frames: [
@@ -200,7 +208,7 @@ class GameScene extends Phaser.Scene {
 
         this.time.addEvent({
             delay: 100,
-            callback: ()=>{
+            callback: () => {
                 this.checkGasCollision(this.sighttail, 'Sighttail');
                 this.checkGasCollision(this.scentpaw, 'Scentpaw');
             },
@@ -218,13 +226,13 @@ class GameScene extends Phaser.Scene {
         this.gas8 = this.physics.add.image(3 * centerX, 0.38 * centerY, 'gas').setScale(5).setVisible(false);
         this.gas9 = this.physics.add.image(2 * centerX, 0.38 * centerY, 'gas').setScale(5).setVisible(false);
 
-        this.gas.push(this.gas1,this.gas2,this.gas3,this.gas4,this.gas5,this.gas6,this.gas7,this.gas8,this.gas9);
+        this.gas.push(this.gas1, this.gas2, this.gas3, this.gas4, this.gas5, this.gas6, this.gas7, this.gas8, this.gas9);
 
-        this.gas.forEach((gasCloud) =>{
-            this.physics.add.overlap(this.sighttail, gasCloud, ()=>{
+        this.gas.forEach((gasCloud) => {
+            this.physics.add.overlap(this.sighttail, gasCloud, () => {
                 this.sighttailInGas = true;
             });
-            this.physics.add.overlap(this.scentpaw, gasCloud, ()=>{
+            this.physics.add.overlap(this.scentpaw, gasCloud, () => {
                 this.scentpawInGas = true;
             });
         });
@@ -249,10 +257,24 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.scentpaw, layer);
 
         //colisiones entre jugadores y cazador
-        this.physics.add.collider(this.sighttail, this.cazador);
-        this.physics.add.collider(this.scentpaw, this.cazador);
-
+        this.physics.add.collider(this.sighttail, this.cazador, ()=>{
+            console.log('colision con cazador: sighttail');
+            this.checkCazadorCollision('Sighttail');
         
+        });
+        this.physics.add.collider(this.scentpaw, this.cazador, ()=>{
+            console.log('colision con cazador: scentpaw');
+            this.checkCazadorCollision('Scentpaw');
+        });
+
+        this.physics.add.collider(this.sighttail, this.carta, ()=>{
+            this.launchDialogueScene(5);
+        })
+        this.physics.add.collider(this.scentpaw, this.carta, ()=>{
+            this.launchDialogueScene(5);
+        })
+
+
 
         // Controles
         this.controls1 = this.input.keyboard.addKeys({
@@ -281,56 +303,73 @@ class GameScene extends Phaser.Scene {
         this.capaV = this.add.circle(0.56 * centerX, 1.4 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
         this.capaO = this.add.circle(0.56 * centerX, 1.25 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
 
+        const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
+        const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
+        this.cameras.main.centerOn(centerjX, centerjY);
+
+        this.launchDialogueScene(0);
+
+    }
+
+
+    checkCazadorCollision(playerKey) {
         
-
-    }
-
-
-    checkCazadorCollision(player, playerKey){
-        if(playerKey === 'Sighttail'){
-            if(this.controls1.power.isDown){
+        if (playerKey === 'Sighttail') {
+            if (this.hablarCazador) {
                 this.launchDialogueScene(4);
+                this.hablarCazador = false; // Desactiva para no repetir el diálogo
+                this.carta.setVisible(true);
+            }
+        } else if (playerKey === 'Scentpaw') {
+            if (this.hablarCazador) {
+                this.launchDialogueScene(4);
+                this.hablarCazador = false;
+                this.carta.setVisible(true);
             }
         }
-        if(playerKey === 'Scentpaw'){
-            if(this.controls2.power.isDown){
-                this.launchDialogueScene(4);
-            }
-        }
     }
 
-    checkGasCollision(player, playerKey){
-        if(playerKey==='Sighttail'){
-            if(this.sighttailInGas){
-                this.sighttailGas+=100;
-                if(this.sighttailGas >=7000){
-                    this.vidas-=1;
-                    this.sighttailGas=0;
+    checkGasCollision(player, playerKey) {
+
+        if (playerKey === 'Sighttail') {
+            if (this.sighttailInGas) {
+                this.sighttailGas += 100;
+                if (this.gasPriVez) {
+                    this.launchDialogueScene(2);
+                    this.gasPriVez = !this.gasPriVez;
+                }
+                if (this.sighttailGas >= 7000) {
+                    this.vidas -= 1;
+                    this.sighttailGas = 0;
                     console.log("Una vida menos");
                     console.log(this.sighttailGas);
                     console.log(this.sighttailInGas);
                 }
-            } 
-            else{
-                this.sighttailGas=0;
+            }
+            else {
+                this.sighttailGas = 0;
             }
             this.sighttailInGas = false;
         }
-        if(playerKey==='Scentpaw'){
-            if(this.scentpawInGas){
-                this.scentpawGas+=100;
-                if(this.scentpawGas >=7000){
-                    this.vidas-=1;
-                    this.scentpawGas=0;
+        if (playerKey === 'Scentpaw') {
+            if (this.scentpawInGas) {
+                this.scentpawGas += 100;
+                if (this.gasPriVez) {
+                    this.launchDialogueScene(2);
+                    this.gasPriVez = !this.gasPriVez;
                 }
-            } 
-            else{
-                this.scentpawGas=0;
+                if (this.scentpawGas >= 7000) {
+                    this.vidas -= 1;
+                    this.scentpawGas = 0;
+                }
+            }
+            else {
+                this.scentpawGas = 0;
             }
             this.scentpawInGas = false;
         }
 
-        if(this.vidas<=0){
+        if (this.vidas <= 0) {
             this.scene.stop('GameScene');
             this.scene.start('GameScene');
         }
@@ -345,17 +384,20 @@ class GameScene extends Phaser.Scene {
         flecha.yaColisiono = true;
         console.log(`${playerkey} ha sido alcanzado por una flecha`);
         this.vidas -= 1;
-
+        if (this.flechasPriVez) {
+            this.launchDialogueScene(1);
+            this.flechasPriVez = !this.flechasPriVez;
+        }
         flecha.setVelocity(0);
         flecha.setVisible(false);
-        this.time.delayedCall(flecha.delay,()=>{
+        this.time.delayedCall(flecha.delay, () => {
             flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
             flecha.play('flechas');
             flecha.setVelocityX(200);
             flecha.setVelocityY(0);
             flecha.yaColisiono = false;
         });
-        
+
 
 
         if (this.vidas <= 0) {
@@ -393,17 +435,17 @@ class GameScene extends Phaser.Scene {
             // game
             case 0: // dialogo sobre trampas
                 startIndex = 12;
-                endIndex = 13;
+                endIndex = 14;
                 break;
 
             case 1: // dialogo sobre flechas
                 startIndex = 14;
-                endIndex = 15;
+                endIndex = 16;
                 break;
 
             case 2: // dialogo sobre neblina
                 startIndex = 16;
-                endIndex = 17;
+                endIndex = 18;
                 break;
 
             case 3: // dialogo sobre paredes
@@ -508,7 +550,6 @@ class GameScene extends Phaser.Scene {
                 flecha.setVelocityX(0);
                 flecha.stop('flechas');
 
-
                 // Retrasar el reinicio usando el delay almacenado
                 this.time.delayedCall(flecha.delay, () => {
                     flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
@@ -565,8 +606,8 @@ class GameScene extends Phaser.Scene {
 
         }
 
-        //this.checkCazadorCollision(this.sighttail, 'Sighttail');
-        //this.checkCazadorCollision(this.scentpaw, 'Scentpaw');
+        this.checkCazadorCollision(this.sighttail, 'Sighttail');
+        this.checkCazadorCollision(this.scentpaw, 'Scentpaw');
         // Centrar cámara entre los dos jugadores
         const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
         const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;

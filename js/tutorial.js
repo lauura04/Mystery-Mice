@@ -229,7 +229,7 @@ class TutorialScene extends Phaser.Scene {
         switch (caseId) {
             case 0: // Caso inicial
                 startIndex = 0;
-                endIndex = 6;
+                endIndex = 7;
                 break;
 
             case 1: // puerta
@@ -240,7 +240,7 @@ class TutorialScene extends Phaser.Scene {
 
             case 2: // dialogo de agujero
                 startIndex = 9;
-                endIndex = 11;
+                endIndex = 12;
                 break;
 
             default: // Caso por defecto
