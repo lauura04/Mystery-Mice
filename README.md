@@ -272,3 +272,8 @@ manteniéndolos inmóviles para los interrogatorios.
 5. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó. 
 
 6. Diario: cuaderno que los hermanos encuentran durante el nivel 2 y que contiene notas de su madre acerca de lo que ocurrió en la quesería. 
+
+
+# Novedades realizadas durante la segunda práctica
+
+##

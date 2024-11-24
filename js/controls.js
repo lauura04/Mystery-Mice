@@ -19,12 +19,14 @@ class ControlScene extends Phaser.Scene{
     }
 
     create(){
-
+        //Calculamos el centro del canvas para tomarlo como referencia
         const centerX = this.scale.width/2;
         const centerY = this.scale.height/2;
        
+        //Ponemos el fondo
         const fonfoC = this.add.image(centerX, centerY, "fondoC");
 
+        //Botón para volver al menú de pausa
         const volverB = this.add.image(0.2*centerX, 1.7*centerY, "volverB")
         .setInteractive()
         .on('pointerdown', ()=>{
@@ -36,6 +38,7 @@ class ControlScene extends Phaser.Scene{
             this.sound.play("button");
         } );
         
+        //Escalamos el botón
         volverB.setScale(0.3);
 
         // imagenes de los ratones con sus respectivos controles de teclado
