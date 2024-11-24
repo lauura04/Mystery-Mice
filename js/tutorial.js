@@ -41,8 +41,8 @@ class TutorialScene extends Phaser.Scene {
         this.durVista = 3000;//por ver 
 
         //estado de los poderes
-        this.vistaDisp = true;
-        this.olfatoDisp = true;
+        this.vistaDisp = false;
+        this.olfatoDisp = false;
 
         // Crear áreas y objetos
         const cripta = this.add.rectangle(0.085 * centerX, 0, centerX + 30, 0.95 * centerY, 0x000000, 0).setOrigin(0, 0);
@@ -163,7 +163,7 @@ class TutorialScene extends Phaser.Scene {
         const pausa = this.add.image(0.55 * centerX, 0.6 * centerY, 'pause').setScrollFactor(0).setScale(0.15)
             .setInteractive()
             .on('pointerdown', () => {
-                this.scene.pause(); 
+                this.scene.pause();
                 this.scene.launch('PauseScene', { callingScene: this.scene.key });
             });
 
@@ -222,6 +222,8 @@ class TutorialScene extends Phaser.Scene {
                 this.agujero.setVisible(true);
                 this.capaO.setVisible(false);
                 this.capaV.setVisible(false);
+                this.vistaDisp = true;
+                this.olfatoDisp = true;
                 break;
 
             case 2: // dialogo de agujero

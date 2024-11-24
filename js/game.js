@@ -50,7 +50,7 @@ class GameScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
-        this.dialogPuerta = false;
+        
         this.cargaOlfato = 10000;
         this.cargaVista = 10000;
         this.durOlfato = 3000;
