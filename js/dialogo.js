@@ -44,7 +44,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text: "¿Sabes, Scentpaw? No puedo dejar de pensar por qué este lugar en concreto es tan importante para nuestra investigación.",
+                                text: "¿Sabes, Scentpaw? No puedo dejar de pensar en por qué este lugar en concreto es tan importante para nuestra investigación.",
                                 side: "left",
 
                         },
@@ -187,7 +187,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "cazador",
                                 name: "Cazador",
-                                text: "¿Quién osa perturbar mi eterno descanso? ¿Sois enviados de ese maldito traidor?",
+                                text: "¿Quién osa perturbar mi descanso eterno? ¿Sois enviados de ese maldito traidor?",
                                 side: "right",
                         },
 
@@ -318,7 +318,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "Queridos Sighttail y Scentpaw, si estáis leyendo esto, significa que nuestra investigación nos ha llevado demasiado lejos,",
+                                text: "Queridos Sighttail y Scentpaw, si estáis leyendo esto, significa que nuestra investigación nos ha llevado demasiado lejos",
                                 side: "rigth",
                         },
 
@@ -332,7 +332,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: " Son víctimas de un antiguo ritual. Una figura en las sombras controla a estos seres cuando llega la medianoche hasta que sale el sol,",
+                                text: " Son víctimas de un antiguo ritual. Una figura en las sombras controla a estos seres cuando llega la medianoche y hasta que sale el sol,",
                                 side: "rigth",
                         },
 
@@ -353,7 +353,7 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "scentpaw",
                                 name: "Scentpaw",
-                                text: "‘Tras mucho tiempo de investigación, hemos descubierto que quién está detrás de todo esto es… la propia alcaldesa VillaCheddar.’",
+                                text: "‘Tras mucho tiempo de investigación, hemos descubierto que quién está detrás de todo esto es… la propia alcaldesa de VillaCheddar.’",
                                 side: "rigth",
                         },
 
