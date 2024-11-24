@@ -81,7 +81,7 @@ class CreditScene extends Phaser.Scene{
 
         })
 
-        const son= this.add.text(0.75*centerX,0.95*centerY, 'Sonido y Música', {
+        const son= this.add.text(0.75*centerX,0.95*centerY, 'Sfx y guión', {
             font: '65px mousy',
             color: '#42240e',
             align: 'center'
@@ -95,7 +95,7 @@ class CreditScene extends Phaser.Scene{
 
         })
 
-        const gam= this.add.text(0.77*centerX,1.35*centerY, 'Game Desing', {
+        const gam= this.add.text(0.77*centerX,1.35*centerY, 'Game Design', {
             font: '65px mousy',
             color: '#42240e',
             align: 'center'
