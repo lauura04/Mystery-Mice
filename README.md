@@ -1,3 +1,6 @@
+
+GDD-MISTERY MICE
+
 # Integrantes
 
 -Laura Facenda Estrella - l.facenda.2022@alumnos.urjc.es - lauura04
@@ -7,7 +10,6 @@
 -Daniel Duque Rodríguez - d.duque.2021@alumnos.urjc.es - Daniii18
 
 -María de Andrés Jarandilla - m.deandres.2021@alumnos.urjc.es - MariaDeAndres
-
 
 
 # INTRODUCCIÓN
@@ -27,17 +29,17 @@ misteriosas entidades.
 
 ## Características generales 
 
--Juego cooperativo para 2 jugadores: Cada jugador controlará a un ratón con habilidades únicas. Dependiendo del ratón que escoja cada jugador, podrá hacer 
+1. Juego cooperativo para 2 jugadores: Cada jugador controlará a un ratón con habilidades únicas. Dependiendo del ratón que escoja cada jugador, podrá hacer 
 determinadas cosas y otras que no, las cuales solo su compañero será capaz de llevar a cabo. La clave está en la cooperación, ambos ratones deben trabajar 
 juntos para descubrir pistas que, por separado, no podrían obtener.  
 
--Historia intrigante: Los jugadores están inmersos en un misterio paranormal que ocurre en VillaCheddar, donde los fantasmas están causando caos en el pueblo. 
+2. Historia intrigante: Los jugadores están inmersos en un misterio paranormal que ocurre en VillaCheddar, donde los fantasmas están causando caos en el pueblo. 
 Al avanzar en la trama, descubrirán que estos sucesos paranormales esconden una verdad más oscura, y deben desenmascarar qué está ocurriendo realmente. 
 
--Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán 
+3. Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán 
 pensamiento estratégico y mucha coordinación entre los dos jugadores, donde los datos sensoriales (vista/olfato) se combinarán para solucionar el misterio. 
 
--Progresión de niveles: El juego está dividido en diferentes niveles, representados por casas misteriosas que los jugadores deben investigar. Cada nivel tiene una 
+4. Progresión de niveles: El juego está dividido en diferentes niveles, representados por casas misteriosas que los jugadores deben investigar. Cada nivel tiene una 
 dificultad creciente, en la que los fantasmas se vuelven más difíciles de rastrear e identificar, y los puzles se tornan más complejos. Con cada casa investigada, 
 la historia avanza, revelando más detalles sobre la realidad oculta detrás de los sucesos paranormales. 
 
@@ -104,40 +106,40 @@ a su religión.
 El juego se va a caracterizar principalmente por el uso coordinado de las habilidades de los personajes,
 así como una combinación con los ítems existentes en el juego. 
  
--Visión + lupa: gracias a la lupa, Sighttail puede analizar huellas, rastros o marcas de fantasmas, permitiendo 
+1. Visión + lupa: gracias a la lupa, Sighttail puede analizar huellas, rastros o marcas de fantasmas, permitiendo 
 así distinguir de qué tipo de fantasma se trata en función del tipo de huella. 
 
--Visión nocturna: es capaz de ver en sitios donde la luz se encuentra ausente. 
+2. Visión nocturna: es capaz de ver en sitios donde la luz se encuentra ausente. 
 
--Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail
+3. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail
 no es capaz de percibir ya que son solo aromas presentes en el aire. 
 
--Los ratones podrán moverse por los escenarios libremente por las casas mediante el teclado y habrá una tecla para
+4. Los ratones podrán moverse por los escenarios libremente por las casas mediante el teclado y habrá una tecla para
 activar las habilidades, ya que no podrán tenerlas activadas de forma continua y solo pueden estar ambas activadas
 a la vez durante 5 segundos.  
 
--Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail en 
+5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail en 
 una habitación nocturna tiene que usar su habilidad para poder guiar a Scentpaw a través de un laberinto en el que para 
 ver a dónde tiene que ir siguiendo un rastro olfativo. 
  
 ## Estados 
 
--Menú principal: la pirmera pantalla que aparece al abrir el juego. Desde aquí se puede entrar o salir del juego y acceder 
+1. Menú principal: la pirmera pantalla que aparece al abrir el juego. Desde aquí se puede entrar o salir del juego y acceder 
 a los ajustes o a la pantalla de créditos. 
 
--Menú de salas: en este menú se podrá acceder a la conexión de los dispositivos que jugarán juntos. 
+2. Menú de salas: en este menú se podrá acceder a la conexión de los dispositivos que jugarán juntos. 
 
--Menú de selección: inmediatamente posterior al menú de salas, desde aqui los jugadores seleccionarán con qué personaje 
+3. Menú de selección: inmediatamente posterior al menú de salas, desde aqui los jugadores seleccionarán con qué personaje 
 quieren jugar y empezarán la partida. 
 
--Juego: todo el contenido jugable de la historia. 
+4. Juego: todo el contenido jugable de la historia. 
 
--Inventario: apartado del juego en el que se puede acceder a pistas, objetos, diálogos que ya han ocurrido y herramientas 
+5. Inventario: apartado del juego en el que se puede acceder a pistas, objetos, diálogos que ya han ocurrido y herramientas 
 interesantes. 
 
--Menú de pausa: accesible en todo momento desde el juego y desde el que se puede acceder a los ajustes. 
+6. Menú de pausa: accesible en todo momento desde el juego y desde el que se puede acceder a los ajustes. 
 
--Fin del juego: una pantalla de game over que te lleva de vuelta al menu pricipal cuando acabas el juego. 
+7. Fin del juego: una pantalla de game over que te lleva de vuelta al menu pricipal cuando acabas el juego. 
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
 
@@ -155,18 +157,18 @@ Como no hay forma de moverse entre niveles, ya que la historia es lineal, no hab
 
 Se describen los botones a partir de los distintos estados: 
 
--Menú principal: botones de jugar, opciones, salir, controles y créditos. 
+1. Menú principal: botones de jugar, opciones, salir, controles y créditos. 
 
--Menú de salas: botones para crear sala o unirte a sala. 
+2. Menú de salas: botones para crear sala o unirte a sala. 
 
--Menú de opciones: + y – para volumen, tamaño de la pantalla (completa: si/no). 
+3. Menú de opciones: + y – para volumen, tamaño de la pantalla (completa: si/no). 
 
--Menú de pausa: volver al menú (principal), salir de sala (menu de salas), salir, continuar, opciones. 
+4. Menú de pausa: volver al menú (principal), salir de sala (menu de salas), salir, continuar, opciones. 
 
--Dentro del juego: botón de pausa arriba a la derecha, inmediatamente a la izquierda un botón de inventario/maletín/diario, algo para llevar cuenta de las 
+5. Dentro del juego: botón de pausa arriba a la derecha, inmediatamente a la izquierda un botón de inventario/maletín/diario, algo para llevar cuenta de las 
 pistas, objetos, información de los fantasmas... 
 
--Todas las pantallas (menos principal): botón “atrás” arriba a la izquierda. 
+6. Todas las pantallas (menos principal): botón “atrás” arriba a la izquierda. 
 
 
 # DESARROLLO DEL JUEGO 
@@ -194,7 +196,7 @@ Sighttail tienen que ser capaces de atravesar esas fases sin ser golpeados por l
 Scentpaw es el único que puede percibir la niebla y Sighttail mientras tiene que encontrar una ruta alternativa para huir de esa zona cuanto antes. 
 
 3. Paredes móviles: algunas paredes del laberinto se mueven para confundir a los jugadores. Scentpaw es capaz de oler los restos de energías espectrales que quedan
- tras estas paredes. Dichas paredes son las que llevan a los jugadores al centro del laberinto, que es donde se encuentra el cazador. 
+tras estas paredes. Dichas paredes son las que llevan a los jugadores al centro del laberinto, que es donde se encuentra el cazador. 
 
 Cuando lleguen al cazador les contará su historia, descubriendo así que fue traicionado por cierto habitante con alto nivel de influencia. Junto al cazador 
 descubren una carta escrita por el padre de estos, en la que se menciona que estaban investigando a la alcaldesa. 
@@ -227,8 +229,8 @@ oscuros acerca de rituales antiguos.
 Los niños que allí vivían fueron sacrificados en un antiguo ritual para calmar un espíritu ancestral, quien resulta ser la alcaldesa. 
 
 El puzzle comienza en un pasillo largo y oscuro con sombras que se mueven bloqueando el paso. Tiene que ser Sighttail quien guie a Scentpaw a través del pasillo
- mientras interactúan con interruptores ocultos que es Scentpaw quien puede averiguar cuáles son aquellos los que tienen que pulsar mediante el olfato mientras 
- siguen el rastro de los niños fantasmales. Aquellas zonas en las que más rastro hay son aquellas en las que más conexión tienen con el ritual. 
+mientras interactúan con interruptores ocultos que es Scentpaw quien puede averiguar cuáles son aquellos los que tienen que pulsar mediante el olfato mientras 
+siguen el rastro de los niños fantasmales. Aquellas zonas en las que más rastro hay son aquellas en las que más conexión tienen con el ritual. 
 
 Una vez llegan a la sala de rituales encuentran a los espíritus de sus padres atrapados en una prisión fantasmal y les revelan que fue la alcaldesa la responsable 
 de la muerte de ambos, así como del resto de hechos del pueblo. 
@@ -258,15 +260,15 @@ una escopeta.
 
 Los ítems presentes en el juego son claves para el desarrollo clave del juego. 
 
--Lupa: sirve para analizar las huellas y demás pistas encontradas. 
+1. Lupa: sirve para analizar las huellas y demás pistas encontradas. 
 
--Cuaderno: contiene todos los datos de la investigación. 
+2. Cuaderno: contiene todos los datos de la investigación. 
 
--Trampa para fantasmas: en su versión pequeña, mediana y grande dependiendo de lo huidizos que sean los fantasmas. 
+3. Trampa para fantasmas: en su versión pequeña, mediana y grande dependiendo de lo huidizos que sean los fantasmas. 
 
--Dispositivo de retención de fantasmas: junto con las trampas, ayudan a detener a los fantasmas que se niegan a colaborar en la investigación, 
+4. Dispositivo de retención de fantasmas: junto con las trampas, ayudan a detener a los fantasmas que se niegan a colaborar en la investigación, 
 manteniéndolos inmóviles para los interrogatorios. 
 
--Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó. 
+5. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó. 
 
--Diario: cuaderno que los hermanos encuentran durante el nivel 2 y que contiene notas de su madre acerca de lo que ocurrió en la quesería. 
+6. Diario: cuaderno que los hermanos encuentran durante el nivel 2 y que contiene notas de su madre acerca de lo que ocurrió en la quesería. 
