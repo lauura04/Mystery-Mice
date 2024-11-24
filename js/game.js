@@ -35,7 +35,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
-        const backgroundMusic1 = this.registry.get("backgroundMusic");
+        const backgroundMusic1 = this.registry.get("musicaFondo");
         if (backgroundMusic1) {
             backgroundMusic1.stop();
         }
