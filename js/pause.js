@@ -6,7 +6,7 @@ class PauseScene extends Phaser.Scene {
     preload() {
         this.load.image("backgroundP", 'assets/backgroundcontrol.png');
         this.load.image("reanudar", 'assets/Reanudar.png');
-        this.load.image("rat1", 'assets/Rat1.png');
+        this.load.image("rat1", 'assets/Rat.png');
         this.load.image("rat2", 'assets/Rat2.png');
 
 
@@ -27,21 +27,20 @@ class PauseScene extends Phaser.Scene {
         const reanudar = this.add.image(0.28 * centerX, 0.4 * centerY, "reanudar").setInteractive()
             .on('pointerdown', () => {
                 this.scene.stop("PauseScene");
-                this.scene.resume("TutorialScene");
-            });;
+                this.returnToCallingScene();
+            });
 
         const salir = this.add.image(0.4 * centerX, 0.9 * centerY, "salir").setInteractive()
             .on('pointerdown', () => {
                 this.scene.stop("PauseScene");
-                this.scene.stop("TutorialScene");
+                this.stopCallingScene();
                 this.scene.start("IntroScene");
             });
 
         const credits = this.add.image(0.6 * centerX, 1.5 * centerY, "credits").setInteractive()
             .on('pointerdown', () => {
-                this.scene.stop("PauseScene");
-                this.scene.stop("TutorialScene");
-                this.scene.start("CreditScene");
+                this.scene.pause("PauseScene");
+                this.scene.launch('CreditScene', { callingScene: this.scene.key });
             });
 
         const sighttailImg = this.add.image(1.1 * centerX, 0.9 * centerY, "rat1");
@@ -51,5 +50,23 @@ class PauseScene extends Phaser.Scene {
         const scentpawAs = this.add.image(1.5*centerX, 0.95*centerY, "scentpawP").setScale(0.4);
 
         const hilos = this.add.image(centerX, centerY, "hilos");
+
+        this.callingScene = this.scene.settings.data?.callingScene || null;
+    }
+
+    //funcion para manejar la llamada entre distintas escenas
+    returnToCallingScene() {
+        if (this.callingScene) {
+            this.scene.stop(); // Detén la escena de controles
+            this.scene.resume(this.callingScene); // Reanuda la escena llamante
+        } else {
+            console.error("No callingScene provided");
+        }
+    }
+
+    stopCallingScene(){
+        if(this.callingScene){
+            this.scene.stop(this.callingScene);
+        }
     }
 }

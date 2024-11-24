@@ -12,6 +12,7 @@ class PreviewScene extends Phaser.Scene {
         
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
+
         //variable del fondo del periodico
         this.periodico = this.add.image(centerX, centerY, 'periodico')
             .setInteractive()
@@ -74,7 +75,7 @@ class PreviewScene extends Phaser.Scene {
 
             if (cont > 1) {
                 this.scene.stop("PreviewScene");
-                this.scene.start("GameScene");
+                this.scene.start("TutorialScene");
             }
         });
 

@@ -5,14 +5,15 @@ class IntroScene extends Phaser.Scene{
 
     preload(){
         // carga de audios
-        this.load.audio("button", 'assets/Clickar_Boton.wav');
-        this.load.audio("backgroundsound", 'assets/musicMenu.mp3');
+        this.load.audio("boton", 'assets/Clickar_Boton.wav');
+        this.load.audio("musicaFondo", 'assets/musicMenu.mp3');
 
 
         //carga de imágenes
-        this.load.image("background", 'assets/menu.png');
-        this.load.image("book", 'assets/Libro.png');
-        this.load.image("shadowBook", 'assets/SombraLibro.png');
+        this.load.image("fondo", 'assets/menu.png');
+        this.load.image("libro", 'assets/Libro.png');
+        this.load.image("sombraLibro", 'assets/SombraLibro.png');
+        this.load.image("periodicoM", 'assets/Menu_inicialPeri.png');
     }
 
     create(){
@@ -21,16 +22,16 @@ class IntroScene extends Phaser.Scene{
         const centerY = this.scale.height/2;
         
         // activacion de sonidos
-        if (!this.sound.get('backgroundsound')) {
-            this.music = this.sound.add("backgroundsound", { loop: true, volume: 0.5 });
+        if (!this.sound.get('musicaFondo')) {
+            this.music = this.sound.add("musicaFondo", { loop: true, volume: 0.5 });
             this.music.play();
-            this.registry.set("backgroundMusic", this.music);
+            this.registry.set("musicaFondo", this.music);
         } else {
-            this.music = this.sound.get('backgroundsound');
+            this.music = this.sound.get('musicaFondo');
         }
 
-        
-        const background_menu = this.add.image(centerX,centerY, "background");
+        // montaje de la escena
+        const background_menu = this.add.image(centerX,centerY, "fondo");
 
         const title = this.add.text(0.1*centerX, 0.05*centerY, 'Mystery Mice', {
             font: '200px mousy',
@@ -39,11 +40,12 @@ class IntroScene extends Phaser.Scene{
             align: 'center'
         });
 
+
         // interfaz del libro
-        const shadowBook = this.add.image(0.618*centerX, 1.2*centerY, "shadowBook");
-        const book = this.add.image(0.65*centerX, 1.2*centerY, "book");
+        const sombraLibro = this.add.image(0.618*centerX, 1.2*centerY, "sombraLibro");
+        const libro = this.add.image(0.65*centerX, 1.2*centerY, "libro");
         
-        
+        // botones del menu
         const startText = this.add.text(0.72*centerX, 0.65*centerY, 'Empezar',{
             font: '70px mousy',
             color: '#42240e',
@@ -52,7 +54,7 @@ class IntroScene extends Phaser.Scene{
         .on('pointerdown', ()=>{
             this.scene.stop("IntroScene");
             this.scene.start("PreviewScene");            
-            this.sound.play("button");
+            this.sound.play("boton");
         });
 
 
@@ -62,9 +64,9 @@ class IntroScene extends Phaser.Scene{
             align: 'center'
         }).setInteractive()
         .on('pointerdown', () =>{
-            this.scene.stop("IntroScene");
-            this.scene.start("ControlScene");
-            this.sound.play("button");
+            this.scene.pause("IntroScene");
+            this.scene.launch('ControlScene', { callingScene: this.scene.key });
+            this.sound.play("boton");
         });
 
         const textCredit = this.add.text(0.72*centerX, 1.15*centerY, 'Créditos', {
@@ -73,9 +75,9 @@ class IntroScene extends Phaser.Scene{
             align: 'center'
         }).setInteractive()
         .on('pointerdown', () =>{
-            this.scene.stop("IntroScene");
-            this.scene.start("CreditScene");
-            this.sound.play("button");
+            this.scene.pause("IntroScene");
+            this.scene.launch('CreditScene', { callingScene: this.scene.key });
+            this.sound.play("boton");
         });
 
         const exitText = this.add.text(0.78*centerX, 1.4*centerY, 'Salir', {
@@ -84,9 +86,11 @@ class IntroScene extends Phaser.Scene{
             align: 'center'
         }).setInteractive()
         .on('pointerdown', ()=>{
-            this.sound.play("button");
+            this.sound.play("boton");
             this.game.destroy(true);
         });
+
+        this.periodicoM = this.add.image(centerX, centerY, "periodicoM");
     }
 
     

@@ -8,10 +8,10 @@ class ControlScene extends Phaser.Scene{
         this.load.audio("button", 'assets/Clickar_Boton.wav')
 
         // carga de imagenes
-        this.load.image("backgroundcontrol", 'assets/backgroundcontrol.png');
-        this.load.image("backControlButton", 'assets/backbutton.png');
-        this.load.image("staticSighttail", 'assets/SightailDialogue.png');
-        this.load.image("staticScentpaw", 'assets/ScentpawDialogue.png');
+        this.load.image("fondoC", 'assets/backgroundcontrol.png');
+        this.load.image("volverB", 'assets/backbutton.png');
+        this.load.image("sighttailE", 'assets/SightailDialogue.png');
+        this.load.image("scentpawE", 'assets/ScentpawDialogue.png');
         this.load.image("control1", 'assets/Controles_awse.png');
         this.load.image("control2", 'assets/Controles_flechas.png');
         this.load.image("vision", 'assets/Supervision.png');
@@ -22,38 +22,45 @@ class ControlScene extends Phaser.Scene{
 
         const centerX = this.scale.width/2;
         const centerY = this.scale.height/2;
+       
+        const fonfoC = this.add.image(centerX, centerY, "fondoC");
 
-        const backgroundControl = this.add.image(centerX, centerY, "backgroundcontrol");
-
-        const backcontrolButton = this.add.image(0.2*centerX, 1.7*centerY, "backControlButton")
+        const volverB = this.add.image(0.2*centerX, 1.7*centerY, "volverB")
         .setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("ControlScene");
-            this.scene.start("IntroScene");
+            if (this.callingScene) {
+                this.scene.stop();
+                this.returnToCallingScene();
+        }
             this.sound.play("button");
         } );
         
-        backcontrolButton.setScale(0.3);
+        volverB.setScale(0.3);
 
-        
-        const sighttailAsset = this.add.image(0.5*centerX,0.6*centerY, "staticSighttail");
+        // imagenes de los ratones con sus respectivos controles de teclado
+        const sighttailAsset = this.add.image(0.5*centerX,0.6*centerY, "sighttailE");
         sighttailAsset.setScale(0.4);
-
         const control1 = this.add.image(0.7*centerX, 0.8*centerY, "control1");
-        control1.setScale(1.2);
-
-        // hacer lo mismo que con sighttail para scentpaw pero con los assets de las flechas
-        const scentpawAsset = this.add.image(1.4*centerX, 0.6*centerY,"staticScentpaw" );
+        control1.setScale(1.2);    
+        const scentpawAsset = this.add.image(1.4*centerX, 0.6*centerY,"scentpawE" );
         scentpawAsset.setScale(-0.45, 0.45);
-
         const control2 = this.add.image(1.5*centerX, 0.9*centerY, "control2");
-        control2.setScale(1.2);
-       
-        // meter lo de los poderes -> teclas por poder
+        control2.setScale(1.2);       
         const vision = this.add.image(0.7*centerX, 1.2*centerY, "vision").setScale(3);
         const olfato = this.add.image(1.5*centerX, 1.2*centerY, "olfato").setScale(3);
 
+        this.callingScene = this.scene.settings.data?.callingScene || null;
+    }
 
+    //funcion para manejar la llamada entre distintas escenas
+    returnToCallingScene() {
+        if (this.callingScene) {
+            this.scene.stop(); 
+            this.scene.resume(this.callingScene); 
+        } else {
+            console.error("No callingScene provided");
+        }
     }
     
 }

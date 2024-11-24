@@ -19,14 +19,14 @@ class DialogueScene extends Phaser.Scene {
                 this.centerX = this.scale.width / 2;
                 this.centerY = this.scale.height / 2;
 
-                this.isRightSide = true; // true -> derecha, false -> izquierda
-
-
+                //variables de las imagenes
                 this.scentpaw = this.add.image(1.45 * this.centerX, 1.2 * this.centerY, "scentpaw").setScale(0.8);
                 this.sighttail = this.add.image(0.5 * this.centerX, 1.2 * this.centerY, "sighttail").setScale(0.8);
                 this.cazador = this.add.image(1.45 * this.centerX, 1.2 * this.centerY, "cazador").setVisible(false).setScale(0.8);
                 this.rectDialogue = this.add.image(this.centerX, 1.2 * this.centerY, "dialog").setScale(-0.8, 0.8);
                 this.rectName = this.add.image(this.centerX, 1.1 * this.centerY, "nameIm");
+
+                //variables de texto
                 this.nameText = this.add.text(0.289 * this.centerX, 1.457 * this.centerY, "Sighttail", {
                         font: '50px mousy',
                         color: '#FFFFFF',
@@ -40,6 +40,7 @@ class DialogueScene extends Phaser.Scene {
 
                 }).setOrigin(0, 0);
 
+                //contenido de los dialogos
                 this.dialogueData = [
                         {
                                 character: "sighttail",
@@ -169,21 +170,7 @@ class DialogueScene extends Phaser.Scene {
                                 side: "left",
                         },
 
-                        //dialogo sobre paredes
-                        {
-                                character: "scentpaw",
-                                name: "Scentpaw",
-                                text: "Noto algo moverse… Son las paredes, están cambiando de lugar.",
-                                side: "rigth",
-                        },
-                        {
-                                character: "sighttail",
-                                name: "Sighttail",
-                                text: "Perfecto, justo lo que nos faltaba. Tranquilo, si seguimos tu rastro saldremos de aquí.",
-                                side: "left",
-                        },
-
-                        // ver cómo hacer lo del cazador --> if(currentIndex) -> aparicion y recolocacion de todo
+                        // dialogo con cazador
                         {
                                 character: "cazador",
                                 name: "Cazador",
@@ -422,7 +409,8 @@ class DialogueScene extends Phaser.Scene {
 
                 ];
 
-                const startIndex = this.scene.settings.data?.startIndex || 0; // Por defecto, empieza en 0
+                // variables para gestionar el comienzo y fin de cada uno de los dialogoso
+                const startIndex = this.scene.settings.data?.startIndex || 0; 
                 const endIndex = this.scene.settings.data?.endIndex || 0;
                 this.currentDialogueIndex = startIndex;
                 this.endIndex = endIndex;
@@ -434,7 +422,11 @@ class DialogueScene extends Phaser.Scene {
                         this.nextDialogue();
                 });
 
+                // letras que skipean dialogo -> de cada raton
                 this.input.keyboard.on('keydown-SPACE', () => {
+                        this.nextDialogue();
+                });
+                this.input.keyboard.on('keydown-E', () => {
                         this.nextDialogue();
                 });
 
@@ -442,21 +434,24 @@ class DialogueScene extends Phaser.Scene {
         }
 
         updateDialogue() {
+
+                //maneja la posicion de cada elemento y la actualizacion de los mismos en funcion de en que dialogo se encuentre
                 const dialogue = this.dialogueData[this.currentDialogueIndex];
-                if (this.currentDialogueIndex < 20) {
+                if (this.currentDialogueIndex < 18 || this.currentDialogueIndex>=34) {
                         if (dialogue.side === 'left') {
                                 this.rectDialogue.setScale(-0.8, 0.8);
                                 this.rectName.setPosition(this.centerX, 1.1 * this.centerY, "nameIm");
                                 this.nameText.setPosition(0.289 * this.centerX, 1.457 * this.centerY).setText("Sighttail");
                         }
                         else {
+                                this.scentpaw.setPosition(1.45 * this.centerX, 1.2 * this.centerY).setScale(0.8);
                                 this.rectDialogue.setScale(0.8);
                                 this.rectName.setPosition(2.25 * this.centerX, 1.1 * this.centerY, "nameIm");
                                 this.nameText.setPosition(1.52 * this.centerX, 1.457 * this.centerY).setText("Scentpaw");
                         }
                 }
 
-                else if(this.currentDialogueIndex<36){
+                else if(this.currentDialogueIndex<34){
                         
                         if (dialogue.character === 'sighttail') {
                                 this.scentpaw.setVisible(false);
@@ -490,6 +485,7 @@ class DialogueScene extends Phaser.Scene {
                 console.log(this.endIndex);
         }
 
+        
         nextDialogue() {
                 this.currentDialogueIndex++;
 
@@ -502,7 +498,7 @@ class DialogueScene extends Phaser.Scene {
                         this.updateDialogue();
                 }
         }
-
+        // para volver a activar la escena en la que se encontraba al acabar el dialogo
         endDialogue() {
                 if (this.callingScene) {
                         this.scene.stop();

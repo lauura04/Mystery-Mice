@@ -91,14 +91,12 @@ class TutorialScene extends Phaser.Scene {
         this.physics.add.collider(this.sighttail, cementerio);
         this.physics.add.collider(this.scentpaw, cementerio);
 
-        this.physics.add.overlap(this.sighttail, this.puerta, () => {
-            this.checkInteraction('Sighttail');
-            this.puertaInteractuable = true;
+        this.physics.add.collider(this.sighttail, this.puerta, () => {
+            this.launchDialogueScene(1);
         });
 
-        this.physics.add.overlap(this.scentpaw, this.puerta, () => {
-            this.checkInteraction('Scentpaw');
-            this.puertaInteractuable = true;
+        this.physics.add.collider(this.scentpaw, this.puerta, () => {
+            this.launchDialogueScene(1);
         });
 
         this.physics.add.overlap(this.sighttail, this.agujero, (player, agujero) => {
@@ -165,37 +163,23 @@ class TutorialScene extends Phaser.Scene {
         const pausa = this.add.image(0.55 * centerX, 0.6 * centerY, 'pause').setScrollFactor(0).setScale(0.15)
             .setInteractive()
             .on('pointerdown', () => {
-                this.scene.pause();
-                this.scene.launch("PauseScene");
+                this.scene.pause(); 
+                this.scene.launch('PauseScene', { callingScene: this.scene.key });
             });
 
         //icono de los poderes
         this.vision = this.add.image(0.56 * centerX, 1.4 * centerY, 'vision').setScrollFactor(0);
         this.olfato = this.add.image(0.56 * centerX, 1.25 * centerY, 'olfato').setScrollFactor(0);
 
-        this.capaV = this.add.circle(0.56 * centerX, 1.4 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
-        this.capaO = this.add.circle(0.56 * centerX, 1.25 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
+        this.capaV = this.add.circle(0.56 * centerX, 1.4 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(true);
+        this.capaO = this.add.circle(0.56 * centerX, 1.25 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(true);
 
         // Lanzar el primer diálogo
         this.launchDialogueScene(0);
-    }
 
-    checkInteraction(playerKey) {
-        this.input.keyboard.on('keydown-E', () => {
-            if (playerKey === 'Sighttail' && this.puertaInteractuable) {
-                this.launchDialogueScene(1);
-                 // Evita más interacciones.
-            }
-        });
-        this.puertaInteractuable = false;
-        this.input.keyboard.on('keydown-SPACE', () => {
-            if (playerKey === 'Scentpaw' && this.puertaInteractuable) {
-                this.launchDialogueScene(1);
-                this.puertaInteractuable = false; // Evita más interacciones.
-            }
-        });
 
     }
+
 
     checkAgujeroInteraction(playerKey) {
         this.input.keyboard.on('keydown-E', () => {
@@ -236,6 +220,8 @@ class TutorialScene extends Phaser.Scene {
                 startIndex = 7;
                 endIndex = 9;
                 this.agujero.setVisible(true);
+                this.capaO.setVisible(false);
+                this.capaV.setVisible(false);
                 break;
 
             case 2: // dialogo de agujero

@@ -132,7 +132,7 @@ class GameScene extends Phaser.Scene {
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
@@ -164,19 +164,19 @@ class GameScene extends Phaser.Scene {
         const worldWidth = map.widthInPixels;
         const worldHeight = map.heightInPixels;
         this.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
-        this.cameras.main.setZoom(1);
+        this.cameras.main.setZoom(2);
 
         // Configurar colisiones en el mapa
-        layer.setCollision([7]);
+        layer.setCollision([1,7]);
 
 
         // Crear los sprites de los jugadores con físicas
-        this.sighttail = this.physics.add.sprite(3.5 * centerX, 4 * centerY, 'Sighttail')
+        this.sighttail = this.physics.add.sprite(3.5 * centerX, 8 * centerY, 'Sighttail')
             .setScale(2)
             .setSize(40, 35)
             .setOffset(12, 25);
 
-        this.scentpaw = this.physics.add.sprite(3.3 * centerX, 4 * centerY, 'Scentpaw')
+        this.scentpaw = this.physics.add.sprite(3.3 * centerX, 8 * centerY, 'Scentpaw')
             .setScale(2)
             .setSize(40, 35)
             .setOffset(12, 25);
@@ -202,7 +202,7 @@ class GameScene extends Phaser.Scene {
 
         this.createFlecha(1.9 * centerX, 6.3 * centerY, 2000, { minX: 1.9 * centerX, maxX: 2.7 * centerX });
         this.createFlecha(3.2 * centerX, 3 * centerY, 3000, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
-        this.createFlecha(3.2 * centerX, 2.5 * centerY, 1000, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
+        this.createFlecha(3.2 * centerX, 2.5 * centerY, 2500, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
         this.createFlecha(3.2 * centerX, 2 * centerY, 4000, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
 
 
@@ -243,7 +243,8 @@ class GameScene extends Phaser.Scene {
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
             .on('pointerdown', () => {
-                this.scene.launch("PauseScene");
+                this.scene.pause(); // Pausa la escena actual
+                this.scene.launch('PauseScene', { callingScene: this.scene.key });
             });
         // Crear las animaciones para los jugadores
         this.createAnimations('Sighttail');
@@ -257,21 +258,29 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.scentpaw, layer);
 
         //colisiones entre jugadores y cazador
-        this.physics.add.collider(this.sighttail, this.cazador, ()=>{
+        this.physics.add.collider(this.sighttail, this.cazador, () => {
             console.log('colision con cazador: sighttail');
             this.checkCazadorCollision('Sighttail');
-        
+
         });
-        this.physics.add.collider(this.scentpaw, this.cazador, ()=>{
+        this.physics.add.collider(this.scentpaw, this.cazador, () => {
             console.log('colision con cazador: scentpaw');
             this.checkCazadorCollision('Scentpaw');
         });
 
-        this.physics.add.collider(this.sighttail, this.carta, ()=>{
+        this.physics.add.collider(this.sighttail, this.carta, () => {
             this.launchDialogueScene(5);
+            this.time.delayedCall(500, ()=>{
+                this.scene.stop("GameScene");
+                this.scene.start("EndScene");
+            });
         })
-        this.physics.add.collider(this.scentpaw, this.carta, ()=>{
+        this.physics.add.collider(this.scentpaw, this.carta, () => {
             this.launchDialogueScene(5);
+            this.time.delayedCall(500, ()=>{
+                this.scene.stop("GameScene");
+                this.scene.start("EndScene");
+            });
         })
 
 
@@ -313,16 +322,16 @@ class GameScene extends Phaser.Scene {
 
 
     checkCazadorCollision(playerKey) {
-        
+
         if (playerKey === 'Sighttail') {
             if (this.hablarCazador) {
-                this.launchDialogueScene(4);
+                this.launchDialogueScene(3);
                 this.hablarCazador = false; // Desactiva para no repetir el diálogo
                 this.carta.setVisible(true);
             }
         } else if (playerKey === 'Scentpaw') {
             if (this.hablarCazador) {
-                this.launchDialogueScene(4);
+                this.launchDialogueScene(3);
                 this.hablarCazador = false;
                 this.carta.setVisible(true);
             }
@@ -448,19 +457,14 @@ class GameScene extends Phaser.Scene {
                 endIndex = 18;
                 break;
 
-            case 3: // dialogo sobre paredes
+            case 3: // dialogo cazador
                 startIndex = 18;
-                endIndex = 19;
-                break;
-
-            case 4: // dialogo cazador
-                startIndex = 20;
-                endIndex = 35;
+                endIndex = 34;
                 break;
 
             case 5: // dialogo de la carta
-                startIndex = 36;
-                endIndex = 53;
+                startIndex = 34;
+                endIndex = 52;
                 break;
 
             default: // Caso por defecto
