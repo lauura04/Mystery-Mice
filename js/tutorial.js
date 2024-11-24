@@ -6,6 +6,7 @@ class TutorialScene extends Phaser.Scene {
     }
 
     preload() {
+        //Cargamos todos los objetos que hay en la escena del tutorial
         this.load.image("escenario", 'assets/EntradaCripta.png');
         this.load.image("agujero", 'assets/Bujero.png');
         this.load.image("pause", 'assets/Boton_Pausa.png');
@@ -18,6 +19,7 @@ class TutorialScene extends Phaser.Scene {
         this.load.image("humo", 'assets/Rastro1.png')
         this.load.image("humov", 'assets/Rastro2.png');
 
+        //Cargamos los spritesheets de los dos personajes
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
@@ -29,41 +31,45 @@ class TutorialScene extends Phaser.Scene {
     }
 
     create() {
+        //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
+        //Creamos unos arrays para meter las imagenes de las huellas y el humo
         this.huellas = [];
         this.humos = [];
 
+        //Tiempo de carga y duracción de las habilidades
         this.cargaOlfato = 10000;
         this.cargaVista = 10000;
         this.durOlfato = 3000;
-        this.durVista = 3000;//por ver 
+        this.durVista = 3000;
 
-        //estado de los poderes
+        //Estado de los poderes inicialmente
         this.vistaDisp = false;
         this.olfatoDisp = false;
 
-        // Crear áreas y objetos
+        //Crear áreas y objetos
         const cripta = this.add.rectangle(0.085 * centerX, 0, centerX + 30, 0.95 * centerY, 0x000000, 0).setOrigin(0, 0);
-        this.physics.add.existing(cripta, true);
+        this.physics.add.existing(cripta, true);//Le añadimos esto para que los personaje sno lo puedan atravesar
 
         const cementerio = this.add.rectangle(1.6 * centerX, 0, 0.4 * centerX, 1.4 * centerY, 0x000000, 0).setOrigin(0, 0);
-        this.physics.add.existing(cementerio, true);
+        this.physics.add.existing(cementerio, true);//Le añadimos esto para que los personaje sno lo puedan atravesar
 
         this.puerta = this.add.rectangle(0.5 * centerX, 0.55 * centerY, 0.2 * centerX, 0.45 * centerY, 0x000000, 0).setOrigin(0, 0);
-        this.physics.add.existing(this.puerta, true);
+        this.physics.add.existing(this.puerta, true);//Le añadimos esto para que los personaje sno lo puedan atravesar
         this.puertaInteractuable = false; // Controla si el jugador puede interactuar con la puerta.
 
-
+        //Fondo
         const escenario = this.add.image(centerX, centerY, "escenario");
 
+        //Hacemos que la imagen ocupe toda la pantalla y le hacemos zoom para que se vea el escenario más grande
         const worldWidthT = escenario.displayWidth;
         const worldHeightT = escenario.displayHeight;
         this.cameras.main.setBounds(0, 0, worldWidthT, worldHeightT);
         this.cameras.main.setZoom(2);
 
-        // agujero
+        //Añadimos el agujero que no es visible desde el inicio
         this.agujero = this.physics.add.image(1.1 * centerX, 0.2 * centerY, 'agujero').setScale(1.7).setVisible(false);
 
         // Crear personajes
@@ -77,6 +83,7 @@ class TutorialScene extends Phaser.Scene {
             .setSize(40, 30)
             .setOffset(12, 20);
 
+        //Colocamos a los personajes en el escenario
         this.centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
         this.centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
         this.cameras.main.centerOn(this.centerjX, this.centerjY);
@@ -91,6 +98,7 @@ class TutorialScene extends Phaser.Scene {
         this.physics.add.collider(this.sighttail, cementerio);
         this.physics.add.collider(this.scentpaw, cementerio);
 
+        
         this.physics.add.collider(this.sighttail, this.puerta, () => {
             this.launchDialogueScene(1);
         });

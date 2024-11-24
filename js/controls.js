@@ -19,7 +19,7 @@ class ControlScene extends Phaser.Scene{
     }
 
     create(){
-        //Calculamos el centro del canvas para tomarlo como referencia
+        //variables para meter las imagenes a posteriori
         const centerX = this.scale.width/2;
         const centerY = this.scale.height/2;
        
@@ -32,8 +32,8 @@ class ControlScene extends Phaser.Scene{
         .on('pointerdown', ()=>{
             this.scene.stop("ControlScene");
             if (this.callingScene) {
-                this.scene.stop();
-                this.returnToCallingScene();
+                this.scene.stop();//Detiene la escena
+                this.returnToCallingScene();//Llama a un método para volver a la escena anterior
         }
             this.sound.play("button");
         } );
@@ -53,6 +53,7 @@ class ControlScene extends Phaser.Scene{
         const vision = this.add.image(0.7*centerX, 1.2*centerY, "vision").setScale(3);
         const olfato = this.add.image(1.5*centerX, 1.2*centerY, "olfato").setScale(3);
 
+        //Se guarda la escena que fué pausada para cambiar a esta interfaz
         this.callingScene = this.scene.settings.data?.callingScene || null;
     }
 

@@ -4,7 +4,7 @@ class CreditScene extends Phaser.Scene {
     }
 
     preload() {
-        //carga de audios
+        //carga de audio
         this.load.audio("button", 'assets/Clickar_Boton.wav')
 
         // carga de imagenes
@@ -16,6 +16,7 @@ class CreditScene extends Phaser.Scene {
     }
 
     create() {
+        //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
@@ -111,25 +112,26 @@ class CreditScene extends Phaser.Scene {
         })
 
 
-
+        //Botón para volver a la escena anterior
         const volverCr = this.add.image(0.2 * centerX, 1.7 * centerY, "volverCr")
             .setInteractive()
             .on('pointerdown', () => {
-                this.scene.stop("CreditScene");
-                this.returnToCallingScene();
+                this.scene.stop("CreditScene");//Detiene la escena
+                this.returnToCallingScene();//Llama a un método para volver a la escena anterior
                 this.sound.play("button");
             });
 
         volverCr.setScale(0.3);
-
+        
+        //Se guarda la escena que fué pausada para cambiar a esta interfaz
         this.callingScene = this.scene.settings.data?.callingScene || null;
     }
 
-    //funcion para manejar la llamada entre distintas escenas
+    //función para manejar la llamada entre distintas escenas
     returnToCallingScene() {
         if (this.callingScene) {
             this.scene.stop(); // Detén la escena de controles
-            this.scene.resume(this.callingScene); // Reanuda la escena llamante
+            this.scene.resume(this.callingScene); // Reanuda la escena parada
         } else {
             console.error("No callingScene provided");
         }
