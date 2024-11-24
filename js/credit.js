@@ -19,7 +19,7 @@ class CreditScene extends Phaser.Scene{
 
         const backgroundCredit = this.add.image(centerX, centerY, "backgroundCredit");
 
-        const backButton = this.add.image(0.3*centerX, 1.6*centerY, "back")
+        const backButton = this.add.image(0.2*centerX, 1.7*centerY, "back")
         .setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("CreditScene");
@@ -27,6 +27,6 @@ class CreditScene extends Phaser.Scene{
             this.sound.play("button");
         } );
         
-        backButton.setScale(0.5);
+        backButton.setScale(0.3);
     }
 }

@@ -24,6 +24,7 @@ class IntroScene extends Phaser.Scene{
         if (!this.sound.get('backgroundsound')) {
             this.music = this.sound.add("backgroundsound", { loop: true, volume: 0.5 });
             this.music.play();
+            this.registry.set("backgroundMusic", this.music);
         } else {
             this.music = this.sound.get('backgroundsound');
         }
@@ -50,8 +51,7 @@ class IntroScene extends Phaser.Scene{
         }).setInteractive()
         .on('pointerdown', ()=>{
             this.scene.stop("IntroScene");
-            this.scene.start("PreviewScene"); 
-            this.music.stop();           
+            this.scene.start("PreviewScene");            
             this.sound.play("button");
         });
 

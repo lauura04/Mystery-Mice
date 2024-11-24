@@ -423,8 +423,9 @@ class DialogueScene extends Phaser.Scene {
                 ];
 
                 const startIndex = this.scene.settings.data?.startIndex || 0; // Por defecto, empieza en 0
-                const endSceneIndex = this.scene.settings.data?.endSceneIndex || 0;
+                const endIndex = this.scene.settings.data?.endIndex || 0;
                 this.currentDialogueIndex = startIndex;
+                this.endIndex = endIndex;
                 this.updateDialogue();
 
                 this.input.on('pointerdown', () => {
@@ -453,20 +454,26 @@ class DialogueScene extends Phaser.Scene {
                 }
                 this.dialogueText.setText(dialogue.text);
                 console.log(this.currentDialogueIndex);
+                console.log(this.endIndex);
         }
 
         nextDialogue() {
                 this.currentDialogueIndex++;
 
-                if(this.currentDialogueIndex === 6){
-                        this.scene.pause();
-                        
+                if (this.currentDialogueIndex >= this.endIndex) {
+                    this.endDialogue();
+                    return;
                 }
-
+            
                 if (this.currentDialogueIndex < this.dialogueData.length) {
-                        this.updateDialogue();
+                    this.updateDialogue();
                 }
         }
+
+        endDialogue() {
+                this.scene.stop();
+                this.scene.resume('TutorialScene');
+            }
 }
 
 

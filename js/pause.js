@@ -8,7 +8,10 @@ class PauseScene extends Phaser.Scene {
         this.load.image("reanudar", 'assets/Reanudar.png');
         this.load.image("rat1", 'assets/Rat1.png');
         this.load.image("rat2", 'assets/Rat2.png');
-        this.load.image("credits", 'assets/CrÃ©ditos.png');
+
+
+        this.load.image("credits", 'assets/Créditos.png');
+
         this.load.image("salir", 'assets/Salir.png');
         this.load.image("hilos", 'assets/Hilos.png');
         this.load.image("sighttailP", 'assets/SightailDialogue.png');
