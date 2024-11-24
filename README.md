@@ -70,8 +70,8 @@ El juego estará formado por Sprites 2D, tanto para el escenario como para los d
 “Profesor Layton” y conformado por una paleta de colores otoñales. Los personajes contarán con unas animaciones fluidas capaces de transmitir el carácter y 
 personalidad de cada uno de ellos.  
 
-![alt text](LAITOOOOON.png)
-El profesor Layton y la villa misteriosa (2007)
+![LAITOOOOON](https://github.com/user-attachments/assets/717658d6-f4bf-47e5-a837-b48921d63f21)
+> El profesor Layton y la villa misteriosa (2007)
  
 
 # DISEÑO DEL JUEGO 
@@ -143,7 +143,9 @@ interesantes.
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
 
- ![alt text](DIAGRAMA.png)
+
+![DIAGRAMASS](https://github.com/user-attachments/assets/9d732e7f-4a8f-4444-be9f-2f98c26c3a8f)
+> Diseño del diagrama de estados
 
 
 ## Interfaces 
