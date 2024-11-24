@@ -281,7 +281,7 @@ class GameScene extends Phaser.Scene {
         this.capaV = this.add.circle(0.56 * centerX, 1.4 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
         this.capaO = this.add.circle(0.56 * centerX, 1.25 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
 
-        this.checkCazadorCollision(this.sighttail, 'Sighttail');
+        
 
     }
 
@@ -289,6 +289,11 @@ class GameScene extends Phaser.Scene {
     checkCazadorCollision(player, playerKey){
         if(playerKey === 'Sighttail'){
             if(this.controls1.power.isDown){
+                this.launchDialogueScene(4);
+            }
+        }
+        if(playerKey === 'Scentpaw'){
+            if(this.controls2.power.isDown){
                 this.launchDialogueScene(4);
             }
         }
@@ -423,7 +428,7 @@ class GameScene extends Phaser.Scene {
         }
 
         this.scene.pause();
-        this.scene.launch('DialogueScene', { startIndex, endIndex });
+        this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
     }
 
     createAnimations(playerkey) {
@@ -559,6 +564,9 @@ class GameScene extends Phaser.Scene {
             });
 
         }
+
+        //this.checkCazadorCollision(this.sighttail, 'Sighttail');
+        //this.checkCazadorCollision(this.scentpaw, 'Scentpaw');
         // Centrar cámara entre los dos jugadores
         const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
         const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;

@@ -53,16 +53,18 @@ class TutorialScene extends Phaser.Scene {
 
         this.puerta = this.add.rectangle(0.5 * centerX, 0.55 * centerY, 0.2 * centerX, 0.45 * centerY, 0x000000, 0).setOrigin(0, 0);
         this.physics.add.existing(this.puerta, true);
+        this.puertaInteractuable = false; // Controla si el jugador puede interactuar con la puerta.
+
 
         const escenario = this.add.image(centerX, centerY, "escenario");
 
         const worldWidthT = escenario.displayWidth;
         const worldHeightT = escenario.displayHeight;
         this.cameras.main.setBounds(0, 0, worldWidthT, worldHeightT);
-        this.cameras.main.setZoom(1);
+        this.cameras.main.setZoom(2);
 
         // agujero
-        this.agujero = this.physics.add.image(1.1 * centerX, 0.2 * centerY, 'agujero').setScale(1.7).setVisible(true);
+        this.agujero = this.physics.add.image(1.1 * centerX, 0.2 * centerY, 'agujero').setScale(1.7).setVisible(false);
 
         // Crear personajes
         this.sighttail = this.physics.add.sprite(1.56 * centerX, 0.2 * centerY, 'Sighttail')
@@ -75,6 +77,10 @@ class TutorialScene extends Phaser.Scene {
             .setSize(40, 30)
             .setOffset(12, 20);
 
+        this.centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
+        this.centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
+        this.cameras.main.centerOn(this.centerjX, this.centerjY);
+
         // Animaciones
         this.createAnimations('Sighttail');
         this.createAnimations('Scentpaw');
@@ -84,13 +90,15 @@ class TutorialScene extends Phaser.Scene {
         this.physics.add.collider(this.scentpaw, cripta);
         this.physics.add.collider(this.sighttail, cementerio);
         this.physics.add.collider(this.scentpaw, cementerio);
-        
-        this.physics.add.overlap(this.sighttail, this.puerta, (player, puerta) => {
+
+        this.physics.add.overlap(this.sighttail, this.puerta, () => {
             this.checkInteraction('Sighttail');
+            this.puertaInteractuable = true;
         });
 
-        this.physics.add.overlap(this.scentpaw, this.puerta, (player, puerta) => {
+        this.physics.add.overlap(this.scentpaw, this.puerta, () => {
             this.checkInteraction('Scentpaw');
+            this.puertaInteractuable = true;
         });
 
         this.physics.add.overlap(this.sighttail, this.agujero, (player, agujero) => {
@@ -174,14 +182,16 @@ class TutorialScene extends Phaser.Scene {
 
     checkInteraction(playerKey) {
         this.input.keyboard.on('keydown-E', () => {
-            if (playerKey === 'Sighttail') {
+            if (playerKey === 'Sighttail' && this.puertaInteractuable) {
                 this.launchDialogueScene(1);
+                 // Evita más interacciones.
             }
         });
-
+        this.puertaInteractuable = false;
         this.input.keyboard.on('keydown-SPACE', () => {
-            if (playerKey === 'Scentpaw') {
+            if (playerKey === 'Scentpaw' && this.puertaInteractuable) {
                 this.launchDialogueScene(1);
+                this.puertaInteractuable = false; // Evita más interacciones.
             }
         });
 
@@ -190,17 +200,22 @@ class TutorialScene extends Phaser.Scene {
     checkAgujeroInteraction(playerKey) {
         this.input.keyboard.on('keydown-E', () => {
             if (playerKey === 'Sighttail' && this.agujero.visible) {
-                //this.launchDialogueScene(2);
-                this.scene.stop('TutorialScene');
-                this.scene.start('GameScene');
+                this.launchDialogueScene(2);
+                this.time.delayedCall(500, () => {
+                    this.scene.stop('TutorialScene');
+                    this.scene.start('GameScene');
+                })
+
             }
         });
 
         this.input.keyboard.on('keydown-SPACE', () => {
             if (playerKey === 'Scentpaw' && this.agujero.visible) {
-                //this.launchDialogueScene(2);
-                this.scene.stop('TutorialScene');
-                this.scene.start('GameScene');
+                this.launchDialogueScene(2);
+                this.time.delayedCall(500, () => {
+                    this.scene.stop('TutorialScene');
+                    this.scene.start('GameScene');
+                })
             }
         });
     }
@@ -209,7 +224,7 @@ class TutorialScene extends Phaser.Scene {
     launchDialogueScene(caseId) {
         let startIndex = 0;
         let endIndex = 0;
-        
+
 
         switch (caseId) {
             case 0: // Caso inicial
@@ -220,7 +235,6 @@ class TutorialScene extends Phaser.Scene {
             case 1: // puerta
                 startIndex = 7;
                 endIndex = 9;
-
                 this.agujero.setVisible(true);
                 break;
 
@@ -236,7 +250,7 @@ class TutorialScene extends Phaser.Scene {
         }
 
         this.scene.pause();
-        this.scene.launch('DialogueScene', { startIndex, endIndex });
+        this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
     }
 
     createAnimations(playerkey) {
@@ -359,14 +373,10 @@ class TutorialScene extends Phaser.Scene {
         }
 
         // Centrar cámara entre los dos jugadores
-        const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
-        const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
-        this.cameras.main.centerOn(centerjX, centerjY);
+        this.centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
+        this.centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
+        this.cameras.main.centerOn(this.centerjX, this.centerjY);
 
-        // Verificar interacción con la puerta
-        if (this.input.keyboard.checkDown(this.input.keyboard.addKey('SPACE'), 250)) {
-            this.checkInteraction();
-        }
 
     }
 

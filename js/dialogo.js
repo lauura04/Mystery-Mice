@@ -24,7 +24,7 @@ class DialogueScene extends Phaser.Scene {
 
                 this.scentpaw = this.add.image(1.45 * this.centerX, 1.2 * this.centerY, "scentpaw").setScale(0.8);
                 this.sighttail = this.add.image(0.5 * this.centerX, 1.2 * this.centerY, "sighttail").setScale(0.8);
-                this.cazador = this.add.image(1.45 * this.centerX, 1.2*this.centerY, "cazador").setVisible(false).setScale(0.8);
+                this.cazador = this.add.image(1.45 * this.centerX, 1.2 * this.centerY, "cazador").setVisible(false).setScale(0.8);
                 this.rectDialogue = this.add.image(this.centerX, 1.2 * this.centerY, "dialog").setScale(-0.8, 0.8);
                 this.rectName = this.add.image(this.centerX, 1.1 * this.centerY, "nameIm");
                 this.nameText = this.add.text(0.289 * this.centerX, 1.457 * this.centerY, "Sighttail", {
@@ -360,14 +360,14 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"¿Qué? ¿La alcaldesa? ¡No puede ser! Dijo que necesitaba nuestra ayuda.",
+                                text: "¿Qué? ¿La alcaldesa? ¡No puede ser! Dijo que necesitaba nuestra ayuda.",
                                 side: "left",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"Pero... ¿por qué alguien atormentaría a su propio pueblo?",
+                                text: "Pero... ¿por qué alguien atormentaría a su propio pueblo?",
                                 side: "left",
                         },
 
@@ -395,14 +395,14 @@ class DialogueScene extends Phaser.Scene {
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:"No quiero creerlo, pero todo encaja. Nos mandó investigar para que no sopechasemos de ella, al igual que al cazador.",
+                                text: "No quiero creerlo, pero todo encaja. Nos mandó investigar para que no sopechasemos de ella, al igual que al cazador.",
                                 side: "left",
                         },
 
                         {
                                 character: "sighttail",
                                 name: "Sighttail",
-                                text:" Entonces papá y mamá descubrieron la verdad y... fueron asesinados por los fantasmas de la alcaldesa.",
+                                text: " Entonces papá y mamá descubrieron la verdad y... fueron asesinados por los fantasmas de la alcaldesa.",
                                 side: "left",
                         },
 
@@ -426,6 +426,7 @@ class DialogueScene extends Phaser.Scene {
                 const endIndex = this.scene.settings.data?.endIndex || 0;
                 this.currentDialogueIndex = startIndex;
                 this.endIndex = endIndex;
+                this.callingScene = this.scene.settings.data?.callingScene || null;
                 this.updateDialogue();
 
                 this.input.on('pointerdown', () => {
@@ -434,7 +435,7 @@ class DialogueScene extends Phaser.Scene {
 
                 this.input.keyboard.on('keydown-SPACE', () => {
                         this.nextDialogue();
-                    });
+                });
 
 
         }
@@ -461,19 +462,23 @@ class DialogueScene extends Phaser.Scene {
                 this.currentDialogueIndex++;
 
                 if (this.currentDialogueIndex >= this.endIndex) {
-                    this.endDialogue();
-                    return;
+                        this.endDialogue();
+                        return;
                 }
-            
+
                 if (this.currentDialogueIndex < this.dialogueData.length) {
-                    this.updateDialogue();
+                        this.updateDialogue();
                 }
         }
 
         endDialogue() {
-                this.scene.stop();
-                this.scene.resume('TutorialScene');
-            }
+                if(this.callingScene){
+                        this.scene.stop();
+                        this.scene.resume(this.callingScene);
+                } else{
+                        console.error("No callingScene provided");
+                }
+        }
 }
 
 
