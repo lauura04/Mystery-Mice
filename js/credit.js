@@ -102,7 +102,7 @@ class CreditScene extends Phaser.Scene{
 
         })
 
-        const dan2=this.add.text(0.77*centerX,1.55*centerY, 'Daniel Duque Rodríguez', {
+        const dan2=this.add.text(0.77*centerX,1.55*centerY, 'Laura Facenda Estrella', {
             font: '35px mousy',
             color: '#42240e',
             align: 'center'
