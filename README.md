@@ -51,7 +51,7 @@ Como se ha mencionado anteriormente cada ratón tiene una habilidad única permi
 El juego estará formado por Sprites 2D, tanto para el escenario como para los distintos personajes, inspirados en el estilo artístico representado en la saga “Profesor Layton” y conformado por una paleta de colores otoñales. Los personajes contarán con unas animaciones fluidas capaces de transmitir el carácter y personalidad de cada uno de ellos.  
 
 ![LAITOOOOON](https://github.com/user-attachments/assets/ffe1a54e-d339-4673-a7f4-8838b9febb7b)
-> El profesor Layton y la villa misteriosa (2007)
+> El profesor Layton y la villa misteriosa (2007) (Figura1)
  
 
 # DISEÑO DEL JUEGO 
@@ -73,14 +73,36 @@ Al final del juego descubrirán que la alcaldesa, quien creían que estaba inter
 El juego se va a caracterizar principalmente por el uso coordinado de las habilidades de los personajes,así como una combinación con los ítems existentes en el juego. 
  
 1. Visión: Sighttail puede analizar huellas, rastros o marcas de fantasmas, y ver en qué lugar hay trampas con flechas. 
+![Supervisión](https://github.com/user-attachments/assets/a62ab7d2-9434-4feb-b207-15e05b0d6cde)
+> Símbolo de la habilidad de visión (Figura2)
 
 2. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail no es capaz de percibir ya que son solo aromas presentes en el aire, en este caso, la neblina tóxica, la cual para que le haga daño a los jugadores deberan estar 7 segundos seguido en ella. 
+![Superolfato](https://github.com/user-attachments/assets/0d5abce2-f07a-4cf4-9a55-f7be58ef05ee)
+> Símbolo de la habilidad de olfato (Figura3)
 
 3. Para esquivar las trampas, podrán usar cada habilidad por 3 segundos y para volverlas a usar tendrán que esperar 10 segundos.   
 
 4. Si los jugadores son dañados 3 veces por las trampas vuelven al inicio del nivel.
 
-5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su super olfativo. 
+5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su olfativo. 
+
+## Controles
+
+Al haber dos personajes jugables cada uno se maneja con unas teclas completamente diferentes:
+
+### Sighttail
+-W: avanza hacia arriba.
+-A: avanza hacia la izquierda.
+-D: avanza hacia la derecha.
+-S: avanza hacia abajo.
+-E: activa su visión.
+
+### Scentpaw
+-Flecha arriba: avanza hacia arriba.
+-Flecha izquierda: avanza hacia la izquierda.
+-Flecha derecha: avanza hacia la derecha.
+-Flecha abajo: avanza hacia abajo.
+-Espacio: activa su olfato.
  
 ## Estados 
 
@@ -92,7 +114,7 @@ El juego se va a caracterizar principalmente por el uso coordinado de las habili
 
 4. Menú de pausa: accesible en todo momento desde el juego.
    
-5. Creditos: pantalla con los integrantes del grupo y su trabajo realizado.
+5. Menú Creditos: pantalla con los integrantes del grupo y su trabajo realizado.
 
 6. Fin del juego: una pantalla que determina que el juego ha finalizado. 
 
@@ -109,10 +131,24 @@ Un estilo minimalista, con flechas y poco texto sería lo más adecuado para est
 Se describen los botones a partir de los distintos estados: 
 
 1. Menú principal: botones de jugar, salir, controles y créditos.  
+![MenuInicio](https://github.com/user-attachments/assets/f2144c8d-5edb-4009-b24d-237aeae38b17)
+> Interfaz menú de inicio
 
-2. Menú de pausa: reanudar (volver a la pantalla anterior), continuar, créditos. 
+2. Menú de pausa: reanudar (volver a la pantalla anterior), continuar, créditos.
+![Pausa](https://github.com/user-attachments/assets/b36e5928-5be0-4ff6-afac-685fab5c488b)
+> Interfaz menú de pausa
 
-3. Dentro del juego: botón de pausa arriba a la izquierda.
+3. Menú Créditos: botón para volver al menú de pausa.
+![Creditos](https://github.com/user-attachments/assets/65af7167-d319-4c62-a1d6-98b8419accf5)
+> Interfaz menú de créditos
+
+4. Menú de controles:botón para volver a la pantalla anterior.
+![Controles](https://github.com/user-attachments/assets/c025b1b5-ff85-472a-b201-ab6856d33ede)
+> Interfaz menú de controles
+
+5. Dentro del juego: botón de pausa arriba a la izquierda.
+![dentroJuego](https://github.com/user-attachments/assets/36c2cf11-2fd7-4805-95d3-be96d062ad4a)
+> Interfaz dentro del juego
 
 
 # DESARROLLO DEL JUEGO 
@@ -143,6 +179,7 @@ Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail l
 
 El cazador de la cripta: Este ratón es robusto y atlético. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva una escopeta. 
 
+
 Alcaldesa: Es nombrada en diversas ocasiones a lo largo del juego sin embargo, no aparece físicamente en él.
 
 Los padres de Sighttail y Scentpaw: al igual que la alcadesa, son nombrados varias veces y tienen un papel clave en el juego, pero no aparecen de manera física.  
@@ -152,10 +189,16 @@ Los padres de Sighttail y Scentpaw: al igual que la alcadesa, son nombrados vari
 Los ítems presentes en el juego son claves para el desarrollo clave del juego. 
 
 1. Flechas: una de las trampas que incluye el juego. Son lanzadas y dañan al jugador si lo dañan.
+![Flechas_F3](https://github.com/user-attachments/assets/05dc7d7b-5431-4788-be02-8a8376af8fd2)
+> Sprite de las flechas
 
 2. Neblina tóxica: la otra trampa. Para que dañe al jugador, este tiene que estar 7 segundos en contacto con la neblina.
+![Gas](https://github.com/user-attachments/assets/4b0be0ed-f8f6-4c71-aba9-c1e52146607f)
+> Sprite de la neblura tóxica
 
 3. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó.  
+![CARTA](https://github.com/user-attachments/assets/4816c66c-7384-490e-ba75-b04750bf7796)
+> Sprite carta familiar
 
 ## Sonido
 
