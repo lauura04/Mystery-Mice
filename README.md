@@ -122,7 +122,7 @@ Al haber dos personajes jugables cada uno se maneja con unas teclas completament
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
 ![DIAGRAMA](https://github.com/user-attachments/assets/dc064ca2-b2ca-4813-9e74-4f65ffe694d8)
-> Mapa de estados actualizado
+> Mapa de estados actualizado (Figura 4)
 
 ## Interfaces 
 
@@ -135,30 +135,30 @@ Se describen los botones a partir de los distintos estados:
 1. Menú principal: botones de jugar, salir, controles y créditos.
 
 ![MenuRef](https://github.com/user-attachments/assets/9273f467-b8b6-4315-9459-172a74988b4b)
-> Boceto del menú principal
+> Boceto del menú principal (Figura 5)
 
 ![MenuInicio](https://github.com/user-attachments/assets/f2144c8d-5edb-4009-b24d-237aeae38b17)
-> Interfaz menú de inicio
+> Interfaz menú de inicio (Figura 6)
 
 2. Menú de pausa: reanudar (volver a la pantalla anterior), continuar, créditos.
 
 ![Pausa](https://github.com/user-attachments/assets/a1c43c1d-c819-4782-ad62-e4365405faa3)
-> Boceto del menú de pausa
+> Boceto del menú de pausa (Figura 7)
 
 ![Pausa](https://github.com/user-attachments/assets/b36e5928-5be0-4ff6-afac-685fab5c488b)
-> Interfaz menú de pausa
+> Interfaz menú de pausa (Figura 8)
 
 3. Menú Créditos: botón para volver al menú de pausa.
 ![Creditos](https://github.com/user-attachments/assets/65af7167-d319-4c62-a1d6-98b8419accf5)
-> Interfaz menú de créditos
+> Interfaz menú de créditos (Figura 9)
 
 4. Menú de controles:botón para volver a la pantalla anterior.
 ![Controles](https://github.com/user-attachments/assets/c025b1b5-ff85-472a-b201-ab6856d33ede)
-> Interfaz menú de controles
+> Interfaz menú de controles (Figura 10)
 
 5. Dentro del juego: botón de pausa arriba a la izquierda.
 ![dentroJuego](https://github.com/user-attachments/assets/36c2cf11-2fd7-4805-95d3-be96d062ad4a)
-> Interfaz dentro del juego
+> Interfaz dentro del juego (Figura 11)
 
 
 # DESARROLLO DEL JUEGO 
@@ -176,10 +176,10 @@ Este cazador murió tras la traición de otro habitante y por ello se encuentra 
 En este nivel, los jugadores llegan a la puerta de la cripta, una zona con muy poca iluminación, y se encuentran con la puerta cerrada. Mediante la vista de Sighttail y el olfato de Scentpaw encontrarán un agujero en la cripta para poder entrar en el edificio. 
 
 ![BocCriptaExterior](https://github.com/user-attachments/assets/08d3fcb9-0a7f-4829-bffe-e4cf09eb1143)
-> Boceto del exterior de la cripta
+> Boceto del exterior de la cripta (Figura 12)
 
 ![EntradaCripta](https://github.com/user-attachments/assets/65e94000-430a-4992-92a1-4e2e64e149c2)
-> Mapa final del exterior de la cripta
+> Mapa final del exterior de la cripta (Figura 13)
 
 Dentro de la cripta se encuentran con que están en un laberinto lleno de trampas, que en función de qué trampa sea un ratón u otro podrá salvar al otro. 
 
@@ -190,25 +190,25 @@ Dentro de la cripta se encuentran con que están en un laberinto lleno de trampa
 Cuando lleguen al cazador les contará su historia, descubriendo así que fue traicionado por cierto habitante con alto nivel de influencia. Junto al cazador descubren una carta escrita por el padre de estos, en la que se menciona que estaban investigando a la alcaldesa. 
 
 ![Diseño Nivel](https://github.com/user-attachments/assets/e272fca9-3ee9-4948-ac0c-6621c2b2273b)
-> Diseño del nivel
+> Diseño del nivel (Figura 14)
 
 ![MapaJuego](https://github.com/user-attachments/assets/aac329cb-9769-4f54-b171-2a5ac5ac28ed)
-> Parte del laberinto final durante el gameplay
+> Parte del laberinto final durante el gameplay (Figura 15)
 
 ## Personajes 
 
 Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail lleva gafas y tiene las orejas grandes. Además, tiene el pelaje algo largo y la cola negra. Por otro lado, Scentpaw tiene un gorro de investigador y las orejas más pequeñas que su hermano. Su pelaje es corto y una cola del mismo color que su pelaje. 
 
 ![Ilustracion_sin_titulo](https://github.com/user-attachments/assets/6c88396c-3123-434f-b46f-3ab91ac08c39)
-> Diseño de Sighttail durante los diálogos
+> Diseño de Sighttail durante los diálogos (Figura 16)
 
 ![Gorra](https://github.com/user-attachments/assets/ce87aced-3c45-4005-838d-2bcdff90a644)
-> Diseño de Scentpaw durante los diálogos
+> Diseño de Scentpaw durante los diálogos (Figura 17)
 
 El cazador de la cripta: Este ratón es algo robusto. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva un hacha. 
 
 ![fanta](https://github.com/user-attachments/assets/e974dc56-1a41-4a98-96f7-7311c4c5d7a9)
-> Diseño del personaje durante los diálogos
+> Diseño del personaje durante los diálogos (Figura 18)
 
 Alcaldesa: Es nombrada en diversas ocasiones a lo largo del juego sin embargo, no aparece físicamente en él.
 
@@ -221,17 +221,17 @@ Los ítems presentes en el juego son claves para el desarrollo clave del juego.
 1. Flechas: una de las trampas que incluye el juego. Son lanzadas y dañan al jugador si lo dañan.
 
 ![Flechas_F3](https://github.com/user-attachments/assets/05dc7d7b-5431-4788-be02-8a8376af8fd2)
-> Sprite de las flechas
+> Sprite de las flechas (Figura 19)
 
 2. Neblina tóxica: la otra trampa. Para que dañe al jugador, este tiene que estar 7 segundos en contacto con la neblina.
 
 ![Gas](https://github.com/user-attachments/assets/4b0be0ed-f8f6-4c71-aba9-c1e52146607f)
-> Sprite de la neblura tóxica
+> Sprite de la neblura tóxica (Figura 20)
 
 3. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó.  
 
 ![CARTA](https://github.com/user-attachments/assets/4816c66c-7384-490e-ba75-b04750bf7796)
-> Sprite carta familiar
+> Sprite carta familiar (Figura 21)
 
 ## Sonido
 
@@ -245,7 +245,7 @@ Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para
 
 1. Cuando se empezó la primera fase se encargó de buscar un estilo visual para el juego además de la persceptiva del gameplay para adecuarse a la visión del equipo.
 
-2. Durante la segunda fase se ha encargado de diseñar y crear los sprite sheet de los personajes, además de los poderes (las huellas y el humo que se ve) y el periodico.
+2. Durante la segunda fase se ha encargado de diseñar y crear los sprite sheet de los personajes, además de los poderes (las huellas y el humo que se ve) y el periodico. Además de esto ha programado código de gestión de pausa y del fondo.
 
 ### David del Castillo Enríquez
 
@@ -257,7 +257,7 @@ Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para
 
 1. En la primera parte se encargó de buscar referencias musicales para ambientar el juego en la atmosfera adecuada.
 
-2. Durante la segunda fase se ha encargado de  la búsqueda de sonidos y música, guión y realización de algunos pequeños assets sueltos, así como de ciertas partes de la programación
+2. Durante la segunda fase se ha encargado de  la búsqueda de sonidos y música, guión y realización de algunos pequeños assets sueltos, así como de ciertas partes de la programación.
 
 ### Laura Facenda Estrella
 
