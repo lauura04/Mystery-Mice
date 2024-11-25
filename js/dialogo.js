@@ -6,6 +6,7 @@ class DialogueScene extends Phaser.Scene {
         //se va a ir llamando a las funciones de forma paralela -> sin fondo
 
         preload() {
+                //Prepara las imagenes para los dialogos
                 this.load.image("scentpaw", 'assets/ScentpawDialogue.png');
                 this.load.image("sighttail", 'assets/SightailDialogue.png');
                 this.load.image("cazador", 'assets/cazador.png');
@@ -410,14 +411,15 @@ class DialogueScene extends Phaser.Scene {
                 ];
 
                 // variables para gestionar el comienzo y fin de cada uno de los dialogoso
-                const startIndex = this.scene.settings.data?.startIndex || 0; 
-                const endIndex = this.scene.settings.data?.endIndex || 0;
-                this.currentDialogueIndex = startIndex;
-                this.endIndex = endIndex;
-                this.callingScene = this.scene.settings.data?.callingScene || null;
-                this.updateDialogue();
+                const startIndex = this.scene.settings.data?.startIndex || 0; //Dialogo inicial
+                const endIndex = this.scene.settings.data?.endIndex || 0; //Dialogo final
+                this.currentDialogueIndex = startIndex; //Se actualiza el dialogo que se muestra
+                this.endIndex = endIndex;//Se actualiza el dialogo final
+                this.callingScene = this.scene.settings.data?.callingScene || null;//Se guarda la escena pausada
+                this.updateDialogue();//Llama a la función para actualizar el dialogo
                 this.primerDialCaz = true;
 
+                //Si se hace click se salta al siguiente dialogo
                 this.input.on('pointerdown', () => {
                         this.nextDialogue();
                 });
@@ -485,15 +487,16 @@ class DialogueScene extends Phaser.Scene {
                 console.log(this.endIndex);
         }
 
-        
+        //Pasa a la siguiente posición de dialogo
         nextDialogue() {
                 this.currentDialogueIndex++;
 
+                //Si es mayor o igual que la final se acaba
                 if (this.currentDialogueIndex >= this.endIndex) {
                         this.endDialogue();
                         return;
                 }
-
+                //Si no se pasa al siguiente
                 if (this.currentDialogueIndex < this.dialogueData.length) {
                         this.updateDialogue();
                 }

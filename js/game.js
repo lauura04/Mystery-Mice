@@ -4,6 +4,7 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
+        //Cargamos los spritesheet de los personajes
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
@@ -12,13 +13,17 @@ class GameScene extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 64,
         });
+
+        //Cargamos el tilemap
         this.load.image('tiles', 'assets/Tilemap.png');
 
+        //Cargamos el spritesheet del cazador
         this.load.spritesheet('Cazador', 'assets/cazador_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
         });
 
+        //Cargamos las imagenes de los distintos elementos
         this.load.image('pause', 'assets/Boton_Pausa.png');
         this.load.image('gas', 'assets/Gas.png');
         this.load.image("vision", 'assets/Supervision.png');
@@ -35,11 +40,13 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+        //Detiene la música de la pantalla anterior
         const backgroundMusic1 = this.registry.get("musicaFondo");
         if (backgroundMusic1) {
             backgroundMusic1.stop();
         }
 
+        //Instaura la música de este nivel
         if (!this.sound.get('laberinto')) {
             this.music = this.sound.add("laberinto", { loop: true, volume: 0.5 });
             this.music.play();
@@ -50,7 +57,7 @@ class GameScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
-        
+        //Tiempo de carga y duracción de las habilidades
         this.cargaOlfato = 10000;
         this.cargaVista = 10000;
         this.durOlfato = 3000;
@@ -63,6 +70,7 @@ class GameScene extends Phaser.Scene {
         this.vistaDisp = true;
         this.olfatoDisp = true;
 
+        //Daño máximo que pueden recibir
         this.vidas = 3;
 
         this.gasPriVez = true;
@@ -70,8 +78,10 @@ class GameScene extends Phaser.Scene {
 
         this.hablarCazador = true;
 
+        //Tamaño de los tiles
         const tileSize = 64;
 
+        //Arrays para guardar los gases y las flechas
         this.gas = [];
         this.flechas = [];
 
@@ -151,12 +161,14 @@ class GameScene extends Phaser.Scene {
 
         ];
 
+        //Creamos un tilemap
         const map = this.make.tilemap({
             data: mapData,
             tileWidth: tileSize,
             tileHeight: tileSize,
         });
 
+        //Le añadimos la imagen correspondiente
         const tileset = map.addTilesetImage('tiles');
         const layer = map.createLayer(0, tileset, 0, 0);
 
@@ -189,6 +201,7 @@ class GameScene extends Phaser.Scene {
 
         this.carta = this.physics.add.image(3.5 * centerX, 4.6 * centerY, 'carta').setVisible(false).setImmovable(true);
 
+        //Animación de las flechas
         this.anims.create({
             key: 'flechas',
             frames: [
@@ -200,12 +213,13 @@ class GameScene extends Phaser.Scene {
             repeat: -1,
         });
 
+        //Llamamos a la función constructor de las flechas que hay por el mapa
         this.createFlecha(1.9 * centerX, 6.3 * centerY, 2000, { minX: 1.9 * centerX, maxX: 2.7 * centerX });
         this.createFlecha(3.2 * centerX, 3 * centerY, 3000, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
         this.createFlecha(3.2 * centerX, 2.5 * centerY, 2500, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
         this.createFlecha(3.2 * centerX, 2 * centerY, 4000, { minX: 3.2 * centerX, maxX: 3.45 * centerX });
 
-
+        //Comprobamos el teimpo que están los persoanjes dentro del gas
         this.time.addEvent({
             delay: 100,
             callback: () => {
@@ -215,6 +229,7 @@ class GameScene extends Phaser.Scene {
             loop: true
         });
 
+        //Creamos los gases
         this.gas1 = this.physics.add.image(2.5 * centerX, 8 * centerY, 'gas').setScale(5).setVisible(false);
         this.gas2 = this.physics.add.image(2 * centerX, 8 * centerY, 'gas').setScale(5).setVisible(false);
         this.gas3 = this.physics.add.image(1.5 * centerX, 8 * centerY, 'gas').setScale(5).setVisible(false);
@@ -226,6 +241,7 @@ class GameScene extends Phaser.Scene {
         this.gas8 = this.physics.add.image(3 * centerX, 0.38 * centerY, 'gas').setScale(5).setVisible(false);
         this.gas9 = this.physics.add.image(2 * centerX, 0.38 * centerY, 'gas').setScale(5).setVisible(false);
 
+        //Añadimos los gases al array
         this.gas.push(this.gas1, this.gas2, this.gas3, this.gas4, this.gas5, this.gas6, this.gas7, this.gas8, this.gas9);
 
         this.gas.forEach((gasCloud) => {
@@ -237,14 +253,16 @@ class GameScene extends Phaser.Scene {
             });
         });
 
+        //Boleanos para indicar si los personajes están dentro del gas inicializandolo en falso
         this.sighttailInGas = false;
         this.scentpawInGas = false;
 
+        //Añadimos el botón de pausa
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
             .on('pointerdown', () => {
                 this.scene.pause(); // Pausa la escena actual
-                this.scene.launch('PauseScene', { callingScene: this.scene.key });
+                this.scene.launch('PauseScene', { callingScene: this.scene.key }); //Nos movemos a la escena de pausa
             });
         // Crear las animaciones para los jugadores
         this.createAnimations('Sighttail');
@@ -268,6 +286,7 @@ class GameScene extends Phaser.Scene {
             this.checkCazadorCollision('Scentpaw');
         });
 
+        //Colisiones entre jugadores y la carta
         this.physics.add.collider(this.sighttail, this.carta, () => {
             this.launchDialogueScene(5);
             this.time.delayedCall(500, ()=>{
@@ -312,6 +331,7 @@ class GameScene extends Phaser.Scene {
         this.capaV = this.add.circle(0.56 * centerX, 1.4 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
         this.capaO = this.add.circle(0.56 * centerX, 1.25 * centerY, 32, 0x000000, 0.5).setScrollFactor(0).setVisible(false);
 
+        //Posición de los personajes en la cámara
         const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
         const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
         this.cameras.main.centerOn(centerjX, centerjY);
@@ -320,34 +340,35 @@ class GameScene extends Phaser.Scene {
 
     }
 
-
+    //Comprueba si alguno de los jugadores ha chocado co él para iniciar su dialogo
     checkCazadorCollision(playerKey) {
 
         if (playerKey === 'Sighttail') {
             if (this.hablarCazador) {
-                this.launchDialogueScene(3);
+                this.launchDialogueScene(3);//Dialogo cazador
                 this.hablarCazador = false; // Desactiva para no repetir el diálogo
                 this.carta.setVisible(true);
             }
         } else if (playerKey === 'Scentpaw') {
             if (this.hablarCazador) {
-                this.launchDialogueScene(3);
+                this.launchDialogueScene(3);//Dialogo cazador
                 this.hablarCazador = false;
                 this.carta.setVisible(true);
             }
         }
     }
 
+    //Función que comprueba la colisión de este con el gas
     checkGasCollision(player, playerKey) {
 
         if (playerKey === 'Sighttail') {
             if (this.sighttailInGas) {
                 this.sighttailGas += 100;
-                if (this.gasPriVez) {
+                if (this.gasPriVez) {//Si es la primera vez que lo toca salta dialogo
                     this.launchDialogueScene(2);
                     this.gasPriVez = !this.gasPriVez;
                 }
-                if (this.sighttailGas >= 7000) {
+                if (this.sighttailGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
                     this.vidas -= 1;
                     this.sighttailGas = 0;
                     console.log("Una vida menos");
@@ -355,7 +376,7 @@ class GameScene extends Phaser.Scene {
                     console.log(this.sighttailInGas);
                 }
             }
-            else {
+            else { //Si se va del gas reinicia el contador
                 this.sighttailGas = 0;
             }
             this.sighttailInGas = false;
@@ -364,20 +385,21 @@ class GameScene extends Phaser.Scene {
             if (this.scentpawInGas) {
                 this.scentpawGas += 100;
                 if (this.gasPriVez) {
-                    this.launchDialogueScene(2);
+                    this.launchDialogueScene(2);//Si es la primera vez que lo toca salta dialogo
                     this.gasPriVez = !this.gasPriVez;
                 }
-                if (this.scentpawGas >= 7000) {
+                if (this.scentpawGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
                     this.vidas -= 1;
                     this.scentpawGas = 0;
                 }
             }
-            else {
+            else {//Si se va del gas reinicia el contador
                 this.scentpawGas = 0;
             }
             this.scentpawInGas = false;
         }
 
+        //Si se quedan sin vidas se reinicia la escena
         if (this.vidas <= 0) {
             this.scene.stop('GameScene');
             this.scene.start('GameScene');
@@ -386,14 +408,15 @@ class GameScene extends Phaser.Scene {
 
     }
 
+    //Función que maneja la colisión de los persoanjes con las flechas
     handleFlechaCollision(playerkey, flecha) {
-        if (flecha.yaColisiono) {
+        if (flecha.yaColisiono) {//Si choca sale de la función
             return;
         }
-        flecha.yaColisiono = true;
+        flecha.yaColisiono = true; //Al chocar le quita una vida
         console.log(`${playerkey} ha sido alcanzado por una flecha`);
         this.vidas -= 1;
-        if (this.flechasPriVez) {
+        if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
             this.launchDialogueScene(1);
             this.flechasPriVez = !this.flechasPriVez;
         }
@@ -408,13 +431,14 @@ class GameScene extends Phaser.Scene {
         });
 
 
-
+        //Si se quedan sin vidas se reinicia la escena
         if (this.vidas <= 0) {
             this.scene.stop('GameScene');
             this.scene.start('GameScene');
         }
     }
 
+    //Función para crear las flechas y añadirles los colliders para detectar a los personajes
     createFlecha(startX, startY, delay, rangoX) {
         const flecha = this.physics.add.sprite(startX, startY, 'frame1').setScale(2).setVisible(false);
         flecha.play('flechas');
@@ -423,7 +447,7 @@ class GameScene extends Phaser.Scene {
         flecha.posicionInicial = { x: startX, y: startY };
         flecha.delay = delay;
         flecha.yaColisiono = false;
-        this.flechas.push(flecha);
+        this.flechas.push(flecha); //Añadimos la flecha al array
 
         this.physics.add.collider(flecha, this.sighttail, () => {
             this.handleFlechaCollision('Sighttail', flecha);
@@ -435,6 +459,7 @@ class GameScene extends Phaser.Scene {
 
     }
 
+    //Gestión de dialogos
     launchDialogueScene(caseId) {
         let startIndex = 0;
         let endIndex = 0;
@@ -477,6 +502,7 @@ class GameScene extends Phaser.Scene {
         this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
     }
 
+    //Construye las animaciones de los personajes
     createAnimations(playerkey) {
         this.anims.create({
             key: `${playerkey}-idleUp`,
@@ -535,6 +561,7 @@ class GameScene extends Phaser.Scene {
         });
     }
 
+    //Comprueba la dirección de los personajes y los estados de los gases y las flechas
     update() {
         this.lastDirection1 = this.handlePlayerMovement(
             this.sighttail,
@@ -549,6 +576,8 @@ class GameScene extends Phaser.Scene {
             'Scentpaw',
             this.lastDirection2
         );
+
+        //Movimiento de las flechas
         this.flechas.forEach((flecha) => {
             if (flecha.x >= flecha.rangoX.maxX) {
                 flecha.setVelocityX(0);
@@ -563,6 +592,8 @@ class GameScene extends Phaser.Scene {
                 });
             }
         });
+
+        //Si la habilidad de la vista está activa se muestran las flechas
         if (this.vistaDisp && this.controls1.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
@@ -587,6 +618,7 @@ class GameScene extends Phaser.Scene {
             });
         }
 
+        //Si la habilidad de olfato está activa se muestran los gases
         if (this.olfatoDisp && this.controls2.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
@@ -618,6 +650,7 @@ class GameScene extends Phaser.Scene {
         this.cameras.main.centerOn(centerjX, centerjY);
     }
 
+    //Movimiento del personaje y actualización de los sprite
     handlePlayerMovement(player, controls, playerkey, lastDirection) {
         let isMoving = false;
 
@@ -645,6 +678,7 @@ class GameScene extends Phaser.Scene {
             isMoving = true;
         }
 
+        //Si no se mueve pone la animación de ilde
         if (!isMoving) {
             switch (lastDirection) {
                 case 'down':

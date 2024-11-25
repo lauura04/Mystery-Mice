@@ -98,7 +98,7 @@ class TutorialScene extends Phaser.Scene {
         this.physics.add.collider(this.sighttail, cementerio);
         this.physics.add.collider(this.scentpaw, cementerio);
 
-        
+        //Si choca con la puerta se inicia el dialogo de esta
         this.physics.add.collider(this.sighttail, this.puerta, () => {
             this.launchDialogueScene(1);
         });
@@ -107,12 +107,14 @@ class TutorialScene extends Phaser.Scene {
             this.launchDialogueScene(1);
         });
 
+        //Si el personaje de Sighttail se choca con el agujero usando su habilidad se inicia la conversación
         this.physics.add.overlap(this.sighttail, this.agujero, (player, agujero) => {
             if (this.agujero.visible) {
                 this.checkAgujeroInteraction('Sighttail');
             }
         });
 
+        //Lo mismo pero con el otro personaje
         this.physics.add.overlap(this.scentpaw, this.agujero, (player, agujero) => {
             if (this.agujero.visible) {
                 this.checkAgujeroInteraction('Scentpaw');
@@ -139,6 +141,7 @@ class TutorialScene extends Phaser.Scene {
         this.lastDirection1 = 'down';
         this.lastDirection2 = 'down';
 
+        //Ponemos las huellas invisibles
         const oscuridad = this.add.rectangle(centerX, centerY, 2 * centerX, 2 * centerY, 0x000000, 0.5);
 
         const huella1 = this.add.image(0.3 * centerX, 1.2 * centerY, 'huellaD').setScale(2).setVisible(false);
@@ -147,19 +150,21 @@ class TutorialScene extends Phaser.Scene {
         const huella4 = this.add.image(1.2 * centerX, 1.2 * centerY, 'huellaD').setScale(2).setVisible(false);
         const huella5 = this.add.image(1.5 * centerX, 0.9 * centerY, 'huellaA').setScale(2).setVisible(false);
 
+        //Las añadimos al array
         this.huellas.push(huella1);
         this.huellas.push(huella2);
         this.huellas.push(huella3);
         this.huellas.push(huella4);
         this.huellas.push(huella5)
 
-
+        //Ponemos los humos
         const humo1 = this.add.image(0.9 * centerX, 1.5 * centerY, 'humo').setScale(2).setVisible(false);
         const humo2 = this.add.image(0.6 * centerX, 1.7 * centerY, 'humo').setScale(2).setVisible(false);
         const humo3 = this.add.image(centerX, centerY, 'humo').setScale(2).setVisible(false);
         const humo4 = this.add.image(1.3 * centerX, 0.7 * centerY, 'humov').setScale(2).setVisible(false);
         const humo5 = this.add.image(1.2 * centerX, 0.4 * centerY, 'humov').setScale(2).setVisible(false);
 
+        //Los añadimos al array
         this.humos.push(humo1);
         this.humos.push(humo2);
         this.humos.push(humo3);
@@ -188,7 +193,7 @@ class TutorialScene extends Phaser.Scene {
 
     }
 
-
+    //Confirma la interacción con el agujero
     checkAgujeroInteraction(playerKey) {
         this.input.keyboard.on('keydown-E', () => {
             if (playerKey === 'Sighttail' && this.agujero.visible) {
@@ -212,7 +217,7 @@ class TutorialScene extends Phaser.Scene {
         });
     }
 
-
+    //Gestión de dialogos
     launchDialogueScene(caseId) {
         let startIndex = 0;
         let endIndex = 0;
@@ -245,10 +250,12 @@ class TutorialScene extends Phaser.Scene {
 
         }
 
+        //Pausamos la escena para mostar los diálogos
         this.scene.pause();
         this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
     }
 
+    //Construye las animaciones de los personajes
     createAnimations(playerkey) {
         this.anims.create({
             key: `${playerkey}-idleUp`,
@@ -307,6 +314,7 @@ class TutorialScene extends Phaser.Scene {
         });
     }
 
+    //Comprueba la dirección de los personajes y los estados de las huellas y humos
     update() {
         this.lastDirection1 = this.handlePlayerMovement(
             this.sighttail,
@@ -322,6 +330,7 @@ class TutorialScene extends Phaser.Scene {
             this.lastDirection2
         );
 
+        //Si la habilidad de la vista está activa se muestran las huellas
         if (this.vistaDisp && this.controls1.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
@@ -345,7 +354,7 @@ class TutorialScene extends Phaser.Scene {
                 console.log("vista disponible");
             });
         }
-
+        //Si la habilidad de olfato está activa se muestran los humos
         if (this.olfatoDisp && this.controls2.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
@@ -376,10 +385,11 @@ class TutorialScene extends Phaser.Scene {
 
     }
 
+    //Movimiento del personaje y actualización de los sprite
     handlePlayerMovement(player, controls, playerkey, lastDirection) {
         let isMoving = false;
 
-        player.setVelocity(0);
+        player.setVelocity(0); // Detener movimiento al principio del fram
 
         if (controls.down.isDown) {
             player.setVelocityY(100);
@@ -403,6 +413,7 @@ class TutorialScene extends Phaser.Scene {
             isMoving = true;
         }
 
+        //Si no se mueve pone la animación de ilde
         if (!isMoving) {
             switch (lastDirection) {
                 case 'down':
