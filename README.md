@@ -66,7 +66,7 @@ Debido a dicha interrupción, no pudieron alcanzar su máximo auge, haciendo as�
 
 VillaCheddar oculta un gran secreto y es que los fantasmas no son simples ratas en pena que vagan sin llegar al inframundo, sino que son antiguos habitantes del pueblo, quienes murieron en extrañas condiciones. En el proceso de resolver dicho misterio se encontrarán también con una carta de sus difuntos padres, quienes les contarán la verdad acerca del pueblo y el motivo oculto tras la muerte de ambos.  
 
-Al final del juego descubrirán que la alcaldesa, quien creían que estaba interesada en acabar con los fantasmas, realmente quería acabar con ellos mandándolos contra estos ya que es la verdadera causante de todo, se trata de un espíritu ancestral completamente enfadado con el pueblo por haber olvidado las viejas costumbres de culto a su religión.  
+Al final del juego descubrirán que la alcaldesa, quien creían que estaba interesada en acabar con los fantasmas, es la verdadera causante de todo, pues con el control de los fantasmas eliminaba a cualquier rival que pudiera quitarle su puesto de poder.  
 
 ## Mecánicas 
 
@@ -76,7 +76,7 @@ El juego se va a caracterizar principalmente por el uso coordinado de las habili
 ![Supervisión](https://github.com/user-attachments/assets/a62ab7d2-9434-4feb-b207-15e05b0d6cde)
 > Símbolo de la habilidad de visión (Figura2)
 
-2. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail no es capaz de percibir ya que son solo aromas presentes en el aire, en este caso, la neblina tóxica, la cual para que le haga daño a los jugadores deberan estar 7 segundos seguido en ella. 
+2. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail no es capaz de percibir ya que son solo aromas presentes en el aire, en este caso, la neblina tóxica, la cual para que le haga daño a los jugadores, deberán estar 7 segundos seguidos en ella. 
 ![Superolfato](https://github.com/user-attachments/assets/0d5abce2-f07a-4cf4-9a55-f7be58ef05ee)
 > Símbolo de la habilidad de olfato (Figura3)
 
@@ -179,7 +179,6 @@ Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail l
 
 El cazador de la cripta: Este ratón es robusto y atlético. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva una escopeta. 
 
-
 Alcaldesa: Es nombrada en diversas ocasiones a lo largo del juego sin embargo, no aparece físicamente en él.
 
 Los padres de Sighttail y Scentpaw: al igual que la alcadesa, son nombrados varias veces y tienen un papel clave en el juego, pero no aparecen de manera física.  
@@ -202,6 +201,6 @@ Los ítems presentes en el juego son claves para el desarrollo clave del juego.
 
 ## Sonido
 
-El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensión. Los sonidos y la música sirven como herramientas para guiar al jugador, generar suspense.
+El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensión. Los sonidos y la música sirven como herramientas para guiar al jugador y generar suspense.
 La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego.
 Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
