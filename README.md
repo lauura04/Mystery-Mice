@@ -28,11 +28,11 @@ Mystery Mice es un juego de investigación que se centra en la cooperación entr
 
 2. Historia intrigante: Los jugadores están inmersos en un misterio paranormal que ocurre en VillaCheddar, donde los fantasmas están causando caos en el pueblo. Al avanzar en la trama, descubrirán que estos sucesos paranormales esconden una verdad más oscura, y deben desenmascarar qué está ocurriendo realmente. 
 
-3. Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán pensamiento estratégico y mucha coordinación entre los dos jugadores, donde los datos sensoriales (vista/olfato) se combinarán para solucionar el misterio. 
+3. Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán pensamiento estratégico y mucha coordinación entre los dos jugadores, donde vista y olfato se combinarán para solucionar el misterio. 
 
 ## Género 
 
-Misterio/Suspense Paranormal: Combina investigación, resolución de acertijos y exploración con elementos de suspense, mientras el jugador intenta descubrir el tipo de fantasma que habita en cada casa. 
+Misterio/Suspense Paranormal: Combina investigación, resolución de acertijos y exploración con elementos de suspense, mientras el jugador intenta descubrir el misterio que se esconde tras esos sucesos fantasmagóricos. 
 
 ## Plataforma 
 
