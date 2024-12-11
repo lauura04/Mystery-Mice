@@ -1,7 +1,7 @@
-package main.java.com.example.controllers;
+package com.example.controllers;
 
-import main.java.com.example.models.Player;
-import main.java.com.example.repositories.PlayerRepository;
+import com.example.models.Player;
+import com.example.repositories.PlayerRepository;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class PlayerRestController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePlayer(@PathVariable Integer id){
-        repo.delete(id);
+        repo.deleteById(id);
     }
 
 }

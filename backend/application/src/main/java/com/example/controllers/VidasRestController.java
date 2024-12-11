@@ -1,9 +1,8 @@
-package main.java.com.example.controllers;
+package com.example.controllers;
 
-import main.java.com.example.models.Vidas;
-import main.java.com.example.repositories.VidaRepository;
+import com.example.models.Vidas;
+import com.example.repositories.VidaRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +18,23 @@ public class VidasRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Vidas> getVidas(@PathVariable String playerKey) {
-        List<Vidas> vidas = repo.findByPlayerKey(playerKey);
-        return vidas.map(value -> new ResponseEntity<>(value, HttpStatus.OK));
+        Optional<Vidas> vidas = repo.findByPlayerKey(playerKey);
+        return vidas.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity<Vidas> updateVidas(@PathVariable String playerKey,
-            @RequestBody Vidas updatedVidas) {
-        updatedVidas.setPlayerKey(playerKey);
-        Vidas saveVidas = repo.saveAndFlush(updatedVidas);
-        return new ResponseEntity<>(vidas, HttpStatus.OK);
+    public ResponseEntity<Vidas> updateVidas(@RequestBody Vidas updatedVidas, @PathVariable String playerKey) {
+        updatedVidas.setPlayerKey(playerKey); // Asocia el playerKey al objeto recibido
+        Vidas saveVidas = repo.saveAndFlush(updatedVidas); // Guarda el objeto en la base de datos
+        return new ResponseEntity<>(saveVidas, HttpStatus.OK); // Retorna la entidad guardada con estado OK
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deleteLives(@PathVariable Integer playerId) {
-        List<Lives> lives = repo.findByPlayerKey(playerKey);
+    public ResponseEntity<Void> deleteLives(@PathVariable String playerKey) {
+        Optional<Vidas> vidas = repo.findByPlayerKey(playerKey);
 
-        repo.delete(lives.get());
+        repo.delete(vidas.get());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }

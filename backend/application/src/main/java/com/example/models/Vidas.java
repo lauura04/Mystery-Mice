@@ -1,6 +1,6 @@
-package main.java.com.example.models;
+package com.example.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class Vidas {
