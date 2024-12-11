@@ -10,8 +10,10 @@ public class Player {
     private Integer id; //player 1 o 2
 
     private String playerKey;
+    private float x; //coordenada x
+    private float y; //coordenada y
 
-    private Integer vidas;
+    private int vidas;
 
     public Integer getId(){
         return id;
@@ -29,11 +31,27 @@ public class Player {
         this.playerKey = playerKey;
     }
 
-    public Integer getvidas(){
+    public float getX(){
+        return x;
+    }
+
+    public void setX(float x){
+        this.x = x;
+    }
+
+    public float getY(){
+        return y;
+    }
+
+    public void setY(float y){
+        this.y = y;
+    }
+
+    public int getvidas(){
         return vidas;
     }
 
-    public void setVidas(Integer vidas){
+    public void setVidas(int vidas){
         this.vidas = vidas;
     }
 }
