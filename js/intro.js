@@ -3,6 +3,8 @@ class IntroScene extends Phaser.Scene{
         super({key: 'IntroScene'});
     }
 
+    
+
     preload(){
         // carga de audios
         this.load.audio("boton", 'assets/Clickar_Boton.wav');
@@ -14,6 +16,11 @@ class IntroScene extends Phaser.Scene{
         this.load.image("libro", 'assets/Libro.png');
         this.load.image("sombraLibro", 'assets/SombraLibro.png');
         this.load.image("periodicoM", 'assets/Menu_inicialPeri.png');
+        $(document).ready(function(){
+            console.log("El DOM está cargado")
+            // Acciones sobre el documento
+            });
+            
     }
 
     create(){
