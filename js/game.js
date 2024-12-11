@@ -34,6 +34,8 @@ class GameScene extends Phaser.Scene {
         this.load.image("frame4", 'assets/Flechas_F4.png');
         this.load.image("frame5", 'assets/Flechas_F5.png');
         this.load.image("carta", 'assets/carta.png');
+        this.load.image("vidaSc", 'assets/ScentpawVida.png');
+        this.load.image("vidaSi", 'assets/SightailVida.png');
 
         this.load.audio("laberinto", 'assets/MusicaLaberinto.mp3');
 
@@ -259,20 +261,25 @@ class GameScene extends Phaser.Scene {
         this.sighttailInGas = false;
         this.scentpawInGas = false;
 
-        //Añadimos los iconos de las vidas muertas de Scentpaw
-        //Añadimos los iconos de las vidas muertas de Signtail
         //Añadimos los iconos de las vidas vivasde Scentpaw
-        this.vidaSc1 = this.add.image(0.55 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
-        this.vidaSc2 = this.add.image(0.65 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
-        this.vidaSc3 = this.add.image(0.75 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSc1 = this.add.image(0.55 * centerX, 0.7 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
+        this.vidaSc2 = this.add.image(0.60 * centerX, 0.7 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
+        this.vidaSc3 = this.add.image(0.65 * centerX, 0.7 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
         //Las metemos en el array de vidas de Scentpaw
         this.vidasSc.push(this.vidaSc1, this.vidaSc2, this.vidaSc3);
         //Añadimos los iconos de las vidas vivasde Signtail
-        this.vidaSi1 = this.add.image(0.55 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
-        this.vidaSi2 = this.add.image(0.65 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
-        this.vidaSi3 = this.add.image(0.75 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSi1 = this.add.image(0.55 * centerX, 0.8 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
+        this.vidaSi2 = this.add.image(0.60 * centerX, 0.8 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
+        this.vidaSi3 = this.add.image(0.65 * centerX, 0.8 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
         //Las metemos en el array de vidas de Signtail
         this.vidasSi.push(this.vidaSi1, this.vidaSi2, this.vidaSi3);
+
+
+        //while(this.vidas>=0){
+            //perderVidas();
+            //this.vidasSc[this.vidas].setVisible(false);
+            //this.vidasSi[this.vidas].setVisible(false);
+        //}
         //Añadimos el botón de pausa
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
