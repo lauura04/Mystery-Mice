@@ -71,7 +71,7 @@ class GameScene extends Phaser.Scene {
         this.olfatoDisp = true;
 
         //Daño máximo que pueden recibir
-        this.vidas = 3;
+        this.vidas = 2;
 
         this.gasPriVez = true;
         this.flechasPriVez = true;
@@ -84,6 +84,8 @@ class GameScene extends Phaser.Scene {
         //Arrays para guardar los gases y las flechas
         this.gas = [];
         this.flechas = [];
+        this.vidasSc= [];
+        this.vidasSi= [];
 
         const mapData = [
             // Aquí va  matriz mapData
@@ -257,6 +259,20 @@ class GameScene extends Phaser.Scene {
         this.sighttailInGas = false;
         this.scentpawInGas = false;
 
+        //Añadimos los iconos de las vidas muertas de Scentpaw
+        //Añadimos los iconos de las vidas muertas de Signtail
+        //Añadimos los iconos de las vidas vivasde Scentpaw
+        this.vidaSc1 = this.add.image(0.55 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSc2 = this.add.image(0.65 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSc3 = this.add.image(0.75 * centerX, 0.7 * centerY, 'vision').setScrollFactor(0);
+        //Las metemos en el array de vidas de Scentpaw
+        this.vidasSc.push(this.vidaSc1, this.vidaSc2, this.vidaSc3);
+        //Añadimos los iconos de las vidas vivasde Signtail
+        this.vidaSi1 = this.add.image(0.55 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSi2 = this.add.image(0.65 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
+        this.vidaSi3 = this.add.image(0.75 * centerX, 0.9 * centerY, 'vision').setScrollFactor(0);
+        //Las metemos en el array de vidas de Signtail
+        this.vidasSi.push(this.vidaSi1, this.vidaSi2, this.vidaSi3);
         //Añadimos el botón de pausa
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
@@ -369,6 +385,9 @@ class GameScene extends Phaser.Scene {
                     this.gasPriVez = !this.gasPriVez;
                 }
                 if (this.sighttailGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                    //Eliminamos un simbolo de vida de los personajes
+                    this.vidasSc[this.vidas].setVisible(false);
+                    this.vidasSi[this.vidas].setVisible(false);
                     this.vidas -= 1;
                     this.sighttailGas = 0;
                     console.log("Una vida menos");
@@ -389,6 +408,9 @@ class GameScene extends Phaser.Scene {
                     this.gasPriVez = !this.gasPriVez;
                 }
                 if (this.scentpawGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                    //Eliminamos un simbolo de vida de los personajes
+                    this.vidasSc[this.vidas].setVisible(false);
+                    this.vidasSi[this.vidas].setVisible(false);
                     this.vidas -= 1;
                     this.scentpawGas = 0;
                 }
@@ -400,7 +422,7 @@ class GameScene extends Phaser.Scene {
         }
 
         //Si se quedan sin vidas se reinicia la escena
-        if (this.vidas <= 0) {
+        if (this.vidas < 0) {
             this.scene.stop('GameScene');
             this.scene.start('GameScene');
         }
@@ -415,6 +437,9 @@ class GameScene extends Phaser.Scene {
         }
         flecha.yaColisiono = true; //Al chocar le quita una vida
         console.log(`${playerkey} ha sido alcanzado por una flecha`);
+        //Eliminamos un simbolo de vida de los personajes
+        this.vidasSc[this.vidas].setVisible(false);
+        this.vidasSi[this.vidas].setVisible(false);
         this.vidas -= 1;
         if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
             this.launchDialogueScene(1);
