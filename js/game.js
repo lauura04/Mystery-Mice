@@ -1,3 +1,6 @@
+import ControlsManager from "./controlesJug";
+import ControlsManager from "./controlesJug";
+
 class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene', physics: { default: 'arcade' } });
@@ -42,6 +45,9 @@ class GameScene extends Phaser.Scene {
     }
 
     create() {
+        const controlsManager = new ControlsManager();
+        controlsManager.initializeControls(this);
+
         //Detiene la música de la pantalla anterior
         const backgroundMusic1 = this.registry.get("musicaFondo");
         if (backgroundMusic1) {
@@ -325,28 +331,6 @@ class GameScene extends Phaser.Scene {
             });
         })
 
-
-
-        // Controles
-        this.controls1 = this.input.keyboard.addKeys({
-            up: 'W',
-            down: 'S',
-            left: 'A',
-            right: 'D',
-            power: 'E'
-        });
-
-        this.controls2 = this.input.keyboard.addKeys({
-            up: 'UP',
-            down: 'DOWN',
-            left: 'LEFT',
-            right: 'RIGHT',
-            power: 'SPACE'
-        });
-
-        this.lastDirection1 = 'down';
-        this.lastDirection2 = 'down';
-
         //icono de los poderes
         this.vision = this.add.image(0.56 * centerX, 1.4 * centerY, 'vision').setScrollFactor(0);
         this.olfato = this.add.image(0.56 * centerX, 1.25 * centerY, 'olfato').setScrollFactor(0);
@@ -595,18 +579,16 @@ class GameScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de los gases y las flechas
     update() {
-        this.lastDirection1 = this.handlePlayerMovement(
+        this.controlsManager.handlePlayerMovement(
             this.sighttail,
-            this.controls1,
             'Sighttail',
-            this.lastDirection1
+            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
         );
 
-        this.lastDirection2 = this.handlePlayerMovement(
+        this.controlsManager.handlePlayerMovement(
             this.scentpaw,
-            this.controls2,
             'Scentpaw',
-            this.lastDirection2
+            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
         );
 
         //Movimiento de las flechas
@@ -682,51 +664,15 @@ class GameScene extends Phaser.Scene {
         this.cameras.main.centerOn(centerjX, centerjY);
     }
 
-    //Movimiento del personaje y actualización de los sprite
-    handlePlayerMovement(player, controls, playerkey, lastDirection) {
-        let isMoving = false;
-
-        player.setVelocity(0); // Detener movimiento al principio del frame
-
-        if (controls.down.isDown) {
-            player.setVelocityY(100);
-            player.anims.play(`${playerkey}-walk-down`, true);
-            lastDirection = 'down';
-            isMoving = true;
-        } else if (controls.up.isDown) {
-            player.setVelocityY(-100);
-            player.anims.play(`${playerkey}-walk-up`, true);
-            lastDirection = 'up';
-            isMoving = true;
-        } else if (controls.left.isDown) {
-            player.setVelocityX(-100);
-            player.anims.play(`${playerkey}-walk-left`, true);
-            lastDirection = 'left';
-            isMoving = true;
-        } else if (controls.right.isDown) {
-            player.setVelocityX(100);
-            player.anims.play(`${playerkey}-walk-right`, true);
-            lastDirection = 'right';
-            isMoving = true;
-        }
-
-        //Si no se mueve pone la animación de ilde
-        if (!isMoving) {
-            switch (lastDirection) {
-                case 'down':
-                    player.anims.play(`${playerkey}-idleDown`, true);
-                    break;
-                case 'up':
-                    player.anims.play(`${playerkey}-idleUp`, true);
-                    break;
-                case 'left':
-                    player.anims.play(`${playerkey}-idleLeft`, true);
-                    break;
-                case 'right':
-                    player.anims.play(`${playerkey}-idleRight`, true);
-                    break;
-            }
-        }
-        return lastDirection;
+    updatePlayerPositionOnServer(x, y, playerKey) {
+        fetch(`/api/players/${playerKey}/move`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ x, y }),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Posición actualizada:', data))
+        .catch(error => console.error('Error al actualizar posición:', error));
     }
+
 }

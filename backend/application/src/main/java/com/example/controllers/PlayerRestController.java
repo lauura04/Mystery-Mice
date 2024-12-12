@@ -2,18 +2,21 @@ package com.example.controllers;
 
 import com.example.models.Player;
 import com.example.repositories.PlayerRepository;
+import com.example.dto.PlayerMoveRequest;
 
 import java.util.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.convert.DataSizeUnit;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 
 @RestController
@@ -73,6 +76,28 @@ public class PlayerRestController {
         } else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    //guarda el estado de los jugadores en el servidor
+    @PostMapping("/move")
+    public ResponseEntity<Void> movePlayer(@RequestBody PlayerMoveRequest request) {
+        Optional<Player> playerOpt = repo.findByPlayerKey(request.getPlayerKey());
+        if(playerOpt.isPresent()){
+            Player player = playerOpt.get();
+            player.setX(player.getX()+request.getDx());
+            player.setY(player.getY()+request.getDy());
+            repo.save(player);
+            return ResponseEntity.ok().build();
+        } else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    
+    //obtener estado actual del juego
+    @GetMapping("/state")
+    public ResponseEntity<List<Player>> getGameState() {
+        List<Player> players = repo.findAll();
+        return ResponseEntity.ok(players);
     }
     
 

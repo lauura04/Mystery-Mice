@@ -1,3 +1,5 @@
+import ControlsManager from "./controlesJug";
+
 class TutorialScene extends Phaser.Scene {
     constructor() {
         super({ key: 'TutorialScene' });
@@ -31,6 +33,8 @@ class TutorialScene extends Phaser.Scene {
     }
 
     create() {
+        const controlsManager = new ControlsManager();
+        controlsManager.initializeControls(this);
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
@@ -120,26 +124,6 @@ class TutorialScene extends Phaser.Scene {
                 this.checkAgujeroInteraction('Scentpaw');
             }
         });
-
-        // Controles
-        this.controls1 = this.input.keyboard.addKeys({
-            up: 'W',
-            down: 'S',
-            left: 'A',
-            right: 'D',
-            power: 'E'
-        });
-
-        this.controls2 = this.input.keyboard.addKeys({
-            up: 'UP',
-            down: 'DOWN',
-            left: 'LEFT',
-            right: 'RIGHT',
-            power: 'SPACE'
-        });
-
-        this.lastDirection1 = 'down';
-        this.lastDirection2 = 'down';
 
         //Ponemos las huellas invisibles
         const oscuridad = this.add.rectangle(centerX, centerY, 2 * centerX, 2 * centerY, 0x000000, 0.5);
@@ -316,18 +300,16 @@ class TutorialScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de las huellas y humos
     update() {
-        this.lastDirection1 = this.handlePlayerMovement(
+        this.controlsManager.handlePlayerMovement(
             this.sighttail,
-            this.controls1,
             'Sighttail',
-            this.lastDirection1
+            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
         );
 
-        this.lastDirection2 = this.handlePlayerMovement(
+        this.controlsManager.handlePlayerMovement(
             this.scentpaw,
-            this.controls2,
             'Scentpaw',
-            this.lastDirection2
+            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
         );
 
         //Si la habilidad de la vista está activa se muestran las huellas
@@ -385,51 +367,14 @@ class TutorialScene extends Phaser.Scene {
 
     }
 
-    //Movimiento del personaje y actualización de los sprite
-    handlePlayerMovement(player, controls, playerkey, lastDirection) {
-        let isMoving = false;
-
-        player.setVelocity(0); // Detener movimiento al principio del fram
-
-        if (controls.down.isDown) {
-            player.setVelocityY(100);
-            player.anims.play(`${playerkey}-walk-down`, true);
-            lastDirection = 'down';
-            isMoving = true;
-        } else if (controls.up.isDown) {
-            player.setVelocityY(-100);
-            player.anims.play(`${playerkey}-walk-up`, true);
-            lastDirection = 'up';
-            isMoving = true;
-        } else if (controls.left.isDown) {
-            player.setVelocityX(-100);
-            player.anims.play(`${playerkey}-walk-left`, true);
-            lastDirection = 'left';
-            isMoving = true;
-        } else if (controls.right.isDown) {
-            player.setVelocityX(100);
-            player.anims.play(`${playerkey}-walk-right`, true);
-            lastDirection = 'right';
-            isMoving = true;
-        }
-
-        //Si no se mueve pone la animación de ilde
-        if (!isMoving) {
-            switch (lastDirection) {
-                case 'down':
-                    player.anims.play(`${playerkey}-idleDown`, true);
-                    break;
-                case 'up':
-                    player.anims.play(`${playerkey}-idleUp`, true);
-                    break;
-                case 'left':
-                    player.anims.play(`${playerkey}-idleLeft`, true);
-                    break;
-                case 'right':
-                    player.anims.play(`${playerkey}-idleRight`, true);
-                    break;
-            }
-        }
-        return lastDirection;
+    updatePlayerPositionOnServer(x, y, playerKey) {
+        fetch(`/api/players/${playerKey}/move`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ x, y }),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Posición actualizada:', data))
+        .catch(error => console.error('Error al actualizar posición:', error));
     }
 }
