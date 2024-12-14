@@ -5,7 +5,9 @@ class ControlScene extends Phaser.Scene{
 
     preload() {
         //carga de audios
-        this.load.audio("button", 'assets/Clickar_Boton.wav')
+        this.load.audio("button", 'assets/Clickar_Boton.wav');
+        this.load.audio("metalpipe", 'assets/metalpipe.mp3')
+
 
         // carga de imagenes
         this.load.image("fondoC", 'assets/backgroundcontrol.png');
@@ -16,6 +18,9 @@ class ControlScene extends Phaser.Scene{
         this.load.image("control2", 'assets/Controles_flechas.png');
         this.load.image("vision", 'assets/Supervision.png');
         this.load.image("olfato", 'assets/Superolfato.png');
+        this.load.image("Boton_pipe", 'assets/Boton_pipe.png');
+        
+
     }
 
     create(){
@@ -25,6 +30,12 @@ class ControlScene extends Phaser.Scene{
        
         //Ponemos el fondo
         const fonfoC = this.add.image(centerX, centerY, "fondoC");
+
+        //Botón del metal pipe
+        const volver = this.add.image(0 * centerX, 2 * centerY, "Boton_pipe").setInteractive()
+            .on('pointerdown', () => {
+                this.sound.play("metalpipe");
+            });
 
         //Botón para volver al menú de pausa
         const volverB = this.add.image(0.2*centerX, 1.7*centerY, "volverB")
