@@ -24,7 +24,12 @@ class GameScene extends Phaser.Scene {
         this.load.spritesheet('Cazador', 'assets/cazador_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
+            
         });
+
+        //Cargamos los audios
+        this.load.audio("Derrota", 'assets/Derrota.mp3');
+        this.load.audio("Daño", 'assets/Daño.mp3');
 
         //Cargamos las imagenes de los distintos elementos
         this.load.image('pause', 'assets/Boton_Pausa.png');
@@ -400,6 +405,8 @@ class GameScene extends Phaser.Scene {
                     console.log("Una vida menos");
                     console.log(this.sighttailGas);
                     console.log(this.sighttailInGas);
+
+                    this.sound.play("Daño");
                 }
             }
             else { //Si se va del gas reinicia el contador
@@ -422,6 +429,8 @@ class GameScene extends Phaser.Scene {
                     //Le quitamos una vida
                     this.vidasP2 -= 1;
                     this.scentpawGas = 0;
+
+                    this.sound.play("Daño");
                 }
             }
             else {//Si se va del gas reinicia el contador
@@ -432,8 +441,11 @@ class GameScene extends Phaser.Scene {
 
         //Si se quedan sin vidas se reinicia la escena
         if (this.vidasP1 < 0 || this.vidasP2<0) {
+
+            this.sound.play("Derrota");
+
             this.scene.stop('GameScene');
-            this.scene.start('GameScene');
+            this.scene.start('LoseScene');
         }
 
 
@@ -454,6 +466,8 @@ class GameScene extends Phaser.Scene {
             this.muertesSi[this.vidasP1].setVisible(true);
             //Le quitamos una vida
             this.vidasP1 -= 1;
+
+            this.sound.play("Daño");
         }
         if(playerkey=='Scentpaw'){
             //Eliminamos un simbolo de vida
@@ -462,6 +476,8 @@ class GameScene extends Phaser.Scene {
             this.muertesSC[this.vidasP2].setVisible(true);
             //Le quitamos una vida
             this.vidasP2 -= 1;
+
+            this.sound.play("Daño");
         }
         if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
             this.launchDialogueScene(1);
@@ -480,8 +496,11 @@ class GameScene extends Phaser.Scene {
 
         //Si se quedan sin vidas se reinicia la escena
         if (this.vidasP1 < 0 || this.vidasP2<0) {
+            
+            this.sound.play("Derrota");
+
             this.scene.stop('GameScene');
-            this.scene.start('GameScene');
+            this.scene.start('LoseScene');
         }
     }
 
