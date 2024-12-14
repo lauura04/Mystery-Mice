@@ -4,16 +4,16 @@
     <link rel="stylesheet" href="mystile.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script src="js/intro.js"></script>
-    <script src="js/game.js"></script>
+    <script type="module" src="js/game.js"></script>
+    <script src="js/intro.js"></script>    
     <script src="js/end.js"></script>
     <script src="js/controls.js"></script>
     <script src="js/preview.js"></script>
     <script src="js/dialogo.js"></script>
     <script src="js/credit.js"></script>
     <script src="js/pause.js"></script>
-    <script src="js/tutorial.js"></script>
-    <script src="js/controlesJug.js"></script>
+    <script type="module" src="js/tutorial.js"></script>
+    <script type="module" src="js/controlesJug.js"></script>
     <script src="js/restCliente.js"></script>
 
     <meta charset="utf-8" />
@@ -22,8 +22,10 @@
 <body>
     <!-- Contenedor para el canvas -->
     <div id="game-canvas"></div>
-    <script>
+    <script type="module">
         // Configuración del juego
+        import GameScene from './js/game.js';
+        import TutorialScene from './js/tutorial.js';
         var config = {
             type: Phaser.AUTO,
             scale: {
@@ -42,7 +44,6 @@
             },
             scene: [IntroScene, GameScene, ControlScene, PreviewScene,  TutorialScene, PauseScene ,CreditScene, DialogueScene, EndScene],
         };
-
         const game = new Phaser.Game(config);
     </script>
 </body>

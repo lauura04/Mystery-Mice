@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500") // Permitir solo tu origen
 
 
 @RestController
@@ -26,7 +28,7 @@ public class PlayerRestController {
     @Autowired
     private PlayerRepository repo;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<Player> findPlayers(){
         return repo.findAll();
     }
@@ -46,6 +48,7 @@ public class PlayerRestController {
                 return new ResponseEntity<>(player, HttpStatus.CREATED);
             
     }
+    
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deletePlayer(@PathVariable Integer id){
@@ -79,7 +82,7 @@ public class PlayerRestController {
     }
 
     //guarda el estado de los jugadores en el servidor
-    @PostMapping("/move")
+    @PostMapping("/{playerKey}/move")
     public ResponseEntity<Void> movePlayer(@RequestBody PlayerMoveRequest request) {
         Optional<Player> playerOpt = repo.findByPlayerKey(request.getPlayerKey());
         if(playerOpt.isPresent()){

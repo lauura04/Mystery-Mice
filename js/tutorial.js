@@ -1,6 +1,6 @@
-import ControlsManager from "./controlesJug";
+import ControlsManager from "./controlesJug.js";
 
-class TutorialScene extends Phaser.Scene {
+export default class TutorialScene extends Phaser.Scene {
     constructor() {
         super({ key: 'TutorialScene' });
 
@@ -300,6 +300,8 @@ class TutorialScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de las huellas y humos
     update() {
+        this.fetchPlayerPosition('Sighttail', this.sighttail);
+    this.fetchPlayerPosition('Scentpaw', this.scentpaw);
         this.controlsManager.handlePlayerMovement(
             this.sighttail,
             'Sighttail',
@@ -313,7 +315,7 @@ class TutorialScene extends Phaser.Scene {
         );
 
         //Si la habilidad de la vista está activa se muestran las huellas
-        if (this.vistaDisp && this.controls1.power.isDown) {
+        if (this.vistaDisp && this.controlsManager.controls.player1.keys.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
             this.huellas.forEach(huella => {
@@ -337,7 +339,7 @@ class TutorialScene extends Phaser.Scene {
             });
         }
         //Si la habilidad de olfato está activa se muestran los humos
-        if (this.olfatoDisp && this.controls2.power.isDown) {
+        if (this.olfatoDisp && this.controlsManager.controls.player2.keys.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
             this.humos.forEach(humo => {
@@ -376,5 +378,24 @@ class TutorialScene extends Phaser.Scene {
         .then(response => response.json())
         .then(data => console.log('Posición actualizada:', data))
         .catch(error => console.error('Error al actualizar posición:', error));
+    }
+
+    fetchPlayerPosition(playerKey, player) {
+        // Lógica para obtener la posición del jugador desde el servidor
+        fetch(`http://localhost:8080/players/${playerKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al obtener la posición del jugador: ${response.status}`);
+                }
+                return response.json(); // Parsear la respuesta como JSON
+            })
+            .then(data => {
+                // Actualizar la posición del jugador en el juego
+                player.setPosition(data.x, data.y); // Suponiendo que `x` y `y` son las coordenadas en el servidor
+                console.log(`Posición del jugador ${playerKey} actualizada: (${data.x}, ${data.y})`);
+            })
+            .catch(error => {
+                console.error(`No se pudo obtener la posición del jugador ${playerKey}:`, error);
+            });
     }
 }

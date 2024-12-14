@@ -1,7 +1,6 @@
-import ControlsManager from "./controlesJug";
-import ControlsManager from "./controlesJug";
+import ControlsManager from "./controlesJug.js";
 
-class GameScene extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene {
     constructor() {
         super({ key: 'GameScene', physics: { default: 'arcade' } });
     }
@@ -629,6 +628,8 @@ class GameScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de los gases y las flechas
     update() {
+        this.fetchPlayerPosition('Sighttail', this.sighttail);
+    this.fetchPlayerPosition('Scentpaw', this.scentpaw);
         this.controlsManager.handlePlayerMovement(
             this.sighttail,
             'Sighttail',
@@ -658,7 +659,7 @@ class GameScene extends Phaser.Scene {
         });
 
         //Si la habilidad de la vista está activa se muestran las flechas
-        if (this.vistaDisp && this.controls1.power.isDown) {
+        if (this.vistaDisp && this.controlsManager.controls.player1.keys.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
             this.flechas.forEach(flecha => {
@@ -683,7 +684,7 @@ class GameScene extends Phaser.Scene {
         }
 
         //Si la habilidad de olfato está activa se muestran los gases
-        if (this.olfatoDisp && this.controls2.power.isDown) {
+        if (this.olfatoDisp && this.controlsManager.controls.player2.keys.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
             this.gas.forEach(gas => {
@@ -726,3 +727,5 @@ class GameScene extends Phaser.Scene {
     }
 
 }
+
+window.GameScene = GameScene;

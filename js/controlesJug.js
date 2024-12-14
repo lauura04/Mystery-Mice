@@ -74,6 +74,17 @@ class ControlsManager {
         }
 
     }
+
+    sendPLayerMove(x,y,playerKey){
+        fetch(`/api/players/${playerKey}/move`,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({x,y}),
+        })
+        .then(response=>response.json())
+        .then(data=>console.log(`Posicion actrualizada para ${playerKey}:`, data))
+        .catch(error=>console.error(`Error al actualizar la posicion para ${playerKey}:`, error));
+    }
 }
 
 export default ControlsManager;
