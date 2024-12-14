@@ -32,7 +32,7 @@ class ControlScene extends Phaser.Scene{
         const fonfoC = this.add.image(centerX, centerY, "fondoC");
 
         //Botón del metal pipe
-        const volver = this.add.image(1 * centerX, 1.8 * centerY, "Boton_pipe").setInteractive()
+        const volver = this.add.image(1 * centerX, 1.6 * centerY, "Boton_pipe").setInteractive()
             .on('pointerdown', () => {
                 this.sound.play("metalpipe");
             });
