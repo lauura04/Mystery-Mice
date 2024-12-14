@@ -40,7 +40,7 @@ class PreviewScene extends Phaser.Scene {
             wordWrap: { width: 700 }
         });
 
-        const noticia = this.add.text(0.65 * centerX, 0.85 * centerY, 'VillaCheddar está en estado de alarma. Tras el reciente eclipse de Ilargi gazta, un fenómeno que ocurre una vez cada cien años, ' +
+        const noticia = this.add.text(0.65 * centerX, 0.85 * centerY, 'VillaCheddar está en estado de alarma. Tras el reciente eclipse de Gazta Ilargia, un fenómeno que ocurre una vez cada cien años, ' +
             'los habitantes han sido testigos de un incremento alarmante en los eventos paranormales. Para combatir esta oleada de actividad sobrenatural, la alcaldesa del pueblo ha contratado a Mystery Mice,' +
             'la famosa empresa de cazarratafantasmas liderada por los hermanos Sighttail y Scentpaw de la familia Arat.' +
             ' La calma en Villa Cheddar pende de un hilo. ¿Será Mystery Mice capaz de poner fin a esta pesadilla paranormal?', {
