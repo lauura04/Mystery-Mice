@@ -628,19 +628,18 @@ export default class GameScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de los gases y las flechas
     update() {
-        this.fetchPlayerPosition('Sighttail', this.sighttail);
-    this.fetchPlayerPosition('Scentpaw', this.scentpaw);
+        
         this.controlsManager.handlePlayerMovement(
             this.sighttail,
+            this.controlsManager.controls1,
             'Sighttail',
-            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
-        );
+            );
 
         this.controlsManager.handlePlayerMovement(
             this.scentpaw,
+            this.controlsManager.controls1,
             'Scentpaw',
-            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
-        );
+            );
 
         //Movimiento de las flechas
         this.flechas.forEach((flecha) => {
@@ -659,7 +658,7 @@ export default class GameScene extends Phaser.Scene {
         });
 
         //Si la habilidad de la vista está activa se muestran las flechas
-        if (this.vistaDisp && this.controlsManager.controls.player1.keys.power.isDown) {
+        if (this.vistaDisp && this.controlsManager.controls1.player1.keys.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
             this.flechas.forEach(flecha => {
@@ -684,7 +683,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         //Si la habilidad de olfato está activa se muestran los gases
-        if (this.olfatoDisp && this.controlsManager.controls.player2.keys.power.isDown) {
+        if (this.olfatoDisp && this.controlsManager.controls2.player2.keys.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
             this.gas.forEach(gas => {
@@ -715,16 +714,7 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.centerOn(centerjX, centerjY);
     }
 
-    updatePlayerPositionOnServer(x, y, playerKey) {
-        fetch(`/api/players/${playerKey}/move`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ x, y }),
-        })
-        .then(response => response.json())
-        .then(data => console.log('Posición actualizada:', data))
-        .catch(error => console.error('Error al actualizar posición:', error));
-    }
+    
 
 }
 

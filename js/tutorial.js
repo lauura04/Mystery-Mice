@@ -33,8 +33,9 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     create() {
-        const controlsManager = new ControlsManager();
-        controlsManager.initializeControls(this);
+        this.controlsManager = new ControlsManager();
+        this.controlsManager.initializeControls(this);
+        
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
@@ -300,22 +301,21 @@ export default class TutorialScene extends Phaser.Scene {
 
     //Comprueba la dirección de los personajes y los estados de las huellas y humos
     update() {
-        this.fetchPlayerPosition('Sighttail', this.sighttail);
-    this.fetchPlayerPosition('Scentpaw', this.scentpaw);
-        this.controlsManager.handlePlayerMovement(
-            this.sighttail,
-            'Sighttail',
-            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
-        );
 
         this.controlsManager.handlePlayerMovement(
+            this.sighttail,
+            this.controlsManager.controls1,
+            'Sighttail'
+        );
+        
+        this.controlsManager.handlePlayerMovement(
             this.scentpaw,
-            'Scentpaw',
-            (x, y, playerKey) => this.updatePlayerPositionOnServer(x, y, playerKey)
+            this.controlsManager.controls2,
+            'Scentpaw'
         );
 
         //Si la habilidad de la vista está activa se muestran las huellas
-        if (this.vistaDisp && this.controlsManager.controls.player1.keys.power.isDown) {
+        if (this.vistaDisp && this.controlsManager.controls1.keys.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
             this.huellas.forEach(huella => {
@@ -339,7 +339,7 @@ export default class TutorialScene extends Phaser.Scene {
             });
         }
         //Si la habilidad de olfato está activa se muestran los humos
-        if (this.olfatoDisp && this.controlsManager.controls.player2.keys.power.isDown) {
+        if (this.olfatoDisp && this.controlsManager.controls2.keys.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
             this.humos.forEach(humo => {
@@ -369,33 +369,4 @@ export default class TutorialScene extends Phaser.Scene {
 
     }
 
-    updatePlayerPositionOnServer(x, y, playerKey) {
-        fetch(`/api/players/${playerKey}/move`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ x, y }),
-        })
-        .then(response => response.json())
-        .then(data => console.log('Posición actualizada:', data))
-        .catch(error => console.error('Error al actualizar posición:', error));
-    }
-
-    fetchPlayerPosition(playerKey, player) {
-        // Lógica para obtener la posición del jugador desde el servidor
-        fetch(`http://localhost:8080/players/${playerKey}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error al obtener la posición del jugador: ${response.status}`);
-                }
-                return response.json(); // Parsear la respuesta como JSON
-            })
-            .then(data => {
-                // Actualizar la posición del jugador en el juego
-                player.setPosition(data.x, data.y); // Suponiendo que `x` y `y` son las coordenadas en el servidor
-                console.log(`Posición del jugador ${playerKey} actualizada: (${data.x}, ${data.y})`);
-            })
-            .catch(error => {
-                console.error(`No se pudo obtener la posición del jugador ${playerKey}:`, error);
-            });
-    }
 }

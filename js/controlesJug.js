@@ -1,6 +1,6 @@
 class ControlsManager {
     constructor() {
-        this.controls = {
+        this.controls1 = {
             keys: {
                 up: 'W',
                 down: 'S',
@@ -9,82 +9,89 @@ class ControlsManager {
                 power: 'E',
 
             },
-            lastDirection: 'down',
+            lastDirection1: 'down',
+
+        };
+
+        this.controls2 = {
+            keys: {
+                up: 'UP',
+                down: 'DOWN',
+                left: 'LEFT',
+                right: 'RIGHT',
+                power: 'SPACE',
+
+            },
+            lastDirection2: 'down',
 
         };
     }
 
     initializeControls(scene) {
-        this.controls.keys = scene.input.keyboard.addKeys({
-            up: this.controls.up,
-            down: this.controls.down,
-            left: this.controls.left,
-            right: this.controls.right,
-            power: this.controls.power,
-        });
+        this.controls1.keys = {
+            up: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
+            down: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+            left: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+            right: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+            power: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
+        };
+    
+        this.controls2.keys = {
+            up: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+            down: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+            left: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+            right: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
+            power: scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+        };
 
     }
 
-    handlePlayerMovement(player, playerKey, updatePositionCallback) {
+    handlePlayerMovement(player, controls, playerKey) {
         let isMoving = false;
-
+    
         player.setVelocity(0); // Detener movimiento al principio del frame
-
-        if (controls.down.isDown) {
+    
+        if (controls.keys.down.isDown) {
             player.setVelocityY(100);
-            player.anims.play(`${playerkey}-walk-down`, true);
-            this.controls.lastDirection = 'down';
+            player.anims.play(`${playerKey}-walk-down`, true);
+            controls.lastDirection = 'down';
             isMoving = true;
-        } else if (controls.up.isDown) {
+        } else if (controls.keys.up.isDown) {
             player.setVelocityY(-100);
-            player.anims.play(`${playerkey}-walk-up`, true);
-            this.controls.lastDirection = 'up';
+            player.anims.play(`${playerKey}-walk-up`, true);
+            controls.lastDirection = 'up';
             isMoving = true;
-        } else if (controls.left.isDown) {
+        } else if (controls.keys.left.isDown) {
             player.setVelocityX(-100);
-            player.anims.play(`${playerkey}-walk-left`, true);
-            this.controls.lastDirection = 'left';
+            player.anims.play(`${playerKey}-walk-left`, true);
+            controls.lastDirection = 'left';
             isMoving = true;
-        } else if (controls.right.isDown) {
+        } else if (controls.keys.right.isDown) {
             player.setVelocityX(100);
-            player.anims.play(`${playerkey}-walk-right`, true);
-            this.controls.lastDirection = 'right';
+            player.anims.play(`${playerKey}-walk-right`, true);
+            controls.lastDirection = 'right';
             isMoving = true;
         }
-
-        //Si no se mueve pone la animación de ilde
+    
+        // Si no se mueve, pone la animación idle
         if (!isMoving) {
-            switch (this.controls.lastDirection) {
+            switch (controls.lastDirection) {
                 case 'down':
-                    player.anims.play(`${playerkey}-idleDown`, true);
+                    player.anims.play(`${playerKey}-idleDown`, true);
                     break;
                 case 'up':
-                    player.anims.play(`${playerkey}-idleUp`, true);
+                    player.anims.play(`${playerKey}-idleUp`, true);
                     break;
                 case 'left':
-                    player.anims.play(`${playerkey}-idleLeft`, true);
+                    player.anims.play(`${playerKey}-idleLeft`, true);
                     break;
                 case 'right':
-                    player.anims.play(`${playerkey}-idleRight`, true);
+                    player.anims.play(`${playerKey}-idleRight`, true);
                     break;
             }
         }
-        if(isMoving){
-            updatePositionCallback(player.x, player.y, playerKey);
-        }
-
     }
 
-    sendPLayerMove(x,y,playerKey){
-        fetch(`/api/players/${playerKey}/move`,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({x,y}),
-        })
-        .then(response=>response.json())
-        .then(data=>console.log(`Posicion actrualizada para ${playerKey}:`, data))
-        .catch(error=>console.error(`Error al actualizar la posicion para ${playerKey}:`, error));
-    }
 }
 
 export default ControlsManager;
