@@ -33,8 +33,8 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     create() {
-        this.controlsManager = new ControlsManager();
-        this.controlsManager.initializeControls(this);
+        const controlsManager = new ControlsManager();
+        controlsManager.initializeControls(this);
         
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;

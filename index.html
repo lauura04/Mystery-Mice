@@ -15,6 +15,7 @@
     <script type="module" src="js/tutorial.js"></script>
     <script type="module" src="js/controlesJug.js"></script>
     <script src="js/restCliente.js"></script>
+    <script src="js/ChatManager.js"></script>
 
     <meta charset="utf-8" />
     <title>Mystery Mice</title>
@@ -22,6 +23,11 @@
 <body>
     <!-- Contenedor para el canvas -->
     <div id="game-canvas"></div>
+
+    <div id="chat-messages"></div>
+    <input type="text" id="chat-input" placeholder="Escribe aquí tu mensaje"/>
+    <button id="chat-send">Enviar</button>
+
     <script type="module">
         // Configuración del juego
         import GameScene from './js/game.js';
