@@ -638,7 +638,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.controlsManager.handlePlayerMovement(
             this.scentpaw,
-            this.controlsManager.controls1,
+            this.controlsManager.controls2,
             'Scentpaw',
             );
 

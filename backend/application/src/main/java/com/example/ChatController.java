@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/chat")
+@CrossOrigin(origins = "http://localhost:8080")
 public class ChatController {
     private final List<ChatMessage> messages = new ArrayList<>();
     private final AtomicInteger lastId = new AtomicInteger(0);
