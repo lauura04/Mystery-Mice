@@ -305,6 +305,23 @@ export default class GameScene extends Phaser.Scene {
         //Las metemos en el array de vidas de Signtail
         this.vidasSi.push(this.vidaSi1, this.vidaSi2, this.vidaSi3);
 
+        // Crear el texto del temporizador
+        this.timerText = this.add.text(0.96* centerX, 0.52*centerY, '00:00', {
+            font: '35px mousy',
+            color: '#FFFFFF',
+        }).setScrollFactor(0);
+
+        // Inicializa el tiempo que transcurre
+        this.elapsedTime = 0;
+
+        // Configura un evento que actualiza el cronómetro cada segundo
+        this.time.addEvent({
+            delay: 1000, //
+            callback: this.updateTimer,
+            callbackScope: this,
+            loop: true, //
+        });
+
         //Añadimos el botón de pausa
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
@@ -364,6 +381,20 @@ export default class GameScene extends Phaser.Scene {
 
         this.launchDialogueScene(0);
 
+    }
+
+    updateTimer() {
+        // Incrementa el tiempo transcurrido
+        this.elapsedTime++;
+
+        // Convierte segundos a minutos y segundos
+        const minutes = Math.floor(this.elapsedTime / 60);
+        const seconds = this.elapsedTime % 60;
+
+        // Actualiza el texto del temporizador
+        this.timerText.setText(
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        );
     }
 
     //Comprueba si alguno de los jugadores ha chocado co él para iniciar su dialogo
