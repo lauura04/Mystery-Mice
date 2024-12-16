@@ -16,6 +16,7 @@
     <script type="module" src="js/controlesJug.js"></script>
     <script src="js/restCliente.js"></script>
     <script src="js/ChatManager.js"></script>
+    <script src="js/derrota.js"></script>
 
     <meta charset="utf-8" />
     <title>Mystery Mice</title>
@@ -48,7 +49,7 @@
                     debug: false,
                 },
             },
-            scene: [IntroScene, GameScene, ControlScene, PreviewScene,  TutorialScene, PauseScene ,CreditScene, DialogueScene, EndScene],
+            scene: [IntroScene, GameScene, ControlScene, PreviewScene,  TutorialScene, PauseScene ,CreditScene, DialogueScene, EndScene, LoseScene],
         };
         const game = new Phaser.Game(config);
     </script>
