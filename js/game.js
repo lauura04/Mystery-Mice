@@ -1,4 +1,5 @@
 import ControlsManager from "./controlesJug.js";
+import ChatManager from "./ChatManager.js";
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
@@ -51,8 +52,8 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
-        const controlsManager = new ControlsManager();
-        controlsManager.initializeControls(this);
+        this.controlsManager = new ControlsManager();
+        this.controlsManager.initializeControls(this);
 
         //Detiene la música de la pantalla anterior
         const backgroundMusic1 = this.registry.get("musicaFondo");
@@ -658,7 +659,7 @@ export default class GameScene extends Phaser.Scene {
         });
 
         //Si la habilidad de la vista está activa se muestran las flechas
-        if (this.vistaDisp && this.controlsManager.controls1.player1.keys.power.isDown) {
+        if (this.vistaDisp && this.controlsManager.controls1.keys.power.isDown) {
             console.log("Jugador 1 usó poder");
             this.vistaDisp = false;
             this.flechas.forEach(flecha => {
@@ -683,7 +684,7 @@ export default class GameScene extends Phaser.Scene {
         }
 
         //Si la habilidad de olfato está activa se muestran los gases
-        if (this.olfatoDisp && this.controlsManager.controls2.player2.keys.power.isDown) {
+        if (this.olfatoDisp && this.controlsManager.controls2.keys.power.isDown) {
             console.log("Jugador 2 usó poder");
             this.olfatoDisp = false;
             this.gas.forEach(gas => {

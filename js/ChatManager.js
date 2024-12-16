@@ -59,3 +59,5 @@ class ChatManager {
         setInterval(()=>this.fetchMessages(), 2000);
     }
 }
+
+export default ChatManager;

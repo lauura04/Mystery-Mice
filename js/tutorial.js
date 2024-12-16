@@ -1,4 +1,5 @@
 import ControlsManager from "./controlesJug.js";
+//import ChatManager from "./ChatManager.js";
 
 export default class TutorialScene extends Phaser.Scene {
     constructor() {
@@ -33,8 +34,10 @@ export default class TutorialScene extends Phaser.Scene {
     }
 
     create() {
-        const controlsManager = new ControlsManager();
-        controlsManager.initializeControls(this);
+        this.controlsManager = new ControlsManager();
+        this.controlsManager.initializeControls(this);
+
+        //this.chatManager = new ChatManager();
         
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
