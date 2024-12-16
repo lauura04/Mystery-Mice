@@ -12,26 +12,30 @@ class ChatManager {
         });
 
         this.messageLog = [];
+        this.lastMessageId = 0;
     }
 
     sendMessage(){
         const message = this.chatInput.value.trim();
         if(message){
-            fetch('http://localhost:8080/api/chat',{
-                method: 'POST',
-                headers: {'Content-type':'application/json'},
-                body: JSON.stringify({message}),
-            })
-            .then(()=>{
-                this.chatInput.value = '';
-                this.fetchMessages();
-            })
-            .catch((error)=>console.error('Error sending messages: ', error));
+            const params = new URLSearchParams();
+            params.append('message', message);
+
+            fetch('http://localhost:8080/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString(),
+        })
+        .then(()=>{
+            this.chatInput.value = '';
+            this.fetchMessages();
+        })
+        .catch((error)=>console.error('Error sending messages: ', error));
         }
     }
 
     fetchMessages(){
-        fetch(`http://localhost:8080/api/chat?since=${this.lastMessageId}`)
+        fetch(`http://localhost:8080/api/chat?since=0`)
         .then((response) => response.json())
         .then((data)=>{
             if(data.messages && data.messages.length > 0){
