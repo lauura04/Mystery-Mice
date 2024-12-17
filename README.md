@@ -125,7 +125,7 @@ Al haber dos personajes jugables cada uno se maneja con unas teclas completament
 7. Pantalla de derrota: pantalla que aparece cuando uno de los ratones muere. 
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
-![DIAGRAMA](https://github.com/user-attachments/assets/dc064ca2-b2ca-4813-9e74-4f65ffe694d8)
+![Diagrama Estados F3](https://github.com/user-attachments/assets/56f79e4d-f124-4dd7-b1c4-94cc12347979)
 > Mapa de estados actualizado (Figura 4)
 
 ## Interfaces 
