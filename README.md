@@ -146,12 +146,10 @@ Se describen los botones a partir de los distintos estados:
 
 2. Menú de pausa: reanudar (volver a la pantalla anterior), continuar, créditos.
 
-![Pausa]!(https://github.com/user-attachments/assets/07feccc2-4f62-407e-85ec-da09abe5c3ad)
-
+![Pausa](https://github.com/user-attachments/assets/a1c43c1d-c819-4782-ad62-e4365405faa3)
 > Boceto del menú de pausa (Figura 7)
 
-![Pausa]!(https://github.com/user-attachments/assets/fcba3fe6-ce6a-475e-9f71-bc8b839e4c6e)
-
+![Pausa](https://github.com/user-attachments/assets/fcba3fe6-ce6a-475e-9f71-bc8b839e4c6e)
 > Interfaz menú de pausa (Figura 8)
 
 3. Menú Créditos: botón para volver al menú de pausa.
