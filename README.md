@@ -1,4 +1,4 @@
-
+![Derrota](https://github.com/user-attachments/assets/f4512db0-146b-4730-8adc-35aedbbfa4bf)
 GDD-MISTERY MICE
 
 # Integrantes
@@ -82,11 +82,13 @@ El juego se va a caracterizar principalmente por el uso coordinado de las habili
 ![Superolfato](https://github.com/user-attachments/assets/0d5abce2-f07a-4cf4-9a55-f7be58ef05ee)
 > Símbolo de la habilidad de olfato (Figura3)
 
-3. Para esquivar las trampas, podrán usar cada habilidad por 3 segundos y para volverlas a usar tendrán que esperar 10 segundos.   
+3. Para esquivar las trampas, podrán usar cada habilidad por 3 segundos y para volverlas a usar tendrán que esperar 10 segundos.
 
-4. Si los jugadores son dañados 3 veces por las trampas vuelven al inicio del nivel.
+4. Cada jugador posee tres vidas de forma independiente reprentado la cantidad de daño que pueden soportar. Si uno de los juegadores es dañado 3 veces por las trampas estos pierden la partida y aparece la pantalla de derrota.
 
-5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su olfativo. 
+5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su olfativo.
+   
+6. Cronómetro: cuando entras en la cripta hay un cronómetro en la parte superior de la pantalla que empeiza a contar la cantidad de tiempo que tardan los jugadores en pasarse el nivel. Esta mecanica no influye en ningún elemento del juego, es un elemento usado solamente para intentar incentivar al jugador pasarse el nivel en el menor tiempo posible buscando el camino más optimo.
 
 ## Controles
 
@@ -118,7 +120,9 @@ Al haber dos personajes jugables cada uno se maneja con unas teclas completament
    
 5. Menú Creditos: pantalla con los integrantes del grupo y su trabajo realizado.
 
-6. Fin del juego: una pantalla que determina que el juego ha finalizado. 
+6. Fin del juego: una pantalla que determina que el juego ha finalizado.
+   
+7. Pantalla de derrota: pantalla a la que te lleva el juego cuando uno de los ratones muere. 
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
 ![DIAGRAMA](https://github.com/user-attachments/assets/dc064ca2-b2ca-4813-9e74-4f65ffe694d8)
@@ -160,6 +164,10 @@ Se describen los botones a partir de los distintos estados:
 ![dentroJuego](https://github.com/user-attachments/assets/36c2cf11-2fd7-4805-95d3-be96d062ad4a)
 > Interfaz dentro del juego (Figura 11)
 
+6. Pantalla de derrota: botón de salir para volver al menú inicial.
+![Derrota](https://github.com/user-attachments/assets/83480657-e6ad-49eb-a06a-ca1d518cabd8)
+>Interfaz pantalla de derrota (Figura 12)
+
 
 # DESARROLLO DEL JUEGO 
 
@@ -176,10 +184,10 @@ Este cazador murió tras la traición de otro habitante y por ello se encuentra 
 En este nivel, los jugadores llegan a la puerta de la cripta, una zona con muy poca iluminación, y se encuentran con la puerta cerrada. Mediante la vista de Sighttail y el olfato de Scentpaw encontrarán un agujero en la cripta para poder entrar en el edificio. 
 
 ![BocCriptaExterior](https://github.com/user-attachments/assets/08d3fcb9-0a7f-4829-bffe-e4cf09eb1143)
-> Boceto del exterior de la cripta (Figura 12)
+> Boceto del exterior de la cripta (Figura 13)
 
 ![EntradaCripta](https://github.com/user-attachments/assets/65e94000-430a-4992-92a1-4e2e64e149c2)
-> Mapa final del exterior de la cripta (Figura 13)
+> Mapa final del exterior de la cripta (Figura 14)
 
 Dentro de la cripta se encuentran con que están en un laberinto lleno de trampas, que en función de qué trampa sea un ratón u otro podrá salvar al otro. 
 
@@ -190,25 +198,25 @@ Dentro de la cripta se encuentran con que están en un laberinto lleno de trampa
 Cuando lleguen al cazador les contará su historia, descubriendo así que fue traicionado por cierto habitante con alto nivel de influencia. Junto al cazador descubren una carta escrita por el padre de estos, en la que se menciona que estaban investigando a la alcaldesa. 
 
 ![Diseño Nivel](https://github.com/user-attachments/assets/e272fca9-3ee9-4948-ac0c-6621c2b2273b)
-> Diseño del nivel (Figura 14)
+> Diseño del nivel (Figura 15)
 
 ![MapaJuego](https://github.com/user-attachments/assets/aac329cb-9769-4f54-b171-2a5ac5ac28ed)
-> Parte del laberinto final durante el gameplay (Figura 15)
+> Parte del laberinto final durante el gameplay (Figura 16)
 
 ## Personajes 
 
 Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail lleva gafas y tiene las orejas grandes. Además, tiene el pelaje algo largo y la cola negra. Por otro lado, Scentpaw tiene un gorro de investigador y las orejas más pequeñas que su hermano. Su pelaje es corto y una cola del mismo color que su pelaje. 
 
 ![Ilustracion_sin_titulo](https://github.com/user-attachments/assets/6c88396c-3123-434f-b46f-3ab91ac08c39)
-> Diseño de Sighttail durante los diálogos (Figura 16)
+> Diseño de Sighttail durante los diálogos (Figura 17)
 
 ![Gorra](https://github.com/user-attachments/assets/ce87aced-3c45-4005-838d-2bcdff90a644)
-> Diseño de Scentpaw durante los diálogos (Figura 17)
+> Diseño de Scentpaw durante los diálogos (Figura 18)
 
 El cazador de la cripta: Este ratón es algo robusto. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva un hacha. 
 
 ![fanta](https://github.com/user-attachments/assets/e974dc56-1a41-4a98-96f7-7311c4c5d7a9)
-> Diseño del personaje durante los diálogos (Figura 18)
+> Diseño del personaje durante los diálogos (Figura 19)
 
 Alcaldesa: Es nombrada en diversas ocasiones a lo largo del juego sin embargo, no aparece físicamente en él.
 
@@ -221,23 +229,25 @@ Los ítems presentes en el juego son claves para el desarrollo clave del juego.
 1. Flechas: una de las trampas que incluye el juego. Son lanzadas y dañan al jugador si lo dañan.
 
 ![Flechas_F3](https://github.com/user-attachments/assets/05dc7d7b-5431-4788-be02-8a8376af8fd2)
-> Sprite de las flechas (Figura 19)
+> Sprite de las flechas (Figura 20)
 
 2. Neblina tóxica: la otra trampa. Para que dañe al jugador, este tiene que estar 7 segundos en contacto con la neblina.
 
 ![Gas](https://github.com/user-attachments/assets/4b0be0ed-f8f6-4c71-aba9-c1e52146607f)
-> Sprite de la neblura tóxica (Figura 20)
+> Sprite de la neblura tóxica (Figura 21)
 
 3. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó.  
 
 ![CARTA](https://github.com/user-attachments/assets/4816c66c-7384-490e-ba75-b04750bf7796)
-> Sprite carta familiar (Figura 21)
+> Sprite carta familiar (Figura 22)
 
 ## Sonido
 
 El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensión. Los sonidos y la música sirven como herramientas para guiar al jugador y generar suspense.
-La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego.
-Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
+
+La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego. Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
+
+El juego tambien posee sonidos cuando los personajes reciben daño y mueren, además del sonido del "metal pipe", añadadido para cumplir la insignia "You've been Metal Pipe'd", puediendose escuchar en la pantalla de controles si se pulsa la barra de metal. 
 
 ## Integrantes y sus contribuciones
 
