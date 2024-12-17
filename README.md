@@ -161,11 +161,11 @@ Se describen los botones a partir de los distintos estados:
 > Interfaz menú de controles (Figura 10)
 
 5. Dentro del juego: botón de pausa arriba a la izquierda.
-![dentroJuego]![image](https://github.com/user-attachments/assets/2bec8536-7863-40c3-93aa-7cb8d41e3f24)
+![dentroJuego](https://github.com/user-attachments/assets/2bec8536-7863-40c3-93aa-7cb8d41e3f24)
 > Interfaz dentro del juego (Figura 11)
 
 6. Pantalla de derrota: botón de salir para volver al menú inicial.
-![Derrota]![image](https://github.com/user-attachments/assets/e3207e45-6568-4664-a3ea-5a5832ad971c)
+![Derrota](https://github.com/user-attachments/assets/e3207e45-6568-4664-a3ea-5a5832ad971c)
 >Interfaz pantalla de derrota (Figura 12)
 
 
