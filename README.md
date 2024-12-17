@@ -88,7 +88,7 @@ El juego se va a caracterizar principalmente por el uso coordinado de las habili
 
 5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su olfativo.
    
-6. Cronómetro: cuando entras en la cripta hay un cronómetro en la parte superior de la pantalla que empeiza a contar la cantidad de tiempo que tardan los jugadores en pasarse el nivel. Esta mecanica no influye en ningún elemento del juego, es un elemento usado solamente para intentar incentivar al jugador pasarse el nivel en el menor tiempo posible buscando el camino más optimo.
+6. Cronómetro: cuando entras en la cripta hay un cronómetro en la parte superior de la pantalla que empieza a contar la cantidad de tiempo que tardan los jugadores en pasarse el nivel. Esta mecánica no influye en ningún elemento del juego, es un elemento usado solamente para intentar incentivar al jugador pasarse el nivel en el menor tiempo posible buscando el camino más óptimo.
 
 ## Controles
 
@@ -122,7 +122,7 @@ Al haber dos personajes jugables cada uno se maneja con unas teclas completament
 
 6. Fin del juego: una pantalla que determina que el juego ha finalizado.
    
-7. Pantalla de derrota: pantalla a la que te lleva el juego cuando uno de los ratones muere. 
+7. Pantalla de derrota: pantalla que aparece cuando uno de los ratones muere. 
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
 ![DIAGRAMA](https://github.com/user-attachments/assets/dc064ca2-b2ca-4813-9e74-4f65ffe694d8)
@@ -144,7 +144,7 @@ Se describen los botones a partir de los distintos estados:
 ![MenuInicio](https://github.com/user-attachments/assets/f2144c8d-5edb-4009-b24d-237aeae38b17)
 > Interfaz menú de inicio (Figura 6)
 
-2. Menú de pausa: reanudar (volver a la pantalla anterior), continuar, créditos.
+2. Menú de pausa: reanudar (volver a la pantalla anterior), volver al menú y créditos.
 
 ![Pausa](https://github.com/user-attachments/assets/a1c43c1d-c819-4782-ad62-e4365405faa3)
 > Boceto del menú de pausa (Figura 7)
@@ -164,7 +164,7 @@ Se describen los botones a partir de los distintos estados:
 ![dentroJuego](https://github.com/user-attachments/assets/2bec8536-7863-40c3-93aa-7cb8d41e3f24)
 > Interfaz dentro del juego (Figura 11)
 
-6. Pantalla de derrota: botón de salir para volver al menú inicial.
+6. Pantalla de derrota: botón para volver al menú inicial.
 ![Derrota](https://github.com/user-attachments/assets/e3207e45-6568-4664-a3ea-5a5832ad971c)
 >Interfaz pantalla de derrota (Figura 12)
 
@@ -247,42 +247,41 @@ El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensió
 
 La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego. Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
 
-El juego tambien posee sonidos cuando los personajes reciben daño y mueren, además del sonido del "metal pipe", añadadido para cumplir la insignia "You've been Metal Pipe'd", puediendose escuchar en la pantalla de controles si se pulsa la barra de metal. 
+El juego tambien posee sonidos cuando los personajes reciben daño y mueren, además del sonido del "metal pipe", añadadido para cumplir la insignia "You've been Metal Pipe'd", puediendose escuchar en la pantalla de derrota si se pulsa la barra de metal. 
 
 ## Insignias
 
 ### "Quien no llora no mama"
 "El juego debe implementar algún tipo de ayuda para el jugador a la que pueda acceder en partida. La ayuda puede ser, desde ver el tutorial del juego o ver los controles, hasta implementar power-ups o pistas sobre como avanzar. En resumen la ayuda puede o no, impactar al gameplay".
 
-Esta insignia se cumple al tener una pantalla de controles donde se muestran los controles de ambos personajes y la tecla para activar sus habilidades.
+Esta insignia se cumple al tener una pantalla donde se muestran los controles de ambos personajes y la tecla para activar sus habilidades como ayuda para el jugador.
 
 ### “You´ve been metal piped”
 "Para ganar esta insignia, se debe incluir elementos relacionados con este meme, ya sea como objeto del mundo, como parte de la interfaz de juego, como un elemento en alguno de los menus, o como efecto de sonido (debe ser el sonido del meme, no otro). Si no se han incluido todos los elementos mencionados anteriormente, solo ganaran la insignia aquella persona que haya implementado dicho elemento. Una misma persona no puede ganar la insignia dos o mas veces. Si se implementan todos los elementos mencionados, todo el equipo gana la insignia, aunque hace falta que al menos 2 personas del grupo hayan ganado la insigna individualmente".
 
-Por el momento, para esta insignia solo se ha implementado una vez el "metal pipe" situandolo en el menú de pausa con un simbolo del mismo que si se le pulsa suena el sonido. 
-
+Se cumple ya que se ha incluido el sonido y la imagen del meme. Después de hablarlo con el grupo creador de la insignia, este nos aseguró que incluyendo tanto el sonido como la imagen una sola vez se garantizaría la insignia para todo el grupo.
 
 ### “¿La de dibujar te la sabes?”
 "El videojuego no debe tener ningún elemento creado con Inteligencia Artificial".
 
-El proyecto realizado no contiene ningún tipo de elemento creado por inteligencia artificial por lo que cumple con dicha insignia.
+El proyecto realizado no contiene ningún tipo de elemento creado por inteligencia artificial por lo que cumple con dicha insignia ya que las imagenes se han creado personalmente para la entrega y todos los orígenes de los sonidos están referenciados en el documento de texto.
 ![IMG_1293](https://github.com/user-attachments/assets/4c522609-3e06-44bd-ae7d-c6522d852ba9)
 >Prueba de la creación de elementos propios (Figura 23)
 
 ### “Eso me suena”
 "El juego debe tener una referencia a un videojuego de nuestra infancia. Esta puede ser acústica, visual, gráfica, de un personaje, un texto, ¡lo que sea! La idea es que seamos capaces de recordar algo de otros videojuegos de cuando éramos pequeños y nos venga la nostalgia de aquella buena época".  
 
-El cumplimiento de esta insignia se observa cuando alguno de los personajes reciben daño suena el sonido de daño del Minecraft.
+El cumplimiento de esta insignia se observa cuando alguno de los personajes recibe daño se escucha igual que lo haría en Minecraft.
 
 ### “No damos a Vasco”
 "Para conseguir esta insignia, el juego debe de contener 1 o más palabras en euskera, no importa la palabra ni el contexto en el que aparezca, solo importa el idioma".
 
-Para implementar esta insignia se ha decidido cambiar el texto del periodico del inicio del juego.
+Para implementar esta insignia se ha decidido cambiar el texto del periodico del inicio del juego, sustituyendo "Luna de Roquefort" por "Gazta Ilargia" que se podría traducir como "Luna de Queso".
 
 ### “Maestro del pixel”
 "La insignia se dará a los juegos con una temática artística pixel art".
 
-El proyecto tiene un diseño pixel art durante el gameplay del mismo por lo que cumplimos con este requisito.
+El juego mezcla la estética pixel art in-game y mantiene una estetica 2D convencional para las interfaces y closeups de los personajes, por lo que estaría cumpliendo con el requisito.
 
 ## Integrantes y sus contribuciones
 
@@ -291,21 +290,31 @@ El proyecto tiene un diseño pixel art durante el gameplay del mismo por lo que 
 1. Cuando se empezó la primera fase se encargó de buscar un estilo visual para el juego además de la persceptiva del gameplay para adecuarse a la visión del equipo.
 
 2. Durante la segunda fase se ha encargado de diseñar y crear los sprite sheet de los personajes, además de los poderes (las huellas y el humo que se ve) y el periodico. Además de esto ha programado código de gestión de pausa y del fondo.
+  
+3. Durante la tercera fase ha creado assets nuevos, implementado las insignias desarrolladas para esta fase y cierta parte de la programación.
 
 ### David del Castillo Enríquez
 
 1. Cuando se empezó la primera fase se encargó de buscar un estilo visual para el juego además de la persceptiva del gameplay para adecuarse a la visión del equipo.
 
 2. En esta segunda fase se ha encargado de realizar los tilemaps de los dos escenarios principales, los sprites de las trampas, ilustrar los menús de las interfaces, crear los logos de las habilidades, además de programar las interfaces de créditos y controles.
+   
+3. Durante la tercera fase se ha encargado de implementar la gestión correcta de las vidas, incluir la pantalla de derrota y crear el camino alternativo del nivel.
 
 ### Daniel Duque Rodríguez
 
 1. En la primera parte se encargó de buscar referencias musicales para ambientar el juego en la atmosfera adecuada.
 
 2. Durante la segunda fase se ha encargado de  la búsqueda de sonidos y música, guión y realización de algunos pequeños assets sueltos, así como de ciertas partes de la programación.
+   
+3.  Durante la tercera fase se ha encargado de  la búsqueda de sonidos y música y ciertas partes de la programación
 
 ### Laura Facenda Estrella
 
 1. Durante la primera parte todo el diseño del juego, los niveles, la historia las mecánicas, etc.
   
 2. En la segunda fase ha diseño de tipografía propia así como la mayor parte de programación.
+   
+3. En la tercera fase ha creado el servidor, implementado el chat, como gran parte de la programación.
+
+A falta de contenido por añadir se podrían modificar los roles.
