@@ -149,7 +149,8 @@ Se describen los botones a partir de los distintos estados:
 ![Pausa](https://github.com/user-attachments/assets/a1c43c1d-c819-4782-ad62-e4365405faa3)
 > Boceto del menú de pausa (Figura 7)
 
-![Pausa](https://github.com/user-attachments/assets/b36e5928-5be0-4ff6-afac-685fab5c488b)
+![Pausa]!(https://github.com/user-attachments/assets/fcba3fe6-ce6a-475e-9f71-bc8b839e4c6e)
+
 > Interfaz menú de pausa (Figura 8)
 
 3. Menú Créditos: botón para volver al menú de pausa.
@@ -161,11 +162,11 @@ Se describen los botones a partir de los distintos estados:
 > Interfaz menú de controles (Figura 10)
 
 5. Dentro del juego: botón de pausa arriba a la izquierda.
-![dentroJuego](https://github.com/user-attachments/assets/36c2cf11-2fd7-4805-95d3-be96d062ad4a)
+![dentroJuego]![image](https://github.com/user-attachments/assets/2bec8536-7863-40c3-93aa-7cb8d41e3f24)
 > Interfaz dentro del juego (Figura 11)
 
 6. Pantalla de derrota: botón de salir para volver al menú inicial.
-![Derrota](https://github.com/user-attachments/assets/83480657-e6ad-49eb-a06a-ca1d518cabd8)
+![Derrota]![image](https://github.com/user-attachments/assets/e3207e45-6568-4664-a3ea-5a5832ad971c)
 >Interfaz pantalla de derrota (Figura 12)
 
 
