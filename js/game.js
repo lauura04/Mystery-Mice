@@ -29,7 +29,7 @@ export default class GameScene extends Phaser.Scene {
 
         //Cargamos los audios
         this.load.audio("Derrota", 'assets/Derrota.mp3');
-        this.load.audio("Daño", 'assets/Daño.mp3');
+        this.load.audio("Daño", 'assets/minecraft_hit.mp3');
 
         //Cargamos las imagenes de los distintos elementos
         this.load.image('pause', 'assets/Boton_Pausa.png');
@@ -472,9 +472,10 @@ export default class GameScene extends Phaser.Scene {
 
         //Si se quedan sin vidas se reinicia la escena
         if (this.vidasP1 < 0 || this.vidasP2<0) {
-
+            
             this.sound.play("Derrota");
 
+            //Cambiamos de escena
             this.scene.stop('GameScene');
             this.scene.start('LoseScene');
         }
@@ -530,6 +531,7 @@ export default class GameScene extends Phaser.Scene {
             
             this.sound.play("Derrota");
 
+            //Cambiamos de escena
             this.scene.stop('GameScene');
             this.scene.start('LoseScene');
         }

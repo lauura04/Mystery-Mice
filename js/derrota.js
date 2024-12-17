@@ -6,7 +6,7 @@ class LoseScene extends Phaser.Scene{
     preload(){
         //Cargamos las imagenes que componen el fondo
         this.load.image("fondoD", 'assets/Pantallla_Derrota.png');
-        this.load.image("botonS", 'assets/Salir.png');
+        this.load.image("botonS", 'assets/VolverMenu.png');
     }
 
     create(){
