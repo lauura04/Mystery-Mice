@@ -473,7 +473,7 @@ export default class GameScene extends Phaser.Scene {
         //Si se quedan sin vidas se reinicia la escena
         if (this.vidasP1 < 0 || this.vidasP2<0) {
             
-            this.sound.play("Derrota");
+           this.sound.play("Derrota");
 
             //Cambiamos de escena
             this.scene.stop('GameScene');
@@ -529,7 +529,7 @@ export default class GameScene extends Phaser.Scene {
         //Si se quedan sin vidas se reinicia la escena
         if (this.vidasP1 < 0 || this.vidasP2<0) {
             
-            this.sound.play("Derrota");
+           this.sound.play("Derrota");
 
             //Cambiamos de escena
             this.scene.stop('GameScene');

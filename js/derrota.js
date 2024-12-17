@@ -31,7 +31,7 @@ class LoseScene extends Phaser.Scene{
         });
 
         //Botón del metal pipe
-        const pipe = this.add.image(1 * centerX, 1.3 * centerY, "Boton_pipe").setInteractive()
+        const pipe = this.add.image(1 * centerX, 1.8 * centerY, "Boton_pipe").setInteractive().setScale(0.3)
             .on('pointerdown', () => {
                 this.sound.play("metalpipe");
             });
