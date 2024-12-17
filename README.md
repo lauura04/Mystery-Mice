@@ -1,4 +1,4 @@
-![IMG_1293](https://github.com/user-attachments/assets/7573842f-0363-4449-b604-6191ad2cabb4)
+
 GDD-MISTERY MICE
 
 # Integrantes
@@ -261,8 +261,6 @@ Esta insignia se cumple al tener una pantalla de controles donde se muestran los
 
 Por el momento, para esta insignia solo se ha implementado una vez el "metal pipe" situandolo en el menú de pausa con un simbolo del mismo que si se le pulsa suena el sonido. 
 
-### “Maestro del chill”
-tayaysy
 
 ### “¿La de dibujar te la sabes?”
 "El videojuego no debe tener ningún elemento creado con Inteligencia Artificial".
@@ -274,7 +272,7 @@ El proyecto realizado no contiene ningún tipo de elemento creado por inteligenc
 ### “Eso me suena”
 "El juego debe tener una referencia a un videojuego de nuestra infancia. Esta puede ser acústica, visual, gráfica, de un personaje, un texto, ¡lo que sea! La idea es que seamos capaces de recordar algo de otros videojuegos de cuando éramos pequeños y nos venga la nostalgia de aquella buena época".  
 
-El cumplimiento de esta insignia se observa cuando alguno de los personajes reciben daño suena el sonido de daño de los aldeanos del Minecraft.
+El cumplimiento de esta insignia se observa cuando alguno de los personajes reciben daño suena el sonido de daño del Minecraft.
 
 ### “No damos a Vasco”
 "Para conseguir esta insignia, el juego debe de contener 1 o más palabras en euskera, no importa la palabra ni el contexto en el que aparezca, solo importa el idioma".
@@ -282,7 +280,9 @@ El cumplimiento de esta insignia se observa cuando alguno de los personajes reci
 Para implementar esta insignia se ha decidido cambiar el texto del periodico del inicio del juego.
 
 ### “Maestro del pixel”
-tsytysytstsysy
+"La insignia se dará a los juegos con una temática artística pixel art".
+
+El proyecto tiene un diseño pixel art durante el gameplay del mismo por lo que cumplimos con este requisito.
 
 ## Integrantes y sus contribuciones
 
