@@ -1,4 +1,4 @@
-![Derrota](https://github.com/user-attachments/assets/f4512db0-146b-4730-8adc-35aedbbfa4bf)
+
 GDD-MISTERY MICE
 
 # Integrantes
@@ -248,6 +248,8 @@ El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensió
 La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego. Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
 
 El juego tambien posee sonidos cuando los personajes reciben daño y mueren, además del sonido del "metal pipe", añadadido para cumplir la insignia "You've been Metal Pipe'd", puediendose escuchar en la pantalla de controles si se pulsa la barra de metal. 
+
+## Insignias
 
 ## Integrantes y sus contribuciones
 
