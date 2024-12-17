@@ -21,7 +21,7 @@ class ChatManager {
             const params = new URLSearchParams();
             params.append('message', message);
 
-            fetch('http://localhost:8080/api/chat', {
+            fetch("/api/chat", {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: params.toString(),
@@ -35,7 +35,7 @@ class ChatManager {
     }
 
     fetchMessages(){
-        fetch(`http://localhost:8080/api/chat?since=0`)
+        fetch("/api/chat?since=0")
         .then((response) => response.json())
         .then((data)=>{
             if(data.messages && data.messages.length > 0){
