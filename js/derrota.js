@@ -18,7 +18,7 @@ class LoseScene extends Phaser.Scene{
         const background_lose = this.add.image(centerX,centerY, "fondoD");
 
         //Texto derrota
-        const LoseText = this.add.text(0.7*centerX, 0.3*centerY, 'El enemigo se ha salido con la suya',{
+        const LoseText = this.add.text(0.7*centerX, 0.3*centerY, 'La alcaldesa se ha salido con la suya',{
             font: '70px mousy',
             color: '#e4be9a',
             align: 'center',
