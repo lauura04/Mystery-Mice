@@ -1,66 +1,51 @@
 class ChatManager {
-    constructor(){
-        this.chatContainer = document.getElementById('chat-container');
-        this.chatMessages = document.getElementById('chat-messages');
-        this.chatInput = document.getElementById('chat-input');
-        this.chatSend = document.getElementById('chat-send');
+    constructor() {
+        this.chatContainer = $('#chat-container'); // jQuery selector
+        this.chatMessages = $('#chat-messages');
+        this.chatInput = $('#chat-input');
+        this.chatSend = $('#chat-send');
 
-        //listeners
-        this.chatSend.addEventListener('click', ()=>this.sendMessage());
-        this.chatInput.addEventListener('keypress', (e)=>{
-            if(e.key === 'Enter') this.sendMessage();
+        this.lastMessageId = 0; // Timestamp de último mensaje
+
+        // Listeners para enviar mensajes
+        this.chatSend.on('click', () => this.sendMessage());
+        this.chatInput.on('keypress', (e) => {
+            if (e.key === 'Enter') this.sendMessage();
         });
 
-        this.messageLog = [];
-        this.lastMessageId = 0;
+        this.startFetchingMessages(); // Iniciar actualización periódica
     }
 
-    sendMessage(){
-        const message = this.chatInput.value.trim();
-        if(message){
-            const params = new URLSearchParams();
-            params.append('message', message);
-
-            fetch("/api/chat", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString(),
-        })
-        .then(()=>{
-            this.chatInput.value = '';
-            this.fetchMessages();
-        })
-        .catch((error)=>console.error('Error sending messages: ', error));
+    sendMessage() {
+        const message = this.chatInput.val().trim(); // Obtener mensaje del input
+        if (message) {
+            $.post("/api/chat", { message: message }, () => {
+                this.chatInput.val(''); // Limpiar input
+                this.fetchMessages(); // Actualizar chat
+            }).fail((error) => {
+                console.error('Error al enviar el mensaje:', error);
+            });
         }
     }
 
-    fetchMessages(){
-        fetch("/api/chat?since=0")
-        .then((response) => response.json())
-        .then((data)=>{
-            if(data.messages && data.messages.length > 0){
-                this.messageLog.push(...data.messages);
-                this.lastMessageId = data.timestamp;
-                this.updateChatWindow();
+    fetchMessages() {
+        $.get("/api/chat", { since: this.lastMessageId }, (data) => {
+            if (data.messages && data.messages.length > 0) {
+                data.messages.forEach((msg) => {
+                    this.chatMessages.append(`<div>${msg}</div>`); // Añadir mensajes
+                });
+
+                // Scroll automático
+                this.chatMessages.scrollTop(this.chatMessages.prop('scrollHeight'));
+                this.lastMessageId = data.timestamp; // Actualizar último timestamp
             }
-        })
-        .catch((error)=> console.error('Error al obetener los mensajes: ', error));
-    }
-
-    updateChatWindow(){
-        this.chatMessages.innerHTML='';
-        this.messageLog.forEach((msg)=>{
-            const messageDiv = document.createElement('div');
-            messageDiv.textContent = msg;
-            this.chatMessages.appendChild(messageDiv);
+        }).fail((error) => {
+            console.error('Error al obtener los mensajes:', error);
         });
-
-        this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
     }
 
-    startFetchingMessages(){
-        //actualiza chat cada 2 segundos
-        setInterval(()=>this.fetchMessages(), 2000);
+    startFetchingMessages() {
+        setInterval(() => this.fetchMessages(), 2000); // Llama a fetchMessages cada 2 segundos
     }
 }
 

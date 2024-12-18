@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.ChatResponse;
-import com.example.ChatMessage;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -10,10 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/api/chat")
-@CrossOrigin(origins = "http://127.0.0.1:5500") // Permite solicitudes desde este origen
+@CrossOrigin(origins = "http://127.0.0.1:5500") // Permite solicitudes desde tu frontend
 public class ChatController {
 
-   
     private final List<ChatMessage> messages = new ArrayList<>();
     private final AtomicInteger lastId = new AtomicInteger(0);
 
@@ -21,7 +18,7 @@ public class ChatController {
     public ChatResponse getMessages(@RequestParam(defaultValue = "0") int since) {
         List<String> newMessages = new ArrayList<>();
         int latestId = since;
-    
+
         synchronized (messages) {
             for (ChatMessage msg : messages) {
                 if (msg.getId() > since) {
@@ -30,7 +27,7 @@ public class ChatController {
                 }
             }
         }
-    
+
         return new ChatResponse(newMessages, latestId);
     }
 
