@@ -1,4 +1,4 @@
-package com.example;
+package com.example.demo;
 
 public record ChatMessage(int id, String text) {
 
@@ -9,6 +9,5 @@ public record ChatMessage(int id, String text) {
     public String getText(){
         return text;
     }
+
 }
-
-
