@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <link rel="stylesheet" href="mystile.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.86.0/phaser.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="module" src="js/game.js"></script>
-    <script src="js/intro.js"></script>    
+    <script src="js/intro.js"></script>
     <script src="js/end.js"></script>
     <script src="js/controls.js"></script>
     <script src="js/preview.js"></script>
@@ -20,18 +21,23 @@
     <meta charset="utf-8" />
     <title>Mystery Mice</title>
 </head>
+
 <body>
     <!-- Contenedor para el canvas -->
     <div id="game-canvas"></div>
-
-    <div id="chat-messages"></div>
-    <input type="text" id="chat-input" placeholder="Escribe aquí tu mensaje"/>
-    <button id="chat-send">Enviar</button>
+    <div id="chat-container">
+        <div id="users-count">Usuarios conectados: 0</div>
+        <div id="chat-messages"></div>
+        <input type="text" id="chat-input" placeholder="Escribe aquí tu mensaje" />
+        <button id="chat-send">Enviar</button>
+    </div>
 
     <script type="module">
         // Configuración del juego
         import GameScene from './js/game.js';
         import TutorialScene from './js/tutorial.js';
+        import ChatManager from './js/ChatManager.js';
+        
         var config = {
             type: Phaser.AUTO,
             scale: {
@@ -48,9 +54,10 @@
                     debug: false,
                 },
             },
-            scene: [IntroScene, GameScene, ControlScene, PreviewScene,  TutorialScene, PauseScene ,CreditScene, DialogueScene, EndScene, LoseScene],
+            scene: [IntroScene, GameScene, ControlScene, PreviewScene, TutorialScene, PauseScene, CreditScene, DialogueScene, EndScene, LoseScene],
         };
         const game = new Phaser.Game(config);
     </script>
 </body>
+
 </html>

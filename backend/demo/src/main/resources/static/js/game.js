@@ -1,5 +1,5 @@
 import ControlsManager from "./controlesJug.js";
-import ChatManager from "./ChatManager.js";
+import ChatManager from './ChatManager.js';
 
 export default class GameScene extends Phaser.Scene {
     constructor() {
