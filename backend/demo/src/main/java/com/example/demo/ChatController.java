@@ -1,9 +1,12 @@
 package com.example.demo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/api/chat")
@@ -12,7 +15,8 @@ public class ChatController {
 
     private final List<ChatMessage> messages = new ArrayList<>();
     private final AtomicInteger lastId = new AtomicInteger(0);
-    private final AtomicInteger numClient = new AtomicInteger(0);
+    private final AtomicInteger userIdCounter = new AtomicInteger(0);
+    private final ConcurrentHashMap<Integer, Long> activeUsers = new ConcurrentHashMap<>();
 
     @GetMapping
     public ChatResponse getMessages(@RequestParam(defaultValue = "0") int since) {
@@ -32,7 +36,7 @@ public class ChatController {
 
     @GetMapping("/activeClients")
     public int getActiveClients() {
-        return numClient.get();
+        return activeUsers.size();
     }
 
     @PostMapping
@@ -47,12 +51,33 @@ public class ChatController {
 
     @PostMapping("/connect")
     public int connectClient() {
-        return numClient.incrementAndGet();
+        int userId = userIdCounter.incrementAndGet();
+        activeUsers.put(userId, System.currentTimeMillis());
+        return userId;
     }
 
     @PostMapping("/disconnect")
-    public int disconnectClient() {
-        return numClient.getAndDecrement();
+    public int disconnectClient(@RequestParam int userId) {
+        activeUsers.remove(userId);
+        return activeUsers.size();
+    }
+
+    @PostMapping("/heartbeat")
+    public void heartbeat(@RequestParam int userId) {
+        if(activeUsers.containsKey(userId)){
+            activeUsers.put(userId, System.currentTimeMillis());
+        }
+    }
+    
+    @Scheduled(fixedRate = 2000) // Cada 2 segundos
+    public void removeInactiveUsers() {
+        long currentTime = System.currentTimeMillis();
+        activeUsers.forEach((userId, lastActive) -> {
+            if (currentTime - lastActive > 10000) { // Más de 10 segundos inactivo
+                activeUsers.remove(userId);
+                System.out.println("Usuario " + userId + " desconectado por inactividad");
+            }
+        });
     }
 
     public static class ChatResponse {

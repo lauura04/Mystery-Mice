@@ -7,7 +7,8 @@ export default class ChatManager {
         this.userCount = $('#users-count');
 
         this.lastMessageId = 0;
-
+        this.userId = null;
+        
         // Listeners
         this.chatSend.on('click', () => this.sendMessage());
         this.chatInput.on('keypress', (e) => {
@@ -54,16 +55,38 @@ export default class ChatManager {
     }
 
     connectUser() {
-        $.post("/api/chat/connect", () => {
-            console.log('Usuario conectado');
-        }).fail((error) => {
-            console.error('Error al conectar usuario:', error);
+       $.post("/api/chat/connect")
+        .done((data)=>{
+            this.userId = data; // guardar userId asignado por servidor
+            console.log(`Usuario conectado con ID: ${this.userId}`);
+            this.startHeartbeat(); // iniciar heartbeat
+        })
+        .fail((error)=>{
+            console.error('Error al conectar usuario: ', error);
         });
     }
 
     disconnectUser() {
-        $.post("/api/chat/disconnect")
-            .fail((error) => console.error('Error al desconectar usuario:', error));
+        if(this.userId){
+            $.post("/api/chat/disconnect", {userId: this.userId})
+                .done((updatedCount)=>{
+                    this.userCount.text(`Usuarios conectados: ${updatedCount}`);
+                })
+                .fail((error)=> console.error('Error al desconectar el usuario: ', error));
+        }
+    }
+
+    startHeartbeat(){
+        setInterval(()=>{
+            this.sendHeartbeat();
+        }, 3000); // cada 3 segundos
+    }
+
+    sendHeartbeat(){
+        if(this.userId){
+            $.post("/api/char/heartbeat", {userId: this.userId})
+            .fail((error)=>console.error('Error en el heartbeat:', error));
+        }
     }
 
     startFetchingMessages() {
@@ -77,5 +100,9 @@ export default class ChatManager {
 
 $(document).ready(() => {
     const chatManager = new ChatManager();
+
+    $(window).on('beforeunload', ()=>{
+        chatManager.disconnectUser();
+    });
 });
 
