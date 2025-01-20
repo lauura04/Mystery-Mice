@@ -28,13 +28,11 @@ Mystery Mice es un juego de investigación que se centra en la cooperación entr
 
 2. Historia intrigante: Los jugadores están inmersos en un misterio paranormal que ocurre en VillaCheddar, donde los fantasmas están causando caos en el pueblo. Al avanzar en la trama, descubrirán que estos sucesos paranormales esconden una verdad más oscura, y deben desenmascarar qué está ocurriendo realmente. 
 
-3. Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán pensamiento estratégico y mucha coordinación entre los dos jugadores, donde los datos sensoriales (vista/olfato) se combinarán para solucionar el misterio. 
-
-4. Progresión de niveles: El juego está dividido en diferentes niveles, representados por casas misteriosas que los jugadores deben investigar. Cada nivel tiene una dificultad creciente, en la que los fantasmas se vuelven más difíciles de rastrear e identificar, y los puzles se tornan más complejos. Con cada casa investigada, la historia avanza, revelando más detalles sobre la realidad oculta detrás de los sucesos paranormales. 
+3. Puzles: Para avanzar en el juego, los jugadores deberán resolver puzles cooperativos que utilizan las habilidades únicas de cada ratón. Algunos puzles requerirán pensamiento estratégico y mucha coordinación entre los dos jugadores, donde vista y olfato se combinarán para solucionar el misterio. 
 
 ## Género 
 
-Misterio/Suspense Paranormal: Combina investigación, resolución de acertijos y exploración con elementos de suspense, mientras el jugador intenta descubrir el tipo de fantasma que habita en cada casa. 
+Misterio/Suspense Paranormal: Combina investigación, resolución de acertijos y exploración con elementos de suspense, mientras el jugador intenta descubrir el misterio que se esconde tras esos sucesos fantasmagóricos. 
 
 ## Plataforma 
 
@@ -52,8 +50,8 @@ Como se ha mencionado anteriormente cada ratón tiene una habilidad única permi
 
 El juego estará formado por Sprites 2D, tanto para el escenario como para los distintos personajes, inspirados en el estilo artístico representado en la saga “Profesor Layton” y conformado por una paleta de colores otoñales. Los personajes contarán con unas animaciones fluidas capaces de transmitir el carácter y personalidad de cada uno de ellos.  
 
-![LAITOOOOON](https://github.com/user-attachments/assets/717658d6-f4bf-47e5-a837-b48921d63f21)
-> El profesor Layton y la villa misteriosa (2007)
+![LAITOOOOON](https://github.com/user-attachments/assets/ffe1a54e-d339-4673-a7f4-8838b9febb7b)
+> El profesor Layton y la villa misteriosa (2007) (Figura1)
  
 
 # DISEÑO DEL JUEGO 
@@ -66,46 +64,69 @@ Los miembros de la familia Arat siempre han sido conocidos por tener grandes hab
 
 Debido a dicha interrupción, no pudieron alcanzar su máximo auge, haciendo así que Sighttail fuera el único en la familia capaz de poder ver en la oscuridad y que Scentpaw sea quien pueda detectar mediante su olfato el rastro que van dejando los fantasmas, así como averiguar cuánto tiempo hace que los fantasmas se alejaron de allí.  
 
-Con cada fantasma que descubran les irá dando pistas a un misterio mayor, el origen de dichos entes, ya que VillaCheddar oculta un gran secreto y es que los fantasmas no son simples ratas en pena que vagan sin llegar al inframundo, sino que son antiguos habitantes del pueblo, quienes murieron en extrañas condiciones. En el proceso de resolver dicho misterio se encontrarán también con los espíritus de sus padres, quienes les contarán la verdad acerca del pueblo y el motivo oculto tras la muerte de ambos.  
+VillaCheddar oculta un gran secreto y es que los fantasmas no son simples ratas en pena que vagan sin llegar al inframundo, sino que son antiguos habitantes del pueblo, quienes murieron en extrañas condiciones. En el proceso de resolver dicho misterio se encontrarán también con una carta de sus difuntos padres, quienes les contarán la verdad acerca del pueblo y el motivo oculto tras la muerte de ambos.  
 
-Al final del juego descubrirán que la alcaldesa, quien creían que estaba interesada en acabar con los fantasmas, realmente quería acabar con ellos mandándolos contra estos ya que es la verdadera causante de todo, se trata de un espíritu ancestral completamente enfadado con el pueblo por haber olvidado las viejas costumbres de culto a su religión.  
+Al final del juego descubrirán que la alcaldesa, quien creían que estaba interesada en acabar con los fantasmas, es la verdadera causante de todo, pues con el control de los fantasmas eliminaba a cualquier rival que pudiera quitarle su puesto de poder.  
 
 ## Mecánicas 
 
-El juego se va a caracterizar principalmente por el uso coordinado de las habilidades de los personajes, así como una combinación con los ítems existentes en el juego. 
+El juego se va a caracterizar principalmente por el uso coordinado de las habilidades de los personajes,así como una combinación con los ítems existentes en el juego. 
  
-1. Visión + lupa: gracias a la lupa, Sighttail puede analizar huellas, rastros o marcas de fantasmas, permitiendo así distinguir de qué tipo de fantasma se trata en función del tipo de huella. 
+1. Visión: Sighttail puede analizar huellas, rastros o marcas de fantasmas, y ver en qué lugar hay trampas con flechas. 
 
-2. Visión nocturna: es capaz de ver en sitios donde la luz se encuentra ausente. 
+![Supervisión](https://github.com/user-attachments/assets/a62ab7d2-9434-4feb-b207-15e05b0d6cde)
+> Símbolo de la habilidad de visión (Figura2)
 
-3. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail no es capaz de percibir ya que son solo aromas presentes en el aire. 
+2. Olfato: gracias al olfato, Scentpaw será capaz de seguir rastros que Sighttail no es capaz de percibir ya que son solo aromas presentes en el aire, en este caso, la neblina tóxica, la cual para que le haga daño a los jugadores, deberán estar 7 segundos seguidos en ella. 
 
-4. Los ratones podrán moverse por los escenarios libremente por las casas mediante el teclado y habrá una tecla para activar las habilidades, ya que no podrán tenerlas activadas de forma continua y solo pueden estar ambas activadas a la vez durante 5 segundos.  
+![Superolfato](https://github.com/user-attachments/assets/0d5abce2-f07a-4cf4-9a55-f7be58ef05ee)
+> Símbolo de la habilidad de olfato (Figura3)
 
-5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail en una habitación nocturna tiene que usar su habilidad para poder guiar a Scentpaw a través de un laberinto en el que para ver a dónde tiene que ir siguiendo un rastro olfativo. 
+3. Para esquivar las trampas, podrán usar cada habilidad por 3 segundos y para volverlas a usar tendrán que esperar 10 segundos.
+
+4. Cada jugador posee tres vidas de forma independiente reprentado la cantidad de daño que pueden soportar. Si uno de los juegadores es dañado 3 veces por las trampas estos pierden la partida y aparece la pantalla de derrota.
+
+5. Puzzles de ingenio en los que tienen que combinar ambas habilidades. Ejemplo: mediante la habilidad de Sighttail pude advertir a Scentpaw de los gases venenosos gracias a su olfativo.
+   
+6. Cronómetro: cuando entras en la cripta hay un cronómetro en la parte superior de la pantalla que empieza a contar la cantidad de tiempo que tardan los jugadores en pasarse el nivel. Esta mecánica no influye en ningún elemento del juego, es un elemento usado solamente para intentar incentivar al jugador pasarse el nivel en el menor tiempo posible buscando el camino más óptimo.
+
+## Controles
+
+Al haber dos personajes jugables cada uno se maneja con unas teclas completamente diferentes:
+
+### Sighttail
+-W: avanza hacia arriba.
+-A: avanza hacia la izquierda.
+-D: avanza hacia la derecha.
+-S: avanza hacia abajo.
+-E: activa su visión.
+
+### Scentpaw
+-Flecha arriba: avanza hacia arriba.
+-Flecha izquierda: avanza hacia la izquierda.
+-Flecha derecha: avanza hacia la derecha.
+-Flecha abajo: avanza hacia abajo.
+-Espacio: activa su olfato.
  
 ## Estados 
 
-1. Menú principal: la pirmera pantalla que aparece al abrir el juego. Desde aquí se puede entrar o salir del juego y acceder a los ajustes o a la pantalla de créditos. 
+1. Menú principal: la pirmera pantalla que aparece al abrir el juego. Desde aquí se puede entrar o salir del juego y acceder a la pantalla de créditos. 
 
-2. Menú de salas: en este menú se podrá acceder a la conexión de los dispositivos que jugarán juntos. 
+2. Menú de controles: en este menú se podrán ver los controles para cada personaje. 
 
-3. Menú de selección: inmediatamente posterior al menú de salas, desde aqui los jugadores seleccionarán con qué personaje quieren jugar y empezarán la partida. 
+3. Juego: todo el contenido jugable de la historia. 
 
-4. Juego: todo el contenido jugable de la historia. 
+4. Menú de pausa: accesible en todo momento desde el juego.
+   
+5. Menú Creditos: pantalla con los integrantes del grupo y su trabajo realizado.
 
-5. Inventario: apartado del juego en el que se puede acceder a pistas, objetos, diálogos que ya han ocurrido y herramientas interesantes. 
-
-6. Menú de pausa: accesible en todo momento desde el juego y desde el que se puede acceder a los ajustes. 
-
-7. Fin del juego: una pantalla de game over que te lleva de vuelta al menu pricipal cuando acabas el juego. 
+6. Fin del juego: una pantalla que determina que el juego ha finalizado.
+   
+7. Pantalla de derrota: pantalla que aparece cuando uno de los ratones muere. 
 
 Se incluye a continuación una versión ilustrada de los estados, con las condiciones para pasar de unos a otros: 
-
-
-![DIAGRAMASS](https://github.com/user-attachments/assets/9d732e7f-4a8f-4444-be9f-2f98c26c3a8f)
-> Diseño del diagrama de estados
-
+![Diagrama Estados F3](https://github.com/user-attachments/assets/56f79e4d-f124-4dd7-b1c4-94cc12347979)
+> Mapa de estados actualizado (Figura 4)
 
 ## Interfaces 
 
@@ -113,36 +134,60 @@ La idea es que las interfaces tengan la temática visual de investigación, ya s
 
 Un estilo minimalista, con flechas y poco texto sería lo más adecuado para este estilo visual, además de hacer la navegación más intuitiva.
 
-Como no hay forma de moverse entre niveles, ya que la historia es lineal, no habrá un mapa. 
-
 Se describen los botones a partir de los distintos estados: 
 
-1. Menú principal: botones de jugar, opciones, salir, controles y créditos. 
+1. Menú principal: botones de jugar, salir, controles y créditos.
 
-2. Menú de salas: botones para crear sala o unirte a sala. 
+![MenuRef](https://github.com/user-attachments/assets/9273f467-b8b6-4315-9459-172a74988b4b)
+> Boceto del menú principal (Figura 5)
 
-3. Menú de opciones: + y – para volumen, tamaño de la pantalla (completa: si/no). 
+![MenuInicio](https://github.com/user-attachments/assets/f2144c8d-5edb-4009-b24d-237aeae38b17)
+> Interfaz menú de inicio (Figura 6)
 
-4. Menú de pausa: volver al menú (principal), salir de sala (menu de salas), salir, continuar, opciones. 
+2. Menú de pausa: reanudar (volver a la pantalla anterior), volver al menú y créditos.
 
-5. Dentro del juego: botón de pausa arriba a la derecha, inmediatamente a la izquierda un botón de inventario/maletín/diario, algo para llevar cuenta de las pistas, objetos, información de los fantasmas... 
+![Pausa](https://github.com/user-attachments/assets/a1c43c1d-c819-4782-ad62-e4365405faa3)
+> Boceto del menú de pausa (Figura 7)
 
-6. Todas las pantallas (menos principal): botón “atrás” arriba a la izquierda. 
+![Pausa](https://github.com/user-attachments/assets/fcba3fe6-ce6a-475e-9f71-bc8b839e4c6e)
+> Interfaz menú de pausa (Figura 8)
+
+3. Menú Créditos: botón para volver al menú de pausa.
+![Creditos](https://github.com/user-attachments/assets/65af7167-d319-4c62-a1d6-98b8419accf5)
+> Interfaz menú de créditos (Figura 9)
+
+4. Menú de controles:botón para volver a la pantalla anterior.
+![Controles](https://github.com/user-attachments/assets/c025b1b5-ff85-472a-b201-ab6856d33ede)
+> Interfaz menú de controles (Figura 10)
+
+5. Dentro del juego: botón de pausa arriba a la izquierda.
+![dentroJuego](https://github.com/user-attachments/assets/2bec8536-7863-40c3-93aa-7cb8d41e3f24)
+> Interfaz dentro del juego (Figura 11)
+
+6. Pantalla de derrota: botón para volver al menú inicial.
+![Derrota](https://github.com/user-attachments/assets/e3207e45-6568-4664-a3ea-5a5832ad971c)
+>Interfaz pantalla de derrota (Figura 12)
 
 
 # DESARROLLO DEL JUEGO 
 
 ## Niveles 
 
-La idea original es hacer tres niveles, y en cada uno de ellos se desarrolla una parte de la historia. 
+La idea original era hacer tres niveles sin embargo, se deicio reducirlo a un solo nivel. 
 
 ### Nivel 1. El Laberinto del Cazador Oculto. 
 
-El fantasma de un cazador se encuentra en una vieja cripta cercana a la casa de la familia Arat y los hermanos deciden empezar a cazar fantasmas por ahí. 
+El fantasma de un cazador se encuentra en una vieja cripta cercana a la casa de la familia Arat y los hermanos deciden empezar a cazar fantasmas por ahí. Dicha cripta se encuentra dentro de un cementerio abandonado lleno de vegetación por la falta de cuidado.
 
 Este cazador murió tras la traición de otro habitante y por ello se encuentra enfadado en busca de su venganza. 
 
 En este nivel, los jugadores llegan a la puerta de la cripta, una zona con muy poca iluminación, y se encuentran con la puerta cerrada. Mediante la vista de Sighttail y el olfato de Scentpaw encontrarán un agujero en la cripta para poder entrar en el edificio. 
+
+![BocCriptaExterior](https://github.com/user-attachments/assets/08d3fcb9-0a7f-4829-bffe-e4cf09eb1143)
+> Boceto del exterior de la cripta (Figura 13)
+
+![EntradaCripta](https://github.com/user-attachments/assets/65e94000-430a-4992-92a1-4e2e64e149c2)
+> Mapa final del exterior de la cripta (Figura 14)
 
 Dentro de la cripta se encuentran con que están en un laberinto lleno de trampas, que en función de qué trampa sea un ratón u otro podrá salvar al otro. 
 
@@ -150,58 +195,126 @@ Dentro de la cripta se encuentran con que están en un laberinto lleno de trampa
 
 2. Neblina Tóxica: algunas partes del laberinto están llenas de una neblina fantasmal que va debilitando a los personajes si se quedan demasiado tiempo en ella. Scentpaw es el único que puede percibir la niebla y Sighttail mientras tiene que encontrar una ruta alternativa para huir de esa zona cuanto antes. 
 
-3. Paredes móviles: algunas paredes del laberinto se mueven para confundir a los jugadores. Scentpaw es capaz de oler los restos de energías espectrales que quedan tras estas paredes. Dichas paredes son las que llevan a los jugadores al centro del laberinto, que es donde se encuentra el cazador. 
-
 Cuando lleguen al cazador les contará su historia, descubriendo así que fue traicionado por cierto habitante con alto nivel de influencia. Junto al cazador descubren una carta escrita por el padre de estos, en la que se menciona que estaban investigando a la alcaldesa. 
 
-### Nivel 2. La Quesería Encantada. 
+![Diseño Nivel](https://github.com/user-attachments/assets/e272fca9-3ee9-4948-ac0c-6621c2b2273b)
+> Diseño del nivel (Figura 15)
 
-Varios trabajadores murieron tras un derrumbe misterioso. La quesería se encuentra llena de ruidos paranormales. 
-
-Los fantasmas allí presentes eran antiguos trabajadores que murieron tras un accidente que nunca fue investigado. Explorando descubrieron que las condiciones inseguras de la fábrica fueron culpa de una negligencia intencionada, a sabiendas de la alcaldesa, quien estaba implicada en el accidente. 
-
-La quesería está llena de viejas máquinas que deben ser sincronizadas para liberar a los fantasmas que allí se encuentran. Para que se activen las máquinas tienen que activar los mecanismos al mismo tiempo. Para ello, Sighttail mediante su lupa tiene que identificar qué máquinas son las que están activas y el orden en el que deben ser reparadas mientras que Scentpaw junto con su olfato tiene que seguir rastros de aceite fantasmal, localizando así las áreas en las que se encuentran los fantasmas.  
-
-Ambos jugadores tienen que activar los mecanismos al mismo tiempo para que las máquinas funcionen. En el caso de que fallen, las máquinas se desincronizan y generan fallos, provocando más fantasmas. En el caso de resolverlo, las almas de los trabajadores se liberan. En el proceso de resolverlo encuentran un cuaderno perteneciente a la madre de los hermanos, donde encuentran notas sobre sobre los fantasmas de la quesería, así como una extraña energía que encontraron en el pueblo.  
-
-Una vez liberan a los trabajadores, estos les explican que la alcaldesa estaba practicando antiguos rituales en secreto y antes de que los padres de ellos pudieran actuar para impedirla, desaparecieron sin dejar rastro. 
-
-### Nivel 3. El Orfanato de las Sombras. 
-
-Antes de la Luna de Roquefort desaparecieron los niños que quedaban en el viejo orfanato del pueblo, donde se rumorea que se esconden ciertos secretos oscuros acerca de rituales antiguos. 
-
-Los niños que allí vivían fueron sacrificados en un antiguo ritual para calmar un espíritu ancestral, quien resulta ser la alcaldesa. 
-
-El puzzle comienza en un pasillo largo y oscuro con sombras que se mueven bloqueando el paso. Tiene que ser Sighttail quien guie a Scentpaw a través del pasillo mientras interactúan con interruptores ocultos que es Scentpaw quien puede averiguar cuáles son aquellos los que tienen que pulsar mediante el olfato mientras siguen el rastro de los niños fantasmales. Aquellas zonas en las que más rastro hay son aquellas en las que más conexión tienen con el ritual. 
-
-Una vez llegan a la sala de rituales encuentran a los espíritus de sus padres atrapados en una prisión fantasmal y les revelan que fue la alcaldesa la responsable de la muerte de ambos, así como del resto de hechos del pueblo. 
+![MapaJuego](https://github.com/user-attachments/assets/aac329cb-9769-4f54-b171-2a5ac5ac28ed)
+> Parte del laberinto final durante el gameplay (Figura 16)
 
 ## Personajes 
 
-Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail lleva gafas y tiene las orejas grandes. Además, tiene el pelaje algo largo y la cola negra. Por otro lado, Scentpaw tiene un gorro de investigador y las orejas más pequeñas que su hermano. Su pelaje es corto y su cola, rosada. 
+Los protagonistas, Sighttail y Scentpaw, controlados por el jugador: Sighttail lleva gafas y tiene las orejas grandes. Además, tiene el pelaje algo largo y la cola negra. Por otro lado, Scentpaw tiene un gorro de investigador y las orejas más pequeñas que su hermano. Su pelaje es corto y una cola del mismo color que su pelaje. 
 
-Alcaldesa: Es una mujer grande e imponente con un toque elegante que le vienen perfecto para su cargo. Viste recatada y siempre va como un pincel. En su versión espiritual, se vuelve incluso más grande, dejando su ropa como trapos desgreñados y su pelo recogido pasa a parecer un nido. 
+![Ilustracion_sin_titulo](https://github.com/user-attachments/assets/6c88396c-3123-434f-b46f-3ab91ac08c39)
+> Diseño de Sighttail durante los diálogos (Figura 17)
 
-Los padres de Sighttail y Scentpaw: ambos aparecen juntos. Se les puede ver vistiendo ropa de investigadores, aunque se nota más antigua a la que se ve durante el juego ya que han pasado muchos años. Ambos ratones son algo rechonchos, lo que da apariencia bondadosa a los personajes y sus expresiones son de orgullo hacia sus hijos. 
+![Gorra](https://github.com/user-attachments/assets/ce87aced-3c45-4005-838d-2bcdff90a644)
+> Diseño de Scentpaw durante los diálogos (Figura 18)
 
-Trabajadores de la quesería: todos se presentan con monos de trabajo y gorros para mantener un espacio salubre en la fábrica. A la hora de presentarse, todos siguen con algo de temor en sus caras. 
+El cazador de la cripta: Este ratón es algo robusto. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva un hacha. 
 
-Huérfanos sacrificados: Sus fantasmas se verán pequeños y frágiles, con las ropas desgastadas y algunos descalzos. Todos bastante delgados debido a la escasez de comida y a la multitud de niños. 
+![fanta](https://github.com/user-attachments/assets/e974dc56-1a41-4a98-96f7-7311c4c5d7a9)
+> Diseño del personaje durante los diálogos (Figura 19)
 
-El cazador de la cripta: Este ratón es robusto y atlético. Es alto, pero lo suficientemente sigiloso como para pasar desapercibido. Viste ropa de caza y lleva una escopeta. 
+Alcaldesa: Es nombrada en diversas ocasiones a lo largo del juego sin embargo, no aparece físicamente en él.
+
+Los padres de Sighttail y Scentpaw: al igual que la alcadesa, son nombrados varias veces y tienen un papel clave en el juego, pero no aparecen de manera física.  
 
 ## Ítems 
 
 Los ítems presentes en el juego son claves para el desarrollo clave del juego. 
 
-1. Lupa: sirve para analizar las huellas y demás pistas encontradas. 
+1. Flechas: una de las trampas que incluye el juego. Son lanzadas y dañan al jugador si lo dañan.
 
-2. Cuaderno: contiene todos los datos de la investigación. 
+![Flechas_F3](https://github.com/user-attachments/assets/05dc7d7b-5431-4788-be02-8a8376af8fd2)
+> Sprite de las flechas (Figura 20)
 
-3. Trampa para fantasmas: en su versión pequeña, mediana y grande dependiendo de lo huidizos que sean los fantasmas. 
+2. Neblina tóxica: la otra trampa. Para que dañe al jugador, este tiene que estar 7 segundos en contacto con la neblina.
 
-4. Dispositivo de retención de fantasmas: junto con las trampas, ayudan a detener a los fantasmas que se niegan a colaborar en la investigación, manteniéndolos inmóviles para los interrogatorios. 
+![Gas](https://github.com/user-attachments/assets/4b0be0ed-f8f6-4c71-aba9-c1e52146607f)
+> Sprite de la neblura tóxica (Figura 21)
 
-5. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó. 
+3. Carta familiar: la carta que los padres de Sighttail y Scentpaw les dejan antes de morir. Contiene información relativa a lo que les pasó.  
 
-6. Diario: cuaderno que los hermanos encuentran durante el nivel 2 y que contiene notas de su madre acerca de lo que ocurrió en la quesería. 
+![CARTA](https://github.com/user-attachments/assets/4816c66c-7384-490e-ba75-b04750bf7796)
+> Sprite carta familiar (Figura 22)
+
+## Sonido
+
+El diseño sonoro busca sumergir al jugador en una atmósfera cargada de tensión. Los sonidos y la música sirven como herramientas para guiar al jugador y generar suspense.
+
+La música de la pantalla principal y el tutorial comparten un mismo tema, diseñado para introducir al jugador en el mundo detectivesco del juego. Sin embargo, para el laberinto de la cripta, la música cambia radicalmente para destacar el componente paranormal, subrayando la tensión y el misterio que rodean a los casos con fantasmas.
+
+El juego tambien posee sonidos cuando los personajes reciben daño y mueren, además del sonido del "metal pipe", añadadido para cumplir la insignia "You've been Metal Pipe'd", puediendose escuchar en la pantalla de derrota si se pulsa la barra de metal. 
+
+## Insignias
+
+### "Quien no llora no mama"
+"El juego debe implementar algún tipo de ayuda para el jugador a la que pueda acceder en partida. La ayuda puede ser, desde ver el tutorial del juego o ver los controles, hasta implementar power-ups o pistas sobre como avanzar. En resumen la ayuda puede o no, impactar al gameplay".
+
+Esta insignia se cumple al tener una pantalla donde se muestran los controles de ambos personajes y la tecla para activar sus habilidades como ayuda para el jugador.
+
+### “You´ve been metal piped”
+"Para ganar esta insignia, se debe incluir elementos relacionados con este meme, ya sea como objeto del mundo, como parte de la interfaz de juego, como un elemento en alguno de los menus, o como efecto de sonido (debe ser el sonido del meme, no otro). Si no se han incluido todos los elementos mencionados anteriormente, solo ganaran la insignia aquella persona que haya implementado dicho elemento. Una misma persona no puede ganar la insignia dos o mas veces. Si se implementan todos los elementos mencionados, todo el equipo gana la insignia, aunque hace falta que al menos 2 personas del grupo hayan ganado la insigna individualmente".
+
+Se cumple ya que se ha incluido el sonido y la imagen del meme. Después de hablarlo con el grupo creador de la insignia, este nos aseguró que incluyendo tanto el sonido como la imagen una sola vez se garantizaría la insignia para todo el grupo.
+
+### “¿La de dibujar te la sabes?”
+"El videojuego no debe tener ningún elemento creado con Inteligencia Artificial".
+
+El proyecto realizado no contiene ningún tipo de elemento creado por inteligencia artificial por lo que cumple con dicha insignia ya que las imagenes se han creado personalmente para la entrega y todos los orígenes de los sonidos están referenciados en el documento de texto.
+![IMG_1293](https://github.com/user-attachments/assets/4c522609-3e06-44bd-ae7d-c6522d852ba9)
+>Prueba de la creación de elementos propios (Figura 23)
+
+### “Eso me suena”
+"El juego debe tener una referencia a un videojuego de nuestra infancia. Esta puede ser acústica, visual, gráfica, de un personaje, un texto, ¡lo que sea! La idea es que seamos capaces de recordar algo de otros videojuegos de cuando éramos pequeños y nos venga la nostalgia de aquella buena época".  
+
+El cumplimiento de esta insignia se observa cuando alguno de los personajes recibe daño se escucha igual que lo haría en Minecraft.
+
+### “No damos a Vasco”
+"Para conseguir esta insignia, el juego debe de contener 1 o más palabras en euskera, no importa la palabra ni el contexto en el que aparezca, solo importa el idioma".
+
+Para implementar esta insignia se ha decidido cambiar el texto del periodico del inicio del juego, sustituyendo "Luna de Roquefort" por "Gazta Ilargia" que se podría traducir como "Luna de Queso".
+
+### “Maestro del pixel”
+"La insignia se dará a los juegos con una temática artística pixel art".
+
+El juego mezcla la estética pixel art in-game y mantiene una estetica 2D convencional para las interfaces y closeups de los personajes, por lo que estaría cumpliendo con el requisito.
+
+## Integrantes y sus contribuciones
+
+### María de Andrés Jarandilla
+
+1. Cuando se empezó la primera fase se encargó de buscar un estilo visual para el juego además de la persceptiva del gameplay para adecuarse a la visión del equipo.
+
+2. Durante la segunda fase se ha encargado de diseñar y crear los sprite sheet de los personajes, además de los poderes (las huellas y el humo que se ve) y el periodico. Además de esto ha programado código de gestión de pausa y del fondo.
+  
+3. Durante la tercera fase ha creado assets nuevos, implementado las insignias desarrolladas para esta fase y cierta parte de la programación.
+
+### David del Castillo Enríquez
+
+1. Cuando se empezó la primera fase se encargó de buscar un estilo visual para el juego además de la persceptiva del gameplay para adecuarse a la visión del equipo.
+
+2. En esta segunda fase se ha encargado de realizar los tilemaps de los dos escenarios principales, los sprites de las trampas, ilustrar los menús de las interfaces, crear los logos de las habilidades, además de programar las interfaces de créditos y controles.
+   
+3. Durante la tercera fase se ha encargado de implementar la gestión correcta de las vidas, incluir la pantalla de derrota y crear el camino alternativo del nivel.
+
+### Daniel Duque Rodríguez
+
+1. En la primera parte se encargó de buscar referencias musicales para ambientar el juego en la atmosfera adecuada.
+
+2. Durante la segunda fase se ha encargado de  la búsqueda de sonidos y música, guión y realización de algunos pequeños assets sueltos, así como de ciertas partes de la programación.
+   
+3.  Durante la tercera fase se ha encargado de  la búsqueda de sonidos y música y ciertas partes de la programación
+
+### Laura Facenda Estrella
+
+1. Durante la primera parte todo el diseño del juego, los niveles, la historia las mecánicas, etc.
+  
+2. En la segunda fase ha diseño de tipografía propia así como la mayor parte de programación.
+   
+3. En la tercera fase ha creado el servidor, implementado el chat, como gran parte de la programación.
+
+A falta de contenido por añadir se podrían modificar los roles.
