@@ -4,6 +4,7 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
+        //Cargamos los spritesheet de los personajes
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
@@ -12,13 +13,20 @@ class GameScene extends Phaser.Scene {
             frameWidth: 64,
             frameHeight: 64,
         });
+        //Cargamos el tilemap
         this.load.image('tiles', 'assets/Tilemap.png');
 
+        //Cargamos el spritesheet del cazador
         this.load.spritesheet('Cazador', 'assets/cazador_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
         });
 
+        //Cargamos los audios
+        this.load.audio("Derrota", 'assets/Derrota.mp3');
+        this.load.audio("Daño", 'assets/minecraft_hit.mp3');
+
+        //Cargamos las imagenes de los distintos elementos
         this.load.image('pause', 'assets/Boton_Pausa.png');
         this.load.image('gas', 'assets/Gas.png');
         this.load.image("vision", 'assets/Supervision.png');
@@ -29,17 +37,23 @@ class GameScene extends Phaser.Scene {
         this.load.image("frame4", 'assets/Flechas_F4.png');
         this.load.image("frame5", 'assets/Flechas_F5.png');
         this.load.image("carta", 'assets/carta.png');
+        this.load.image("vidaSc", 'assets/ScentpawVida.png');
+        this.load.image("vidaSi", 'assets/SightailVida.png');
+        this.load.image("muerteSc", 'assets/ScentpawMuerte.png');
+        this.load.image("muerteSi", 'assets/SightailMuerte.png');
 
         this.load.audio("laberinto", 'assets/MusicaLaberinto.mp3');
 
     }
 
     create() {
+        //Detiene la música de la pantalla anterior
         const backgroundMusic1 = this.registry.get("musicaFondo");
         if (backgroundMusic1) {
             backgroundMusic1.stop();
         }
 
+        //Instaura la música de este nivel
         if (!this.sound.get('laberinto')) {
             this.music = this.sound.add("laberinto", { loop: true, volume: 0.5 });
             this.music.play();
@@ -50,7 +64,7 @@ class GameScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
-        
+        //Tiempo de carga y duracción de las habilidades
         this.cargaOlfato = 10000;
         this.cargaVista = 10000;
         this.durOlfato = 3000;
@@ -63,7 +77,10 @@ class GameScene extends Phaser.Scene {
         this.vistaDisp = true;
         this.olfatoDisp = true;
 
-        this.vidas = 3;
+        //Daño máximo que pueden recibir
+        this.vidasP1 = 2; //Vida de Sightail
+        this.vidasP2 = 2;//Vida de Scentpaw
+
 
         this.gasPriVez = true;
         this.flechasPriVez = true;
@@ -74,6 +91,12 @@ class GameScene extends Phaser.Scene {
 
         this.gas = [];
         this.flechas = [];
+
+        //Arrays para guardar las vidas y muertes de los personajes
+        this.vidasSc= [];
+        this.vidasSi= [];
+        this.muertesSc= [];
+        this.muertesSi= [];
 
         const mapData = [
             // Aquí va  matriz mapData
@@ -120,28 +143,28 @@ class GameScene extends Phaser.Scene {
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 0, 1, 1, 1, 2, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 3, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
-            [7, 7, 7, 3, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 6, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
+            [7, 7, 7, 3, 4, 4, 4, 4, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
             [7, 7, 7, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 7, 7, 7, 7, 7, 7],
@@ -151,12 +174,14 @@ class GameScene extends Phaser.Scene {
 
         ];
 
+        //Creamos un tilemap
         const map = this.make.tilemap({
             data: mapData,
             tileWidth: tileSize,
             tileHeight: tileSize,
         });
 
+        //Le añadimos la imagen correspondiente
         const tileset = map.addTilesetImage('tiles');
         const layer = map.createLayer(0, tileset, 0, 0);
 
@@ -240,6 +265,52 @@ class GameScene extends Phaser.Scene {
         this.sighttailInGas = false;
         this.scentpawInGas = false;
 
+
+
+         //Añadimos los iconos de las muertes de Scentpaw
+         this.muerteSc1 = this.add.image(1.35 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+         this.muerteSc2 = this.add.image(1.4 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+         this.muerteSc3 = this.add.image(1.45 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+         //Las metemos en el array de muertes de Scentpaw
+         this.muertesSc.push(this.muerteSc1, this.muerteSc2, this.muerteSc3);
+         //Añadimos los iconos de las muertes de Signtail
+         this.muerteSi1 = this.add.image(1.35 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+         this.muerteSi2 = this.add.image(1.4 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+         this.muerteSi3 = this.add.image(1.45 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+         //Las metemos en el array de muertes de Signtail
+         this.muertesSi.push(this.muerteSi1, this.muerteSi2, this.muerteSi3);
+
+        //Añadimos los iconos de las vidas de Scentpaw
+        this.vidaSc1 = this.add.image(1.35 * centerX, 0.56 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
+        this.vidaSc2 = this.add.image(1.4 * centerX, 0.56 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
+        this.vidaSc3 = this.add.image(1.45 * centerX, 0.56 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
+        //Las metemos en el array de vidas de Scentpaw
+        this.vidasSc.push(this.vidaSc1, this.vidaSc2, this.vidaSc3);
+        //Añadimos los iconos de las vidas de Signtail
+        this.vidaSi1 = this.add.image(1.35 * centerX, 0.66 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
+        this.vidaSi2 = this.add.image(1.4 * centerX, 0.66 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
+        this.vidaSi3 = this.add.image(1.45 * centerX, 0.66 * centerY, 'vidaSi').setScrollFactor(0).setScale(0.11);
+        //Las metemos en el array de vidas de Signtail
+        this.vidasSi.push(this.vidaSi1, this.vidaSi2, this.vidaSi3);
+
+        // Crear el texto del temporizador
+        this.timerText = this.add.text(0.96* centerX, 0.52*centerY, '00:00', {
+            font: '35px mousy',
+            color: '#FFFFFF',
+        }).setScrollFactor(0);
+
+        // Inicializa el tiempo que transcurre
+        this.elapsedTime = 0;
+
+        // Configura un evento que actualiza el cronómetro cada segundo
+        this.time.addEvent({
+            delay: 1000, //
+            callback: this.updateTimer,
+            callbackScope: this,
+            loop: true, //
+        });
+
+        //Añadimos el botón de pausa       
         const pausa = this.add.image(0.54 * centerX, 0.55 * centerY, 'pause').setScrollFactor(0).setScale(0.09)
             .setInteractive()
             .on('pointerdown', () => {
@@ -320,7 +391,19 @@ class GameScene extends Phaser.Scene {
 
     }
 
+    updateTimer() {
+        // Incrementa el tiempo transcurrido
+        this.elapsedTime++;
 
+        // Convierte segundos a minutos y segundos
+        const minutes = Math.floor(this.elapsedTime / 60);
+        const seconds = this.elapsedTime % 60;
+
+        // Actualiza el texto del temporizador
+        this.timerText.setText(
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+        );
+    }
     checkCazadorCollision(playerKey) {
 
         if (playerKey === 'Sighttail') {
@@ -338,24 +421,32 @@ class GameScene extends Phaser.Scene {
         }
     }
 
+    //Función que comprueba la colisión de este con el gas
     checkGasCollision(player, playerKey) {
 
         if (playerKey === 'Sighttail') {
             if (this.sighttailInGas) {
                 this.sighttailGas += 100;
-                if (this.gasPriVez) {
+                if (this.gasPriVez) {//Si es la primera vez que lo toca salta dialogo
                     this.launchDialogueScene(2);
                     this.gasPriVez = !this.gasPriVez;
                 }
-                if (this.sighttailGas >= 7000) {
-                    this.vidas -= 1;
+                if (this.sighttailGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                    //Eliminamos un simbolo de vida
+                    this.vidasSi[this.vidasP1].setVisible(false);
+                    //Mostramos ek simbolo de muerte
+                    this.muertesSi[this.vidasP1].setVisible(true);
+                    //Le quitamos una vida
+                    this.vidasP1 -= 1;
                     this.sighttailGas = 0;
                     console.log("Una vida menos");
                     console.log(this.sighttailGas);
                     console.log(this.sighttailInGas);
+
+                    this.sound.play("Daño");
                 }
             }
-            else {
+            else { //Si se va del gas reinicia el contador
                 this.sighttailGas = 0;
             }
             this.sighttailInGas = false;
@@ -364,55 +455,92 @@ class GameScene extends Phaser.Scene {
             if (this.scentpawInGas) {
                 this.scentpawGas += 100;
                 if (this.gasPriVez) {
-                    this.launchDialogueScene(2);
+                    this.launchDialogueScene(2);//Si es la primera vez que lo toca salta dialogo
                     this.gasPriVez = !this.gasPriVez;
                 }
-                if (this.scentpawGas >= 7000) {
-                    this.vidas -= 1;
+                if (this.scentpawGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                    //Eliminamos un simbolo de vida
+                    this.vidasSc[this.vidasP2].setVisible(false);
+                    //Mostramos un simbolo de muerte
+                    this.muertesSc[this.vidasP2].setVisible(true);
+                    //Le quitamos una vida
+                    this.vidasP2 -= 1;
                     this.scentpawGas = 0;
+
+                    this.sound.play("Daño");
                 }
             }
-            else {
+            else {//Si se va del gas reinicia el contador
                 this.scentpawGas = 0;
             }
             this.scentpawInGas = false;
         }
 
-        if (this.vidas <= 0) {
+        //Si se quedan sin vidas se reinicia la escena
+        if (this.vidasP1 < 0 || this.vidasP2<0) {
+            
+           this.sound.play("Derrota");
+
+            //Cambiamos de escena
             this.scene.stop('GameScene');
-            this.scene.start('GameScene');
+            this.scene.start('LoseScene');
         }
 
 
     }
 
-    handleFlechaCollision(playerkey, flecha) {
-        if (flecha.yaColisiono) {
-            return;
-        }
-        flecha.yaColisiono = true;
-        console.log(`${playerkey} ha sido alcanzado por una flecha`);
-        this.vidas -= 1;
-        if (this.flechasPriVez) {
-            this.launchDialogueScene(1);
-            this.flechasPriVez = !this.flechasPriVez;
-        }
-        flecha.setVelocity(0);
-        flecha.setVisible(false);
-        this.time.delayedCall(flecha.delay, () => {
-            flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
-            flecha.play('flechas');
-            flecha.setVelocityX(200);
-            flecha.setVelocityY(0);
-            flecha.yaColisiono = false;
-        });
+   //Función que maneja la colisión de los persoanjes con las flechas
+   handleFlechaCollision(playerkey, flecha) {
+    if (flecha.yaColisiono) {//Si choca sale de la función
+        return;
+    }
+    flecha.yaColisiono = true; //Al chocar le quita una vida
+    console.log(`${playerkey} ha sido alcanzado por una flecha`);
+    //Eliminamos un simbolo de vida de los personajes
+    if(playerkey=='Sighttail'){
+        //Eliminamos un simbolo de vida
+        this.vidasSi[this.vidasP1].setVisible(false);
+        //Mostramos un simbolo de muerte
+        this.muertesSi[this.vidasP1].setVisible(true);
+        //Le quitamos una vida
+        this.vidasP1 -= 1;
+
+        this.sound.play("Daño");
+    }
+    if(playerkey=='Scentpaw'){
+        //Eliminamos un simbolo de vida
+        this.vidasSc[this.vidasP2].setVisible(false);
+        //Mostramos un simbolo de muerte
+        this.muertesSc[this.vidasP2].setVisible(true);
+        //Le quitamos una vida
+        this.vidasP2 -= 1;
+
+        this.sound.play("Daño");
+    }
+    if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
+        this.launchDialogueScene(1);
+        this.flechasPriVez = !this.flechasPriVez;
+    }
+    flecha.setVelocity(0);
+    flecha.setVisible(false);
+    this.time.delayedCall(flecha.delay, () => {
+        flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
+        flecha.play('flechas');
+        flecha.setVelocityX(200);
+        flecha.setVelocityY(0);
+        flecha.yaColisiono = false;
+    });
 
 
+    //Si se quedan sin vidas se reinicia la escena
+    if (this.vidasP1 < 0 || this.vidasP2<0) {
+        
+       this.sound.play("Derrota");
 
-        if (this.vidas <= 0) {
-            this.scene.stop('GameScene');
-            this.scene.start('GameScene');
-        }
+        //Cambiamos de escena
+        this.scene.stop('GameScene');
+        this.scene.start('LoseScene');
+    }
     }
 
     createFlecha(startX, startY, delay, rangoX) {
