@@ -1,13 +1,26 @@
 package com.example.demo;
 
+import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
+import lombok.Data;
+
+@Entity
+@Table(name = "usuarios")
 @Component
 public class Usuario{
 
     //Datos que guarda la clase
-    private String user;
-    private String password;
-    private float time;
+    @Id
+    @GeneratedValue(strategy== GenationType.IDENTITY)
     private int userId;
+
+    @Column(nullable=false, unique= true)
+    private String user;
+
+    @Column(nullable=false)
+    private String password;
+
+    private float time;
 
     //Constructores
     public Usuario(int userId, String user, String password, float time){

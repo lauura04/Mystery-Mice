@@ -56,9 +56,10 @@ class Login extends Phaser.Scene {
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.scene.stop("LoginScene");
-                this.scene.start("IntroScene");
-                this.sound.play("boton");
+                this.IniciarSesion(nombre.value, contra.value);
+                //this.scene.stop("LoginScene");
+                //this.scene.start("IntroScene");
+                //this.sound.play("boton");
             });
 
         //Botón para ir al registrarse
@@ -68,9 +69,10 @@ class Login extends Phaser.Scene {
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.scene.stop("LoginScene");
-                this.scene.start("IntroScene");
-                this.sound.play("boton");
+                this.Registarse(nombre.value, contra.value);
+                //this.scene.stop("LoginScene");
+                //this.scene.start("IntroScene");
+                //this.sound.play("boton");
             });
 
     }
