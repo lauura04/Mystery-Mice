@@ -57,9 +57,6 @@ class Login extends Phaser.Scene {
         }).setInteractive()
             .on('pointerdown', () => {
                 this.IniciarSesion(nombre.value, contra.value);
-                //this.scene.stop("LoginScene");
-                //this.scene.start("IntroScene");
-                //this.sound.play("boton");
             });
 
         //Botón para ir al registrarse
@@ -70,10 +67,49 @@ class Login extends Phaser.Scene {
         }).setInteractive()
             .on('pointerdown', () => {
                 this.Registarse(nombre.value, contra.value);
-                //this.scene.stop("LoginScene");
-                //this.scene.start("IntroScene");
-                //this.sound.play("boton");
             });
 
+    }
+
+    // Función para iniciar sesión
+    login(user, password) {
+        fetch("http://localhost:8080/usuarios/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Inicio de sesión exitoso");
+                this.scene.stop("LoginScene");
+                this.scene.start("IntroScene");  // Vamos a la escena de inicio de juego
+                this.sound.play("boton");
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => console.error("Error en el login:", error));
+    }
+
+    // Función para registrar usuario
+    registrar(user, password) {
+        fetch("http://localhost:8080/usuarios/registro", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ user, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Usuario registrado correctamente");
+                this.scene.stop("LoginScene");
+                this.scene.start("IntroScene");  // Vamos a la escena de inicio de juego
+                this.sound.play("boton");
+            } else {
+                alert("Error: " + data.message);
+            }
+        })
+        .catch(error => console.error("Error en el registro:", error));
     }
 }

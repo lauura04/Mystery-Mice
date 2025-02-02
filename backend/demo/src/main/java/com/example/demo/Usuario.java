@@ -12,7 +12,7 @@ public class Usuario{
     //Datos que guarda la clase
     @Id
     @GeneratedValue(strategy== GenationType.IDENTITY)
-    private int userId;
+    private Integer userId;
 
     @Column(nullable=false, unique= true)
     private String user;
@@ -23,7 +23,7 @@ public class Usuario{
     private float time;
 
     //Constructores
-    public Usuario(int userId, String user, String password, float time){
+    public Usuario(Integer userId, String user, String password, float time){
         this.userId=userId
         this.user=user;
         this.password=password;
@@ -39,7 +39,7 @@ public class Usuario{
     public Usuario(){}
 
     //Getters
-    public int GetUserId(){
+    public Integer GetUserId(){
         return userId;
     }
 
@@ -56,7 +56,7 @@ public class Usuario{
     }
 
     //Setters
-    public int SetUserId(int userId){
+    public Integer SetUserId(int userId){
         this.userId=userId;
     }
 
