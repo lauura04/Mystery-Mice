@@ -7,11 +7,12 @@ import lombok.Data;
 @Entity
 @Table(name = "usuarios")
 @Component
+@Data
 public class Usuario{
 
     //Datos que guarda la clase
     @Id
-    @GeneratedValue(strategy== GenationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Column(nullable=false, unique= true)
@@ -24,7 +25,7 @@ public class Usuario{
 
     //Constructores
     public Usuario(Integer userId, String user, String password, float time){
-        this.userId=userId
+        this.userId=userId;
         this.user=user;
         this.password=password;
         this.time=0;
@@ -37,38 +38,4 @@ public class Usuario{
     }
 
     public Usuario(){}
-
-    //Getters
-    public Integer GetUserId(){
-        return userId;
-    }
-
-    public String GetUser(){
-        return user;
-    }
-
-    public String GetPassword(){
-        return password;
-    }
-
-    public float GetTime(){
-        return time;
-    }
-
-    //Setters
-    public Integer SetUserId(int userId){
-        this.userId=userId;
-    }
-
-    public String SetUser(String user){
-        this.user=user;
-    }
-
-    public String SetPassword(String password){
-        this.password=password;
-    }
-
-    public float SetTime(float time){
-        this.time=time;
-    }
 }

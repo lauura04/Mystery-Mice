@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 @RestController
 @RequestMapping("/usuario")
-@CrossOrigin(origins= "*")
 public class LoginController{
     private final UserRepository userRepository;
 
@@ -48,10 +47,12 @@ public class LoginController{
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerUsuario(@PathVariable Integer id) {
         Optional<Usuario> usuario = userRepository.findById(id);
-
-        return usuario.map(value -> ResponseEntity.ok().body(value))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(Map.of("success", false, "message", "Usuario no encontrado")));
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok(usuario.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("success", false, "message", "Usuario no encontrado"));
+        }
     }
 
     //Eliminar usuario

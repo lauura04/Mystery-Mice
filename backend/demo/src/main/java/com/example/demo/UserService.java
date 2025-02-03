@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class UserService{
     }
 
     //Obtenemos el usuario para comprobar que es el correcto
-    public Optional<Usuario> obtenerUsuario(Integer Id){
+    public Optional<Usuario> obtenerUsuario(Integer id){
         return userRepository.findById(id);
     }
 
