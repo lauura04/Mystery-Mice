@@ -24,12 +24,13 @@ export default class GameScene extends Phaser.Scene {
         this.load.spritesheet('Cazador', 'assets/cazador_spritesheet.png', {
             frameWidth: 64,
             frameHeight: 64,
-            
+
         });
 
         //Cargamos los audios
         this.load.audio("Derrota", 'assets/Derrota.mp3');
         this.load.audio("Daño", 'assets/minecraft_hit.mp3');
+        this.load.audio("chillaud", 'assets/chill-guy.mp3');
 
         //Cargamos las imagenes de los distintos elementos
         this.load.image('pause', 'assets/Boton_Pausa.png');
@@ -46,8 +47,11 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("vidaSi", 'assets/SightailVida.png');
         this.load.image("muerteSc", 'assets/ScentpawMuerte.png');
         this.load.image("muerteSi", 'assets/SightailMuerte.png');
+        this.load.image("chillpic", 'assets/chill_sprite.png');
 
         this.load.audio("laberinto", 'assets/MusicaLaberinto.mp3');
+
+
 
     }
 
@@ -101,10 +105,10 @@ export default class GameScene extends Phaser.Scene {
         this.gas = [];
         this.flechas = [];
         //Arrays para guardar las vidas y muertes de los personajes
-        this.vidasSc= [];
-        this.vidasSi= [];
-        this.muertesSc= [];
-        this.muertesSi= [];
+        this.vidasSc = [];
+        this.vidasSi = [];
+        this.muertesSc = [];
+        this.muertesSi = [];
 
         const mapData = [
             // Aquí va  matriz mapData
@@ -200,7 +204,7 @@ export default class GameScene extends Phaser.Scene {
         this.cameras.main.setZoom(2);
 
         // Configurar colisiones en el mapa
-        layer.setCollision([1,7]);
+        layer.setCollision([1, 7]);
 
 
         // Crear los sprites de los jugadores con físicas
@@ -279,18 +283,18 @@ export default class GameScene extends Phaser.Scene {
         this.scentpawInGas = false;
 
 
-         //Añadimos los iconos de las muertes de Scentpaw
-         this.muerteSc1 = this.add.image(1.35 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
-         this.muerteSc2 = this.add.image(1.4 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
-         this.muerteSc3 = this.add.image(1.45 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
-         //Las metemos en el array de muertes de Scentpaw
-         this.muertesSc.push(this.muerteSc1, this.muerteSc2, this.muerteSc3);
-         //Añadimos los iconos de las muertes de Signtail
-         this.muerteSi1 = this.add.image(1.35 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
-         this.muerteSi2 = this.add.image(1.4 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
-         this.muerteSi3 = this.add.image(1.45 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
-         //Las metemos en el array de muertes de Signtail
-         this.muertesSi.push(this.muerteSi1, this.muerteSi2, this.muerteSi3);
+        //Añadimos los iconos de las muertes de Scentpaw
+        this.muerteSc1 = this.add.image(1.35 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+        this.muerteSc2 = this.add.image(1.4 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+        this.muerteSc3 = this.add.image(1.45 * centerX, 0.56 * centerY, 'muerteSc').setScrollFactor(0).setScale(0.11).setVisible(false);
+        //Las metemos en el array de muertes de Scentpaw
+        this.muertesSc.push(this.muerteSc1, this.muerteSc2, this.muerteSc3);
+        //Añadimos los iconos de las muertes de Signtail
+        this.muerteSi1 = this.add.image(1.35 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+        this.muerteSi2 = this.add.image(1.4 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+        this.muerteSi3 = this.add.image(1.45 * centerX, 0.66 * centerY, 'muerteSi').setScrollFactor(0).setScale(0.11).setVisible(false);
+        //Las metemos en el array de muertes de Signtail
+        this.muertesSi.push(this.muerteSi1, this.muerteSi2, this.muerteSi3);
 
         //Añadimos los iconos de las vidas de Scentpaw
         this.vidaSc1 = this.add.image(1.35 * centerX, 0.56 * centerY, 'vidaSc').setScrollFactor(0).setScale(0.11);
@@ -306,7 +310,7 @@ export default class GameScene extends Phaser.Scene {
         this.vidasSi.push(this.vidaSi1, this.vidaSi2, this.vidaSi3);
 
         // Crear el texto del temporizador
-        this.timerText = this.add.text(0.96* centerX, 0.52*centerY, '00:00', {
+        this.timerText = this.add.text(0.96 * centerX, 0.52 * centerY, '00:00', {
             font: '35px mousy',
             color: '#FFFFFF',
         }).setScrollFactor(0);
@@ -335,6 +339,25 @@ export default class GameScene extends Phaser.Scene {
         this.createAnimations('Cazador');
 
 
+        //Implementacion de la insignia "chill guy"
+        //añadimos cómo se va a ver la imagen en pantalla
+        this.cuadropixel = this.physics.add.image(1.1 * centerX, 0.2 * centerY, 'chillpic').setScale(1.7).setVisible(true);
+
+        //Si el personaje de Sighttail se choca con el cuadro se muestra este
+        this.physics.add.overlap(this.sighttail, this.cuadropixel, (player, cuadropixel) => {
+            if (this.cuadropixel.visible) {
+                this.checkCuadroInteraction('Sighttail');
+            }
+        });
+
+        //Lo mismo pero con el otro personaje
+        this.physics.add.overlap(this.scentpaw, this.cuadropixel, (player, cuadropixel) => {
+            if (this.cuadropixel.visible) {
+                this.checkCuadroInteraction('Scentpaw');
+            }
+        });
+
+
 
         // Habilitar colisiones entre los jugadores y los tiles del mapa
         this.physics.add.collider(this.sighttail, layer);
@@ -354,14 +377,14 @@ export default class GameScene extends Phaser.Scene {
         //Colisiones entre jugadores y la carta
         this.physics.add.collider(this.sighttail, this.carta, () => {
             this.launchDialogueScene(5);
-            this.time.delayedCall(500, ()=>{
+            this.time.delayedCall(500, () => {
                 this.scene.stop("GameScene");
                 this.scene.start("EndScene");
             });
         })
         this.physics.add.collider(this.scentpaw, this.carta, () => {
             this.launchDialogueScene(5);
-            this.time.delayedCall(500, ()=>{
+            this.time.delayedCall(500, () => {
                 this.scene.stop("GameScene");
                 this.scene.start("EndScene");
             });
@@ -383,372 +406,403 @@ export default class GameScene extends Phaser.Scene {
 
     }
 
-    updateTimer() {
-        // Incrementa el tiempo transcurrido
-        this.elapsedTime++;
 
-        // Convierte segundos a minutos y segundos
-        const minutes = Math.floor(this.elapsedTime / 60);
-        const seconds = this.elapsedTime % 60;
+    //interacción cuadro chill
 
-        // Actualiza el texto del temporizador
-        this.timerText.setText(
-            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
-        );
-    }
+    //Confirma la interacción con el cuadro
 
-    //Comprueba si alguno de los jugadores ha chocado co él para iniciar su dialogo
-    checkCazadorCollision(playerKey) {
-
+    checkCuadroInteraction(playerKey) {
+    this.input.keyboard.on('keydown-E', () => {
         if (playerKey === 'Sighttail') {
-            if (this.hablarCazador) {
-                this.launchDialogueScene(3);//Dialogo cazador
-                this.hablarCazador = false; // Desactiva para no repetir el diálogo
-                this.carta.setVisible(true);
-            }
-        } else if (playerKey === 'Scentpaw') {
-            if (this.hablarCazador) {
-                this.launchDialogueScene(3);//Dialogo cazador
-                this.hablarCazador = false;
-                this.carta.setVisible(true);
-            }
+            //Instaura la música de este nivel
+            this.music = this.sound.add("chillaud", { loop: true, volume: 0.5 });
+            this.music.play();
+            this.time.delayedCall(5000, () => {
+                this.music = this.sound.add("laberinto", { loop: true, volume: 0.5 });
+                this.music.play();
+            })
         }
-    }
+    });
 
-    //Función que comprueba la colisión de este con el gas
-    checkGasCollision(player, playerKey) {
-
-        if (playerKey === 'Sighttail') {
-            if (this.sighttailInGas) {
-                this.sighttailGas += 100;
-                if (this.gasPriVez) {//Si es la primera vez que lo toca salta dialogo
-                    this.launchDialogueScene(2);
-                    this.gasPriVez = !this.gasPriVez;
-                }
-                if (this.sighttailGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
-                    //Eliminamos un simbolo de vida
-                    this.vidasSi[this.vidasP1].setVisible(false);
-                    //Mostramos ek simbolo de muerte
-                    this.muertesSi[this.vidasP1].setVisible(true);
-                    //Le quitamos una vida
-                    this.vidasP1 -= 1;
-                    this.sighttailGas = 0;
-                    console.log("Una vida menos");
-                    console.log(this.sighttailGas);
-                    console.log(this.sighttailInGas);
-
-                    this.sound.play("Daño");
-                }
-            }
-            else { //Si se va del gas reinicia el contador
-                this.sighttailGas = 0;
-            }
-            this.sighttailInGas = false;
-        }
+    this.input.keyboard.on('keydown-E', () => {
         if (playerKey === 'Scentpaw') {
-            if (this.scentpawInGas) {
-                this.scentpawGas += 100;
-                if (this.gasPriVez) {
-                    this.launchDialogueScene(2);//Si es la primera vez que lo toca salta dialogo
-                    this.gasPriVez = !this.gasPriVez;
-                }
-                if (this.scentpawGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
-                    //Eliminamos un simbolo de vida
-                    this.vidasSc[this.vidasP2].setVisible(false);
-                    //Mostramos un simbolo de muerte
-                    this.muertesSc[this.vidasP2].setVisible(true);
-                    //Le quitamos una vida
-                    this.vidasP2 -= 1;
-                    this.scentpawGas = 0;
+            //Instaura la música de este nivel
+            this.music = this.sound.add("chillaud", { loop: true, volume: 0.5 });
+            this.music.play();
+            this.time.delayedCall(5000, () => {
+                this.music = this.sound.add("laberinto", { loop: true, volume: 0.5 });
+                this.music.play();
+            })
+        }
+    });
+}
 
-                    this.sound.play("Daño");
-                }
+updateTimer() {
+    // Incrementa el tiempo transcurrido
+    this.elapsedTime++;
+
+    // Convierte segundos a minutos y segundos
+    const minutes = Math.floor(this.elapsedTime / 60);
+    const seconds = this.elapsedTime % 60;
+
+    // Actualiza el texto del temporizador
+    this.timerText.setText(
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+    );
+}
+
+//Comprueba si alguno de los jugadores ha chocado co él para iniciar su dialogo
+checkCazadorCollision(playerKey) {
+
+    if (playerKey === 'Sighttail') {
+        if (this.hablarCazador) {
+            this.launchDialogueScene(3);//Dialogo cazador
+            this.hablarCazador = false; // Desactiva para no repetir el diálogo
+            this.carta.setVisible(true);
+        }
+    } else if (playerKey === 'Scentpaw') {
+        if (this.hablarCazador) {
+            this.launchDialogueScene(3);//Dialogo cazador
+            this.hablarCazador = false;
+            this.carta.setVisible(true);
+        }
+    }
+}
+
+//Función que comprueba la colisión de este con el gas
+checkGasCollision(player, playerKey) {
+
+    if (playerKey === 'Sighttail') {
+        if (this.sighttailInGas) {
+            this.sighttailGas += 100;
+            if (this.gasPriVez) {//Si es la primera vez que lo toca salta dialogo
+                this.launchDialogueScene(2);
+                this.gasPriVez = !this.gasPriVez;
             }
-            else {//Si se va del gas reinicia el contador
+            if (this.sighttailGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                //Eliminamos un simbolo de vida
+                this.vidasSi[this.vidasP1].setVisible(false);
+                //Mostramos ek simbolo de muerte
+                this.muertesSi[this.vidasP1].setVisible(true);
+                //Le quitamos una vida
+                this.vidasP1 -= 1;
+                this.sighttailGas = 0;
+                console.log("Una vida menos");
+                console.log(this.sighttailGas);
+                console.log(this.sighttailInGas);
+
+                this.sound.play("Daño");
+            }
+        }
+        else { //Si se va del gas reinicia el contador
+            this.sighttailGas = 0;
+        }
+        this.sighttailInGas = false;
+    }
+    if (playerKey === 'Scentpaw') {
+        if (this.scentpawInGas) {
+            this.scentpawGas += 100;
+            if (this.gasPriVez) {
+                this.launchDialogueScene(2);//Si es la primera vez que lo toca salta dialogo
+                this.gasPriVez = !this.gasPriVez;
+            }
+            if (this.scentpawGas >= 7000) {//Si esta más tiempo del que debe se le quita una vida
+                //Eliminamos un simbolo de vida
+                this.vidasSc[this.vidasP2].setVisible(false);
+                //Mostramos un simbolo de muerte
+                this.muertesSc[this.vidasP2].setVisible(true);
+                //Le quitamos una vida
+                this.vidasP2 -= 1;
                 this.scentpawGas = 0;
+
+                this.sound.play("Daño");
             }
-            this.scentpawInGas = false;
         }
-
-        //Si se quedan sin vidas se reinicia la escena
-        if (this.vidasP1 < 0 || this.vidasP2<0) {
-            
-           this.sound.play("Derrota");
-
-            //Cambiamos de escena
-            this.scene.stop('GameScene');
-            this.scene.start('LoseScene');
+        else {//Si se va del gas reinicia el contador
+            this.scentpawGas = 0;
         }
-
-
+        this.scentpawInGas = false;
     }
 
-    //Función que maneja la colisión de los persoanjes con las flechas
-    handleFlechaCollision(playerkey, flecha) {
-        if (flecha.yaColisiono) {//Si choca sale de la función
-            return;
-        }
-        flecha.yaColisiono = true; //Al chocar le quita una vida
-        console.log(`${playerkey} ha sido alcanzado por una flecha`);
-        //Eliminamos un simbolo de vida de los personajes
-        if(playerkey=='Sighttail'){
-            //Eliminamos un simbolo de vida
-            this.vidasSi[this.vidasP1].setVisible(false);
-            //Mostramos un simbolo de muerte
-            this.muertesSi[this.vidasP1].setVisible(true);
-            //Le quitamos una vida
-            this.vidasP1 -= 1;
+    //Si se quedan sin vidas se reinicia la escena
+    if (this.vidasP1 < 0 || this.vidasP2 < 0) {
 
-            this.sound.play("Daño");
-        }
-        if(playerkey=='Scentpaw'){
-            //Eliminamos un simbolo de vida
-            this.vidasSc[this.vidasP2].setVisible(false);
-            //Mostramos un simbolo de muerte
-            this.muertesSc[this.vidasP2].setVisible(true);
-            //Le quitamos una vida
-            this.vidasP2 -= 1;
+        this.sound.play("Derrota");
 
-            this.sound.play("Daño");
-        }
-        if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
-            this.launchDialogueScene(1);
-            this.flechasPriVez = !this.flechasPriVez;
-        }
-        flecha.setVelocity(0);
-        flecha.setVisible(false);
-        this.time.delayedCall(flecha.delay, () => {
-            flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
-            flecha.play('flechas');
-            flecha.setVelocityX(200);
-            flecha.setVelocityY(0);
-            flecha.yaColisiono = false;
-        });
-
-
-        //Si se quedan sin vidas se reinicia la escena
-        if (this.vidasP1 < 0 || this.vidasP2<0) {
-            
-           this.sound.play("Derrota");
-
-            //Cambiamos de escena
-            this.scene.stop('GameScene');
-            this.scene.start('LoseScene');
-        }
+        //Cambiamos de escena
+        this.scene.stop('GameScene');
+        this.scene.start('LoseScene');
     }
 
-    //Función para crear las flechas y añadirles los colliders para detectar a los personajes
-    createFlecha(startX, startY, delay, rangoX) {
-        const flecha = this.physics.add.sprite(startX, startY, 'frame1').setScale(2).setVisible(false);
+
+}
+
+//Función que maneja la colisión de los persoanjes con las flechas
+handleFlechaCollision(playerkey, flecha) {
+    if (flecha.yaColisiono) {//Si choca sale de la función
+        return;
+    }
+    flecha.yaColisiono = true; //Al chocar le quita una vida
+    console.log(`${playerkey} ha sido alcanzado por una flecha`);
+    //Eliminamos un simbolo de vida de los personajes
+    if (playerkey == 'Sighttail') {
+        //Eliminamos un simbolo de vida
+        this.vidasSi[this.vidasP1].setVisible(false);
+        //Mostramos un simbolo de muerte
+        this.muertesSi[this.vidasP1].setVisible(true);
+        //Le quitamos una vida
+        this.vidasP1 -= 1;
+
+        this.sound.play("Daño");
+    }
+    if (playerkey == 'Scentpaw') {
+        //Eliminamos un simbolo de vida
+        this.vidasSc[this.vidasP2].setVisible(false);
+        //Mostramos un simbolo de muerte
+        this.muertesSc[this.vidasP2].setVisible(true);
+        //Le quitamos una vida
+        this.vidasP2 -= 1;
+
+        this.sound.play("Daño");
+    }
+    if (this.flechasPriVez) {//Si es la primera vez que choca salta el dialogo
+        this.launchDialogueScene(1);
+        this.flechasPriVez = !this.flechasPriVez;
+    }
+    flecha.setVelocity(0);
+    flecha.setVisible(false);
+    this.time.delayedCall(flecha.delay, () => {
+        flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
         flecha.play('flechas');
         flecha.setVelocityX(200);
-        flecha.rangoX = rangoX;
-        flecha.posicionInicial = { x: startX, y: startY };
-        flecha.delay = delay;
+        flecha.setVelocityY(0);
         flecha.yaColisiono = false;
-        this.flechas.push(flecha); //Añadimos la flecha al array
+    });
 
-        this.physics.add.collider(flecha, this.sighttail, () => {
-            this.handleFlechaCollision('Sighttail', flecha);
-        });
 
-        this.physics.add.collider(flecha, this.scentpaw, () => {
-            this.handleFlechaCollision('Scentpaw', flecha);
-        });
+    //Si se quedan sin vidas se reinicia la escena
+    if (this.vidasP1 < 0 || this.vidasP2 < 0) {
+
+        this.sound.play("Derrota");
+
+        //Cambiamos de escena
+        this.scene.stop('GameScene');
+        this.scene.start('LoseScene');
+    }
+}
+
+//Función para crear las flechas y añadirles los colliders para detectar a los personajes
+createFlecha(startX, startY, delay, rangoX) {
+    const flecha = this.physics.add.sprite(startX, startY, 'frame1').setScale(2).setVisible(false);
+    flecha.play('flechas');
+    flecha.setVelocityX(200);
+    flecha.rangoX = rangoX;
+    flecha.posicionInicial = { x: startX, y: startY };
+    flecha.delay = delay;
+    flecha.yaColisiono = false;
+    this.flechas.push(flecha); //Añadimos la flecha al array
+
+    this.physics.add.collider(flecha, this.sighttail, () => {
+        this.handleFlechaCollision('Sighttail', flecha);
+    });
+
+    this.physics.add.collider(flecha, this.scentpaw, () => {
+        this.handleFlechaCollision('Scentpaw', flecha);
+    });
+
+}
+
+//Gestión de dialogos
+launchDialogueScene(caseId) {
+    let startIndex = 0;
+    let endIndex = 0;
+
+
+    switch (caseId) {
+        // game
+        case 0: // dialogo sobre trampas
+            startIndex = 12;
+            endIndex = 14;
+            break;
+
+        case 1: // dialogo sobre flechas
+            startIndex = 14;
+            endIndex = 16;
+            break;
+
+        case 2: // dialogo sobre neblina
+            startIndex = 16;
+            endIndex = 18;
+            break;
+
+        case 3: // dialogo cazador
+            startIndex = 18;
+            endIndex = 34;
+            break;
+
+        case 5: // dialogo de la carta
+            startIndex = 34;
+            endIndex = 52;
+            break;
+
+        default: // Caso por defecto
+            console.error("Invalid caseId provided:", caseId);
+            return;
 
     }
 
-    //Gestión de dialogos
-    launchDialogueScene(caseId) {
-        let startIndex = 0;
-        let endIndex = 0;
+    this.scene.pause();
+    this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
+}
 
+//Construye las animaciones de los personajes
+createAnimations(playerkey) {
+    this.anims.create({
+        key: `${playerkey}-idleUp`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 286, end: 287 }),
+        frameRate: 8,
+        repeat: -1,
+    });
 
-        switch (caseId) {
-            // game
-            case 0: // dialogo sobre trampas
-                startIndex = 12;
-                endIndex = 14;
-                break;
+    this.anims.create({
+        key: `${playerkey}-idleLeft`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 299, end: 300 }),
+        frameRate: 8,
+        repeat: -1,
+    });
 
-            case 1: // dialogo sobre flechas
-                startIndex = 14;
-                endIndex = 16;
-                break;
+    this.anims.create({
+        key: `${playerkey}-idleDown`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 312, end: 313 }),
+        frameRate: 8,
+        repeat: -1,
+    });
 
-            case 2: // dialogo sobre neblina
-                startIndex = 16;
-                endIndex = 18;
-                break;
+    this.anims.create({
+        key: `${playerkey}-idleRight`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 325, end: 326 }),
+        frameRate: 8,
+        repeat: -1,
+    });
 
-            case 3: // dialogo cazador
-                startIndex = 18;
-                endIndex = 34;
-                break;
+    this.anims.create({
+        key: `${playerkey}-walk-up`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 104, end: 112 }),
+        frameRate: 10,
+        repeat: -1,
+    });
 
-            case 5: // dialogo de la carta
-                startIndex = 34;
-                endIndex = 52;
-                break;
+    this.anims.create({
+        key: `${playerkey}-walk-down`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 130, end: 138 }),
+        frameRate: 10,
+        repeat: -1,
+    });
 
-            default: // Caso por defecto
-                console.error("Invalid caseId provided:", caseId);
-                return;
+    this.anims.create({
+        key: `${playerkey}-walk-left`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 117, end: 125 }),
+        frameRate: 10,
+        repeat: -1,
+    });
 
+    this.anims.create({
+        key: `${playerkey}-walk-right`,
+        frames: this.anims.generateFrameNumbers(playerkey, { start: 143, end: 151 }),
+        frameRate: 10,
+        repeat: -1,
+    });
+}
+
+//Comprueba la dirección de los personajes y los estados de los gases y las flechas
+update() {
+
+    this.controlsManager.handlePlayerMovement(
+        this.sighttail,
+        this.controlsManager.controls1,
+        'Sighttail',
+    );
+
+    this.controlsManager.handlePlayerMovement(
+        this.scentpaw,
+        this.controlsManager.controls2,
+        'Scentpaw',
+    );
+
+    //Movimiento de las flechas
+    this.flechas.forEach((flecha) => {
+        if (flecha.x >= flecha.rangoX.maxX) {
+            flecha.setVelocityX(0);
+            flecha.stop('flechas');
+
+            // Retrasar el reinicio usando el delay almacenado
+            this.time.delayedCall(flecha.delay, () => {
+                flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
+
+                flecha.play('flechas');
+                flecha.setVelocityX(200); // Reinicia el movimiento
+            });
         }
+    });
 
-        this.scene.pause();
-        this.scene.launch('DialogueScene', { startIndex, endIndex, callingScene: this.scene.key });
-    }
-
-    //Construye las animaciones de los personajes
-    createAnimations(playerkey) {
-        this.anims.create({
-            key: `${playerkey}-idleUp`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 286, end: 287 }),
-            frameRate: 8,
-            repeat: -1,
+    //Si la habilidad de la vista está activa se muestran las flechas
+    if (this.vistaDisp && this.controlsManager.controls1.keys.power.isDown) {
+        console.log("Jugador 1 usó poder");
+        this.vistaDisp = false;
+        this.flechas.forEach(flecha => {
+            flecha.setVisible(true);
         });
 
-        this.anims.create({
-            key: `${playerkey}-idleLeft`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 299, end: 300 }),
-            frameRate: 8,
-            repeat: -1,
-        });
+        this.capaV.setVisible(true);
 
-        this.anims.create({
-            key: `${playerkey}-idleDown`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 312, end: 313 }),
-            frameRate: 8,
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: `${playerkey}-idleRight`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 325, end: 326 }),
-            frameRate: 8,
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: `${playerkey}-walk-up`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 104, end: 112 }),
-            frameRate: 10,
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: `${playerkey}-walk-down`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 130, end: 138 }),
-            frameRate: 10,
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: `${playerkey}-walk-left`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 117, end: 125 }),
-            frameRate: 10,
-            repeat: -1,
-        });
-
-        this.anims.create({
-            key: `${playerkey}-walk-right`,
-            frames: this.anims.generateFrameNumbers(playerkey, { start: 143, end: 151 }),
-            frameRate: 10,
-            repeat: -1,
-        });
-    }
-
-    //Comprueba la dirección de los personajes y los estados de los gases y las flechas
-    update() {
-        
-        this.controlsManager.handlePlayerMovement(
-            this.sighttail,
-            this.controlsManager.controls1,
-            'Sighttail',
-            );
-
-        this.controlsManager.handlePlayerMovement(
-            this.scentpaw,
-            this.controlsManager.controls2,
-            'Scentpaw',
-            );
-
-        //Movimiento de las flechas
-        this.flechas.forEach((flecha) => {
-            if (flecha.x >= flecha.rangoX.maxX) {
-                flecha.setVelocityX(0);
-                flecha.stop('flechas');
-
-                // Retrasar el reinicio usando el delay almacenado
-                this.time.delayedCall(flecha.delay, () => {
-                    flecha.setPosition(flecha.posicionInicial.x, flecha.posicionInicial.y);
-
-                    flecha.play('flechas');
-                    flecha.setVelocityX(200); // Reinicia el movimiento
-                });
-            }
-        });
-
-        //Si la habilidad de la vista está activa se muestran las flechas
-        if (this.vistaDisp && this.controlsManager.controls1.keys.power.isDown) {
-            console.log("Jugador 1 usó poder");
-            this.vistaDisp = false;
+        //logica del timer 
+        this.time.delayedCall(this.durVista, () => {
             this.flechas.forEach(flecha => {
-                flecha.setVisible(true);
+                flecha.setVisible(false);
             });
 
-            this.capaV.setVisible(true);
+        });
 
-            //logica del timer 
-            this.time.delayedCall(this.durVista, () => {
-                this.flechas.forEach(flecha => {
-                    flecha.setVisible(false);
-                });
-
-            });
-
-            this.time.delayedCall(this.cargaVista, () => {
-                this.vistaDisp = true;
-                this.capaV.setVisible(false);
-                console.log("vista disponible");
-            });
-        }
-
-        //Si la habilidad de olfato está activa se muestran los gases
-        if (this.olfatoDisp && this.controlsManager.controls2.keys.power.isDown) {
-            console.log("Jugador 2 usó poder");
-            this.olfatoDisp = false;
-            this.gas.forEach(gas => {
-                gas.setVisible(true);
-            });
-
-            this.capaO.setVisible(true);
-
-            this.time.delayedCall(this.durOlfato, () => {
-                this.gas.forEach(gas => {
-                    gas.setVisible(false);
-                });
-            });
-
-            this.time.delayedCall(this.cargaOlfato, () => {
-                this.olfatoDisp = true;
-                this.capaO.setVisible(false);
-                console.log("olfato disponible");
-            });
-
-        }
-
-        this.checkCazadorCollision(this.sighttail, 'Sighttail');
-        this.checkCazadorCollision(this.scentpaw, 'Scentpaw');
-        // Centrar cámara entre los dos jugadores
-        const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
-        const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
-        this.cameras.main.centerOn(centerjX, centerjY);
+        this.time.delayedCall(this.cargaVista, () => {
+            this.vistaDisp = true;
+            this.capaV.setVisible(false);
+            console.log("vista disponible");
+        });
     }
 
-    
+    //Si la habilidad de olfato está activa se muestran los gases
+    if (this.olfatoDisp && this.controlsManager.controls2.keys.power.isDown) {
+        console.log("Jugador 2 usó poder");
+        this.olfatoDisp = false;
+        this.gas.forEach(gas => {
+            gas.setVisible(true);
+        });
+
+        this.capaO.setVisible(true);
+
+        this.time.delayedCall(this.durOlfato, () => {
+            this.gas.forEach(gas => {
+                gas.setVisible(false);
+            });
+        });
+
+        this.time.delayedCall(this.cargaOlfato, () => {
+            this.olfatoDisp = true;
+            this.capaO.setVisible(false);
+            console.log("olfato disponible");
+        });
+
+    }
+
+    this.checkCazadorCollision(this.sighttail, 'Sighttail');
+    this.checkCazadorCollision(this.scentpaw, 'Scentpaw');
+    // Centrar cámara entre los dos jugadores
+    const centerjX = (this.sighttail.x + this.scentpaw.x) / 2;
+    const centerjY = (this.sighttail.y + this.scentpaw.y) / 2;
+    this.cameras.main.centerOn(centerjX, centerjY);
+}
+
+
 
 }
 
