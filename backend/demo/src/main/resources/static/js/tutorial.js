@@ -21,6 +21,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.load.image("huellaI", 'assets/Huellas1i.png');
         this.load.image("humo", 'assets/Rastro1.png')
         this.load.image("humov", 'assets/Rastro2.png');
+        this.load.image("chat", 'assets/backbutton.png');
 
         //Cargamos los spritesheets de los dos personajes
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
@@ -38,7 +39,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.controlsManager.initializeControls(this);
 
         this.chatManager = new ChatManager();
-
+        
         this.time.addEvent({
             delay:2000,
             loop: true,
@@ -49,6 +50,8 @@ export default class TutorialScene extends Phaser.Scene {
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
 
+        
+       
         //Creamos unos arrays para meter las imagenes de las huellas y el humo
         this.huellas = [];
         this.humos = [];
@@ -76,6 +79,9 @@ export default class TutorialScene extends Phaser.Scene {
 
         //Fondo
         const escenario = this.add.image(centerX, centerY, "escenario");
+
+        
+
 
         //Hacemos que la imagen ocupe toda la pantalla y le hacemos zoom para que se vea el escenario más grande
         const worldWidthT = escenario.displayWidth;
@@ -165,7 +171,6 @@ export default class TutorialScene extends Phaser.Scene {
         this.humos.push(humo4);
         this.humos.push(humo5);
 
-
         // Pausa
         const pausa = this.add.image(0.55 * centerX, 0.6 * centerY, 'pause').setScrollFactor(0).setScale(0.15)
             .setInteractive()
@@ -173,6 +178,13 @@ export default class TutorialScene extends Phaser.Scene {
                 this.scene.pause();
                 this.scene.launch('PauseScene', { callingScene: this.scene.key });
             });
+
+        //boton para abrir el chat
+        const chatButton = this.add.image(1.43*centerX, 0.6*centerY, 'chat').setScrollFactor(0).setScale(0.15)
+            .setInteractive()
+            .on('pointerdown', () =>{
+                $('#chat-container').toggle();
+        });
 
         //icono de los poderes
         this.vision = this.add.image(0.56 * centerX, 1.4 * centerY, 'vision').setScrollFactor(0);
@@ -183,8 +195,8 @@ export default class TutorialScene extends Phaser.Scene {
 
         // Lanzar el primer diálogo
         this.launchDialogueScene(0);
-
-
+        
+         
     }
 
     //Confirma la interacción con el agujero

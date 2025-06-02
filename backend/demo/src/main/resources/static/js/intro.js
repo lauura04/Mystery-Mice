@@ -16,6 +16,8 @@ class IntroScene extends Phaser.Scene{
         this.load.image("libro", 'assets/Libro.png');
         this.load.image("sombraLibro", 'assets/SombraLibro.png');
         this.load.image("periodicoM", 'assets/Menu_inicialPeri.png');
+        this.load.image("chat", 'assets/backbutton.png');
+
         $(document).ready(function(){
             console.log("El DOM está cargado")
             // Acciones sobre el documento
@@ -53,6 +55,11 @@ class IntroScene extends Phaser.Scene{
         const sombraLibro = this.add.image(0.618*centerX, 1.2*centerY, "sombraLibro");
         const libro = this.add.image(0.65*centerX, 1.2*centerY, "libro");
         
+        //boton para abrir el chat
+        const chatButton = this.add.image(1.9*centerX, 0.15*centerY, "chat").setScale(0.3).setInteractive().on('pointerdown', () =>{
+           $('#chat-container').toggle();
+        });
+
         // botones del menú
         //Botón para iniciar el juego
         const startText = this.add.text(0.72*centerX, 0.65*centerY, 'Empezar',{

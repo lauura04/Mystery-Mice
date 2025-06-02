@@ -43,7 +43,7 @@ class LoginScene extends Phaser.Scene {
         contra.placeholder = 'Contraseña';
         contra.style.position= 'absolute';
         contra.style.left=`${0.72*centerX} px`;
-        contra.style.top=`${0.6*centerY} px`;
+        contra.style.top=`${0.8*centerY} px`;
         contra.style.font= '40px mousy';
         document.body.appendChild(contra);
 
@@ -60,7 +60,7 @@ class LoginScene extends Phaser.Scene {
             });
 
         //Botón para ir al registrarse
-        const regText = this.add.text(0.72 * centerX, 0.65 * centerY, 'Registrarse', {
+        const regText = this.add.text(0.72 * centerX,  centerY, 'Registrarse', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
