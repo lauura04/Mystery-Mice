@@ -9,7 +9,7 @@ class IntroScene extends Phaser.Scene{
         // carga de audios
         this.load.audio("boton", 'assets/Clickar_Boton.wav');
         this.load.audio("musicaFondo", 'assets/musicMenu.mp3');
-
+        this.load.image("chat", 'assets/backbutton.png');
 
         //carga de imágenes
         this.load.image("fondo", 'assets/menu.png');
@@ -53,6 +53,14 @@ class IntroScene extends Phaser.Scene{
         const sombraLibro = this.add.image(0.618*centerX, 1.2*centerY, "sombraLibro");
         const libro = this.add.image(0.65*centerX, 1.2*centerY, "libro");
         
+
+        //boton del chat
+        const chatButton = this.add.image(1.9*centerX, 0.2*centerY, 'chat').setScale(0.3)
+            .setInteractive()
+            .on('pointerdown', () =>{
+                $('#chat-container').toggle();
+        });
+
         // botones del menú
         //Botón para iniciar el juego
         const startText = this.add.text(0.72*centerX, 0.65*centerY, 'Empezar',{

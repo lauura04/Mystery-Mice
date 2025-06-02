@@ -7,7 +7,7 @@ export default class ChatManager {
         this.userCount = $('#users-count');
 
         this.lastMessageId = 0;
-        this.userId = null;
+        this.userId = localStorage.getItem('chatUserId') || null;
         
         // Listeners
         this.chatSend.on('click', () => this.sendMessage());

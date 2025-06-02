@@ -1,5 +1,5 @@
 import ControlsManager from "./controlesJug.js";
-import ChatManager from "./ChatManager.js";
+
 
 export default class TutorialScene extends Phaser.Scene {
     constructor() {
@@ -21,6 +21,7 @@ export default class TutorialScene extends Phaser.Scene {
         this.load.image("huellaI", 'assets/Huellas1i.png');
         this.load.image("humo", 'assets/Rastro1.png')
         this.load.image("humov", 'assets/Rastro2.png');
+        this.load.image("chat", 'assets/backbutton.png');
 
         //Cargamos los spritesheets de los dos personajes
         this.load.spritesheet('Sighttail', 'assets/Sightail_spritesheet.png', {
@@ -37,14 +38,6 @@ export default class TutorialScene extends Phaser.Scene {
         this.controlsManager = new ControlsManager();
         this.controlsManager.initializeControls(this);
 
-        this.chatManager = new ChatManager();
-
-        this.time.addEvent({
-            delay:2000,
-            loop: true,
-            callback: () => this.chatManager.fetchMessages()
-        });
-        
         //variables para meter las imagenes a posteriori
         const centerX = this.scale.width / 2;
         const centerY = this.scale.height / 2;
@@ -173,6 +166,13 @@ export default class TutorialScene extends Phaser.Scene {
                 this.scene.pause();
                 this.scene.launch('PauseScene', { callingScene: this.scene.key });
             });
+
+        //boton para abrir el chat
+        const chatButton = this.add.image(1.43*centerX, 0.6*centerY, 'chat').setScrollFactor(0).setScale(0.15)
+            .setInteractive()
+            .on('pointerdown', () =>{
+                $('#chat-container').toggle();
+        });
 
         //icono de los poderes
         this.vision = this.add.image(0.56 * centerX, 1.4 * centerY, 'vision').setScrollFactor(0);

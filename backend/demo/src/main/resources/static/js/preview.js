@@ -6,6 +6,7 @@ class PreviewScene extends Phaser.Scene {
     preload() {
         // cargar imagen del periodico
         this.load.image('periodico', 'assets/periodico.png');
+        this.load.image("chat", 'assets/backbutton.png');
     }
 
     create() {
@@ -88,7 +89,14 @@ class PreviewScene extends Phaser.Scene {
         this.time.delayedCall(readingTime,()=>{
             this.scene.stop("PreviewScene");
             this.scene.start("TutorialScene");
-        })
+        });
+
+        //boton del chat
+        const chatButton = this.add.image(1.9*centerX, 0.2*centerY, 'chat').setScale(0.3)
+            .setInteractive()
+            .on('pointerdown', () =>{
+                $('#chat-container').toggle();
+        });
 
 
     }
