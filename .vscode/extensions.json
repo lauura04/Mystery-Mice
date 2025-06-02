@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "vscjava.vscode-spring-boot-dashboard",
-        "vmware.vscode-boot-dev-pack"
+        "vscjava.vscode-spring-boot-dashboard"
     ]
 }
