@@ -32,9 +32,12 @@ class LoginScene extends Phaser.Scene {
         nombre.type= 'text';
         nombre.placeholder = 'Usuario';
         nombre.style.position= 'absolute';
-        nombre.style.left=`${0.72*centerX} px`;
-        nombre.style.top=`${0.4*centerY} px`;
+        nombre.style.left=`${0.6*centerX}px`;
+        nombre.style.top=`${0.45*centerY}px`;
+        nombre.style.width= '200px';
         nombre.style.font= '40px mousy';
+        nombre.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        nombre.style.color='#42240e';
         document.body.appendChild(nombre);
 
         //Recuadro contraseña
@@ -42,15 +45,19 @@ class LoginScene extends Phaser.Scene {
         contra.type= 'password';
         contra.placeholder = 'Contraseña';
         contra.style.position= 'absolute';
-        contra.style.left=`${0.72*centerX} px`;
-        contra.style.top=`${0.6*centerY} px`;
+        contra.style.left=`${0.6*centerX}px`;
+        contra.style.top=`${0.6*centerY}px`;
+        contra.style.width= '200px';
+        contra.style.font= '40px mousy';
+        contra.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        contra.style.color='#42240e';
         contra.style.font= '40px mousy';
         document.body.appendChild(contra);
 
 
 
         //Botón para ir al inicio
-        const logText = this.add.text(0.72 * centerX, 0.65 * centerY, 'Iniciar sesion', {
+        const logText = this.add.text(0.7 * centerX, 1.2 * centerY, 'Iniciar sesion', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
@@ -60,20 +67,20 @@ class LoginScene extends Phaser.Scene {
             });
 
         //Botón para ir al registrarse
-        const regText = this.add.text(0.72 * centerX, 0.65 * centerY, 'Registrarse', {
+        const regText = this.add.text(0.7 * centerX, 1.4 * centerY, 'Registrarse', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.Registarse(nombre.value, contra.value);
+                this.registrar(nombre.value, contra.value);
             });
 
     }
 
     // Función para iniciar sesión
     login(user, password) {
-        fetch("http://localhost:8080/usuarios/login", {
+        fetch("http://localhost:8090/usuarios/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user, password })
@@ -94,7 +101,7 @@ class LoginScene extends Phaser.Scene {
 
     // Función para registrar usuario
     registrar(user, password) {
-        fetch("http://localhost:8080/usuarios/registro", {
+        fetch("http://localhost:8090/usuarios/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user, password })
@@ -107,7 +114,7 @@ class LoginScene extends Phaser.Scene {
                 this.scene.start("IntroScene");  // Vamos a la escena de inicio de juego
                 this.sound.play("boton");
             } else {
-                alert("Error: " + data.message);
+                alert("Error: este usuario no se ha podido registrar");
             }
         })
         .catch(error => console.error("Error en el registro:", error));
