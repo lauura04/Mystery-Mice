@@ -48,7 +48,6 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("muerteSc", 'assets/ScentpawMuerte.png');
         this.load.image("muerteSi", 'assets/SightailMuerte.png');
         this.load.image("chillpic", 'assets/chill_sprite.png');
-        this.load.image("chat", 'assets/backbutton.png');
 
         this.load.audio("laberinto", 'assets/MusicaLaberinto.mp3');
 
@@ -334,13 +333,6 @@ export default class GameScene extends Phaser.Scene {
                 this.scene.pause(); // Pausa la escena actual
                 this.scene.launch('PauseScene', { callingScene: this.scene.key }); //Nos movemos a la escena de pausa
             });
-
-        //boton para abrir el chat
-        const chatButton = this.add.image(1.43*centerX, 0.6*centerY, 'chat').setScrollFactor(0).setScale(0.15)
-            .setInteractive()
-            .on('pointerdown', () =>{
-                $('#chat-container').toggle();
-        });
         // Crear las animaciones para los jugadores
         this.createAnimations('Sighttail');
         this.createAnimations('Scentpaw');

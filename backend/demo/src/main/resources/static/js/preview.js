@@ -6,8 +6,6 @@ class PreviewScene extends Phaser.Scene {
     preload() {
         // cargar imagen del periodico
         this.load.image('periodico', 'assets/periodico.png');
-        this.load.image("chat", 'assets/backbutton.png');
-
     }
 
     create() {
@@ -32,14 +30,7 @@ class PreviewScene extends Phaser.Scene {
                     this.scene.start("TutorialScene");
                 }
             });
-        
 
-            //boton para abrir el chat
-        const chatButton = this.add.image(1.9*centerX, 0.15*centerY, "chat").setScrollFactor(0).setScale(0.3)
-            .setInteractive()
-            .on('pointerdown', () =>{
-                $('#chat-container').toggle();
-        });
         //meter texto 
         const tit = this.add.text(0.65 * centerX, 0.6 * centerY, '¡Aumentan los sucesos paranormales en Villa Cheddar!', {
             font: '55px mousy',

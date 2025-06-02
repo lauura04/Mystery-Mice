@@ -7,7 +7,7 @@ export default class ChatManager {
         this.userCount = $('#users-count');
 
         this.lastMessageId = 0;
-        this.userId =  localStorage.getItem('chatUserId') || null;
+        this.userId = null;
         
         // Listeners
         this.chatSend.on('click', () => this.sendMessage());
@@ -15,20 +15,9 @@ export default class ChatManager {
             if (e.key === 'Enter') this.sendMessage();
         });
 
-        if (this.userId) {
-            // Ya tenemos userId guardado, solo iniciamos heartbeat y fetch
-            this.startHeartbeat();
-        } else {
-            this.connectUser();
-        }
-
+        this.connectUser();
         this.startFetchingMessages();
         this.startFetchingUsers();
-
-          // Desconectar al cerrar la pestaña o ventana
-        $(window).on('beforeunload', () => {
-            this.disconnectUser();
-        });
     }
 
     sendMessage() {
@@ -69,9 +58,7 @@ export default class ChatManager {
        $.post("/api/chat/connect")
         .done((data)=>{
             this.userId = data; // guardar userId asignado por servidor
-            localStorage.setItem('chatUserId', data);
             console.log(`Usuario conectado con ID: ${this.userId}`);
-             console.log(`Usuario conectado con ID: ${this.userId}`);
             this.startHeartbeat(); // iniciar heartbeat
         })
         .fail((error)=>{
@@ -84,15 +71,13 @@ export default class ChatManager {
             $.post("/api/chat/disconnect", {userId: this.userId})
                 .done((updatedCount)=>{
                     this.userCount.text(`Usuarios conectados: ${updatedCount}`);
-                    localStorage.removeItem('chatUserId');
-                    this.userId = null;
                 })
                 .fail((error)=> console.error('Error al desconectar el usuario: ', error));
         }
     }
 
     startHeartbeat(){
-        this.heartbeatInterval = setInterval(()=>{
+        setInterval(()=>{
             this.sendHeartbeat();
         }, 3000); // cada 3 segundos
     }
