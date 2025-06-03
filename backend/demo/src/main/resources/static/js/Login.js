@@ -57,7 +57,7 @@ class LoginScene extends Phaser.Scene {
 
 
         //Botón para ir al inicio
-        const logText = this.add.text(0.7 * centerX, 1.2 * centerY, 'Iniciar sesion', {
+        const logText = this.add.text(0.7 * centerX, 1.15 * centerY, 'Iniciar sesion', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
@@ -83,7 +83,9 @@ class LoginScene extends Phaser.Scene {
         fetch("http://localhost:8090/usuarios/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, password })
+            body: JSON.stringify({
+                user, 
+                password })
         })
         .then(response => response.json())
         .then(data => {
@@ -100,23 +102,30 @@ class LoginScene extends Phaser.Scene {
     }
 
     // Función para registrar usuario
-    registrar(user, password) {
-        fetch("http://localhost:8090/usuarios/registro", {
+    registrar(nombre, contra) {
+        if (!nombre || !contra) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+        fetch("http://localhost:8090/usuario/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, password })
+            body: JSON.stringify({ user: nombre, password: contra })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Usuario registrado correctamente");
-                this.scene.stop("LoginScene");
-                this.scene.start("IntroScene");  // Vamos a la escena de inicio de juego
-                this.sound.play("boton");
-            } else {
-                alert("Error: este usuario no se ha podido registrar");
-            }
-        })
-        .catch(error => console.error("Error en el registro:", error));
+        .then(async response => {
+        const data = await response.json().catch(() => ({})); 
+        if (response.ok && data.success) {
+            alert(data.message || "Usuario registrado correctamente");
+            this.scene.stop("LoginScene");
+            this.scene.start("IntroScene");
+            this.sound.play("boton");
+        } else {
+            alert("Error: " + (data.message || "No se pudo registrar"));
+        }
+    })
+    .catch(error => {
+        console.error("Error en el registro:", error);
+        alert("Error al conectar con el servidor");
+    });
     }
 }

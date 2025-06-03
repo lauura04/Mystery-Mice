@@ -18,6 +18,7 @@ public class LoginController{
     //Registrar Usuario
     @PostMapping("/registro")
     public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario){
+        System.out.println("Usuario recibido: " + usuario);
         //Comprueba si ya existe en la BD
         if(userRepository.findByUser(usuario.getUser()).isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT)

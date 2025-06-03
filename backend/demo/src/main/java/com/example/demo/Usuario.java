@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "usuarios")
 @Component
-@Data
 public class Usuario{
 
     //Datos que guarda la clase
@@ -22,19 +22,8 @@ public class Usuario{
     private String password;
 
     private float time;
-
-    //Constructores
-    public Usuario(Integer userId, String user, String password, float time){
-        this.userId=userId;
-        this.user=user;
-        this.password=password;
-        this.time=0;
-    }
-
-    public Usuario(String user, String password, float time){
-        this.user=user;
-        this.password=password;
-        this.time=0;
+    public String getUser() {
+        return user;
     }
 
     public Usuario(){}
