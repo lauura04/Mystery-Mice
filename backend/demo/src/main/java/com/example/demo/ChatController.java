@@ -16,7 +16,8 @@ public class ChatController {
     private final List<ChatMessage> messages = new ArrayList<>();
     private final AtomicInteger lastId = new AtomicInteger(0);
     private final AtomicInteger userIdCounter = new AtomicInteger(0);
-    private final ConcurrentHashMap<Integer, Long> activeUsers = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Long> activeUsers = new ConcurrentHashMap<>(); //otro mapa igual para los UserName
+
 
     @GetMapping
     public ChatResponse getMessages(@RequestParam(defaultValue = "0") int since) {
@@ -40,9 +41,9 @@ public class ChatController {
     }
 
     @PostMapping
-    public void postMessage(@RequestParam String message) {
+    public void postMessage(@RequestParam String message, @RequestParam int userId) {
         synchronized (messages) {
-            messages.add(new ChatMessage(lastId.incrementAndGet(), message));
+            messages.add(new ChatMessage(lastId.incrementAndGet(), userId + ": " + message));
             if (messages.size() > 50) {
                 messages.remove(0); // Almacenar los últimos 50 mensajes
             }

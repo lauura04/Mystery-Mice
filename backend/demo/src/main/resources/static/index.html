@@ -24,6 +24,10 @@
 </head>
 
 <body>
+    <div class="rectangulo"></div>
+    
+    <h1>Mystery Mice</h1>
+      
     <!-- Contenedor para el canvas -->
     <div id="game-canvas"></div>
     <div id="chat-container">
@@ -32,7 +36,7 @@
         <input type="text" id="chat-input" placeholder="Escribe aquí tu mensaje" />
         <button id="chat-send">Enviar</button>
     </div>
-
+    
     <script type="module">
         // Configuración del juego
         import GameScene from './js/game.js';
@@ -58,7 +62,9 @@
             scene: [IntroScene, GameScene, ControlScene, PreviewScene, TutorialScene, PauseScene, CreditScene, DialogueScene, EndScene, LoseScene],
         };
         const game = new Phaser.Game(config);
+        
     </script>
+    
 </body>
 
 </html>

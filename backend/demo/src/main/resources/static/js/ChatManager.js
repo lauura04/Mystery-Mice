@@ -23,7 +23,7 @@ export default class ChatManager {
     sendMessage() {
         const message = this.chatInput.val().trim();
         if (message) {
-            $.post("/api/chat", { message: message })
+            $.post("/api/chat", { message: message, userId: this.userId })
                 .done(() => {
                     this.chatInput.val('');
                     this.fetchMessages();
@@ -37,7 +37,7 @@ export default class ChatManager {
             .done((data) => {
                 if (data.messages && data.messages.length > 0) {
                     data.messages.forEach((msg) => {
-                        this.chatMessages.append(`<div>${msg}</div>`);
+                        this.chatMessages.append(`<div>${msg.id}:${msg}</div>`);
                     });
                     this.chatMessages.scrollTop(this.chatMessages.prop('scrollHeight'));
                     this.lastMessageId = data.timestamp;
@@ -58,6 +58,7 @@ export default class ChatManager {
        $.post("/api/chat/connect")
         .done((data)=>{
             this.userId = data; // guardar userId asignado por servidor
+            localStorage.setItem('chatUserId', this.userId);
             console.log(`Usuario conectado con ID: ${this.userId}`);
             this.startHeartbeat(); // iniciar heartbeat
         })
