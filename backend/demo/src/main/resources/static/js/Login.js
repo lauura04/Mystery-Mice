@@ -28,31 +28,31 @@ class LoginScene extends Phaser.Scene {
 
 
         //Recuadro usuario
-        let nombre = document.createElement('input');
-        nombre.type= 'text';
-        nombre.placeholder = 'Usuario';
-        nombre.style.position= 'absolute';
-        nombre.style.left=`${0.6*centerX}px`;
-        nombre.style.top=`${0.45*centerY}px`;
-        nombre.style.width= '200px';
-        nombre.style.font= '40px mousy';
-        nombre.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
-        nombre.style.color='#42240e';
-        document.body.appendChild(nombre);
+        this.nombre = document.createElement('input');
+        this.nombre.type= 'text';
+        this.nombre.placeholder = 'Usuario';
+        this.nombre.style.position= 'absolute';
+        this.nombre.style.left=`${0.6*centerX}px`;
+        this.nombre.style.top=`${0.45*centerY}px`;
+        this.nombre.style.width= '200px';
+        this.nombre.style.font= '40px mousy';
+        this.nombre.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        this.nombre.style.color='#42240e';
+        document.body.appendChild(this.nombre);
 
         //Recuadro contraseña
-        let contra = document.createElement('input');
-        contra.type= 'password';
-        contra.placeholder = 'Contraseña';
-        contra.style.position= 'absolute';
-        contra.style.left=`${0.6*centerX}px`;
-        contra.style.top=`${0.6*centerY}px`;
-        contra.style.width= '200px';
-        contra.style.font= '40px mousy';
-        contra.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
-        contra.style.color='#42240e';
-        contra.style.font= '40px mousy';
-        document.body.appendChild(contra);
+        this.contra = document.createElement('input');
+        this.contra.type= 'password';
+        this.contra.placeholder = 'Contraseña';
+        this.contra.style.position= 'absolute';
+        this.contra.style.left=`${0.6*centerX}px`;
+        this.contra.style.top=`${0.6*centerY}px`;
+        this.contra.style.width= '200px';
+        this.contra.style.font= '40px mousy';
+        this.contra.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        this.contra.style.color='#42240e';
+        this.contra.style.font= '40px mousy';
+        document.body.appendChild(this.contra);
 
 
 
@@ -63,7 +63,7 @@ class LoginScene extends Phaser.Scene {
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.IniciarSesion(nombre.value, contra.value);
+                this.IniciarSesion(this.nombre.value, this.contra.value);
             });
 
         //Botón para ir al registrarse
@@ -73,7 +73,7 @@ class LoginScene extends Phaser.Scene {
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.registrar(nombre.value, contra.value);
+                this.registrar(this.nombre.value, this.contra.value);
             });
 
     }
@@ -110,12 +110,14 @@ class LoginScene extends Phaser.Scene {
         fetch("http://localhost:8090/usuario/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user: nombre, password: contra })
+            body: JSON.stringify({ id: nombre, password: contra })
         })
         .then(async response => {
         const data = await response.json().catch(() => ({})); 
         if (response.ok && data.success) {
             alert(data.message || "Usuario registrado correctamente");
+            if (this.nombre) this.nombre.remove();
+            if (this.contra) this.contra.remove();
             this.scene.stop("LoginScene");
             this.scene.start("IntroScene");
             this.sound.play("boton");

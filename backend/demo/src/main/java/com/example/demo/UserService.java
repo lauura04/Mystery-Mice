@@ -1,4 +1,4 @@
-package com.example.demo;
+/*package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +25,4 @@ public class UserService{
     public Usuario registrarUsuario(Usuario user){
         return userRepository.save(user);
     }
-}
+}*/
