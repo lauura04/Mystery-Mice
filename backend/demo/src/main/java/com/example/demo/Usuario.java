@@ -4,7 +4,10 @@ public class Usuario {
     //Variables que guarda de cada usuario
     private String id;
     private String password;
-    public Usuario(){}
+    public Usuario(String id, String password){
+        this.id=id;
+        this.password=password;
+    }
     //Los getters y setters correcpondientes
     public String getId(){
         return id;

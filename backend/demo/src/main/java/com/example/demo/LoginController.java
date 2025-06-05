@@ -4,7 +4,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Map;
@@ -23,24 +25,25 @@ public class LoginController{
         try{
             String nombreUsuario = usuario.getId();
             String password = usuario.getPassword();
-            String rutaArchivo = "usuarios/"+nombreUsuario+".txt";
+            File archivoGeneral =new File ("usuarios/usuarios.txt");
             File carpeta = new File("usuarios");
 
             if(!carpeta.exists()) carpeta.mkdirs(); //Sino existe la carpeta la crea
-            File archivoUsuario =new File (rutaArchivo);
-            if (archivoUsuario.exists()){
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(Map.of("success", false, "message", "Este nombre ya existe"));
+            
+            // Verificar si el usuario ya existe
+            if (archivoGeneral.exists()) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(archivoGeneral))) {
+                    String linea;
+                    while ((linea = reader.readLine()) != null) {
+                        String[] partes = linea.split(",");
+                        if (partes.length >= 1 && partes[0].equals(nombreUsuario)) {
+                            return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body(Map.of("success", false, "message", "Este nombre ya existe"));
+                        }
+                    }
+                }
             }
-
-            //Crea un archivo individual
-            try(PrintWriter write = new PrintWriter(archivoUsuario)){
-                write.println(password);
-                write.println("0");
-            }
-
             //Guarda la información en uno general
-            File archivoGeneral = new File("usuarios/usuarios.txt");
             try(FileWriter write =new FileWriter(archivoGeneral, true)){
                 write.write(nombreUsuario+","+password+",0\n");
             }
