@@ -1,41 +1,27 @@
 package com.example.demo;
 
-import jakarta.persistence.*;
-import org.springframework.stereotype.Component;
-import lombok.Data;
-
-@Entity
-@Table(name = "usuarios")
-@Component
-@Data
-public class Usuario{
-
-    //Datos que guarda la clase
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
-
-    @Column(nullable=false, unique= true)
-    private String user;
-
-    @Column(nullable=false)
+public class Usuario {
+    //Variables que guarda de cada usuario
+    private String id;
     private String password;
-
-    private float time;
-
-    //Constructores
-    public Usuario(Integer userId, String user, String password, float time){
-        this.userId=userId;
-        this.user=user;
+    public Usuario(String id, String password){
+        this.id=id;
         this.password=password;
-        this.time=0;
+    }
+    //Los getters y setters correcpondientes
+    public String getId(){
+        return id;
     }
 
-    public Usuario(String user, String password, float time){
-        this.user=user;
-        this.password=password;
-        this.time=0;
+    public void setId(String id){
+        this.id=id;
     }
 
-    public Usuario(){}
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password=password;
+    }
 }

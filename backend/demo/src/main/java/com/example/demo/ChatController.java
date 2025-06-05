@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,11 +53,18 @@ public class ChatController {
         }
     }
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/connect")
-    public int connectClient() {
-        int userId = userIdCounter.incrementAndGet();
-        activeUsers.put(userId, System.currentTimeMillis());
-        return userId;
+    public ResponseEntity<?> connectClient(@RequestParam int userId) {
+        if (userRepository.existsById(userId)) {
+            activeUsers.put(userId, System.currentTimeMillis());
+            return ResponseEntity.ok(userId);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("success", false, "message", "Usuario no encontrado"));
+        }
     }
 
     @PostMapping("/disconnect")

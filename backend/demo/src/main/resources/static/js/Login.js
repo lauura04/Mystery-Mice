@@ -28,55 +28,64 @@ class LoginScene extends Phaser.Scene {
 
 
         //Recuadro usuario
-        let nombre = document.createElement('input');
-        nombre.type= 'text';
-        nombre.placeholder = 'Usuario';
-        nombre.style.position= 'absolute';
-        nombre.style.left=`${0.72*centerX} px`;
-        nombre.style.top=`${0.4*centerY} px`;
-        nombre.style.font= '40px mousy';
-        document.body.appendChild(nombre);
+        this.nombre = document.createElement('input');
+        this.nombre.type= 'text';
+        this.nombre.placeholder = 'Usuario';
+        this.nombre.style.position= 'absolute';
+        this.nombre.style.left=`${0.6*centerX}px`;
+        this.nombre.style.top=`${0.45*centerY}px`;
+        this.nombre.style.width= '200px';
+        this.nombre.style.font= '40px mousy';
+        this.nombre.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        this.nombre.style.color='#42240e';
+        document.body.appendChild(this.nombre);
 
         //Recuadro contraseña
-        let contra = document.createElement('input');
-        contra.type= 'password';
-        contra.placeholder = 'Contraseña';
-        contra.style.position= 'absolute';
-        contra.style.left=`${0.72*centerX} px`;
-        contra.style.top=`${0.6*centerY} px`;
-        contra.style.font= '40px mousy';
-        document.body.appendChild(contra);
+        this.contra = document.createElement('input');
+        this.contra.type= 'password';
+        this.contra.placeholder = 'Contraseña';
+        this.contra.style.position= 'absolute';
+        this.contra.style.left=`${0.6*centerX}px`;
+        this.contra.style.top=`${0.6*centerY}px`;
+        this.contra.style.width= '200px';
+        this.contra.style.font= '40px mousy';
+        this.contra.style.backgroundColor = 'rgba(162, 208, 158, 0.39)';
+        this.contra.style.color='#42240e';
+        this.contra.style.font= '40px mousy';
+        document.body.appendChild(this.contra);
 
 
 
         //Botón para ir al inicio
-        const logText = this.add.text(0.72 * centerX, 0.65 * centerY, 'Iniciar sesion', {
+        const logText = this.add.text(0.7 * centerX, 1.15 * centerY, 'Iniciar sesion', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.IniciarSesion(nombre.value, contra.value);
+                this.IniciarSesion(this.nombre.value, this.contra.value);
             });
 
         //Botón para ir al registrarse
-        const regText = this.add.text(0.72 * centerX, 0.65 * centerY, 'Registrarse', {
+        const regText = this.add.text(0.7 * centerX, 1.4 * centerY, 'Registrarse', {
             font: '70px mousy',
             color: '#42240e',
             align: 'center'
         }).setInteractive()
             .on('pointerdown', () => {
-                this.Registarse(nombre.value, contra.value);
+                this.registrar(this.nombre.value, this.contra.value);
             });
 
     }
 
     // Función para iniciar sesión
     login(user, password) {
-        fetch("http://localhost:8080/usuarios/login", {
+        fetch("http://localhost:8090/usuarios/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, password })
+            body: JSON.stringify({
+                user, 
+                password })
         })
         .then(response => response.json())
         .then(data => {
@@ -93,23 +102,32 @@ class LoginScene extends Phaser.Scene {
     }
 
     // Función para registrar usuario
-    registrar(user, password) {
-        fetch("http://localhost:8080/usuarios/registro", {
+    registrar(nombre, contra) {
+        if (!nombre || !contra) {
+            alert("Por favor completa todos los campos.");
+            return;
+        }
+        fetch("http://localhost:8090/usuario/registro", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, password })
+            body: JSON.stringify({ id: nombre, password: contra })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Usuario registrado correctamente");
-                this.scene.stop("LoginScene");
-                this.scene.start("IntroScene");  // Vamos a la escena de inicio de juego
-                this.sound.play("boton");
-            } else {
-                alert("Error: " + data.message);
-            }
-        })
-        .catch(error => console.error("Error en el registro:", error));
+        .then(async response => {
+        const data = await response.json().catch(() => ({})); 
+        if (response.ok && data.success) {
+            alert(data.message || "Usuario registrado correctamente");
+            if (this.nombre) this.nombre.remove();
+            if (this.contra) this.contra.remove();
+            this.scene.stop("LoginScene");
+            this.scene.start("IntroScene");
+            this.sound.play("boton");
+        } else {
+            alert("Error: " + (data.message || "No se pudo registrar"));
+        }
+    })
+    .catch(error => {
+        console.error("Error en el registro:", error);
+        alert("Error al conectar con el servidor");
+    });
     }
 }
